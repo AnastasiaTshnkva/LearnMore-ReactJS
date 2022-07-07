@@ -1,6 +1,7 @@
 import React from "react";
-import CreateMemoryCard from "./CreateMemoryCard";
-// import CreateMemoryCard from "./CreateMemoryCard";
+import Header from "./Components/Header"
+import Body from "./Components/Body";
+import Footer from "./Components/Footer";
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -10,11 +11,9 @@ class App extends React.PureComponent {
     render() {
         return(
             <div className={'app'}>
-                <div className={'header'}>Header</div>
-                <div className={'body'}>
-                    <CreateMemoryCard/>
-                </div>
-                <div className={'footer'}>Footer</div>
+                <Header/>
+                <Body/>
+                <Footer/>
             </div>
         )
     }

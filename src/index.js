@@ -1,6 +1,5 @@
 import React from "react";
-// import App from './App';
+import ReactDom from "react-dom";
+import App from "./App.jsx"
 
-const root = document.getElementById('root');
-console.log(root);
-
+ReactDom.render(<App/>, document.getElementById('root'));

@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import Body from "../Components/Body";
 
-const MainLayoutStyles = styled.div`
+const StyledMainLayout = styled.div`
  margin: 0 auto;
 `
 
@@ -14,9 +14,9 @@ class MainLayout extends React.PureComponent {
 
     render() {
         return (
-            <MainLayoutStyles>
+            <StyledMainLayout>
                 <Body/>
-            </MainLayoutStyles>
+            </StyledMainLayout>
         );
     }
 }

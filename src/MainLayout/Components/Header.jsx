@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-const HeaderStyles = styled.div`
+const StyledHeader = styled.div`
   background-color: rgb(70, 84, 70);
   color: white;
   width: 100vw;
@@ -36,7 +36,7 @@ class Header extends React.PureComponent {
 
     render() {
         return(
-            <HeaderStyles>
+            <StyledHeader>
                 <ul className={'header'}>
                     <li className={'header__logo'}>Learn more</li>
                     <li className={'header__user'}>
@@ -44,7 +44,7 @@ class Header extends React.PureComponent {
                         <p className={'header__user-name'}>name</p>
                     </li>
                 </ul>
-            </HeaderStyles>
+            </StyledHeader>
 
         )
     }

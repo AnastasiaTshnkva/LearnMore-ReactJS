@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MemoryCard from "./MemoryCard";
 import Buttons from "./Buttons";
 
-const BodyStyles = styled.div`
+const StyledBody = styled.div`
   .body{
     height: calc(100vh - 66px - 80px);
     display: flex;
@@ -13,23 +13,46 @@ const BodyStyles = styled.div`
     }
 `
 
-
+const MyContext = React.createContext('oops error');
 
 class Body extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        this.state = {
+            cardData: [
+                {
+                    cardName: 'card',
+                    cardTranslation: 'translation',
+                },
+                {
+                    cardName: 'card 2',
+                    cardTranslation: 'translation 2',
+                },
+                {
+                    cardName: 'card 3',
+                    cardTranslation: 'translation 3',
+                }
+            ],
+        }
+    }
+
+    flipCard() {
+        this.setState((state) => {
+            return ({name: state.name + 'add smth'})
+        }, () => {
+            console.log('try', this.state.name);
+        })
     }
 
     render() {
         return(
-            <BodyStyles>
+            <StyledBody>
                 <div className={'body'}>
                     <Buttons innerText={'Add card'}></Buttons>
-                    <MemoryCard name={'card 1'} translation={'translation 1'}></MemoryCard>
-                    <MemoryCard name={'card 2'} translation={'translation 2'}></MemoryCard>
-                    <MemoryCard name={'card 3'} translation={'translation 3'}></MemoryCard>
+                    <MemoryCard></MemoryCard>
                 </div>
-            </BodyStyles>
+            </StyledBody>
         )
     }
 }

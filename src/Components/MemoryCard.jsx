@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-const MemoryCardStyles = styled.div`
+const StyledMemoryCard = styled.div`
   .memoryCard {
     margin: 5px auto;
     height: 100px;
@@ -14,11 +14,11 @@ const MemoryCardStyles = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    &:hover {
-      background-color: #d1f3d1;
-      transform: rotate3d(0, 1, 0, 180deg);
-      transition-duration: 0.8s;
-    }
+    //&:hover {
+    //  background-color: #d1f3d1;
+    //  transform: rotate3d(0, 1, 0, 180deg);
+    //  transition-duration: 0.8s;
+    //}
     .memoryCard__front-side {
       display: flex;
       justify-content: space-between;
@@ -62,22 +62,40 @@ const MemoryCardStyles = styled.div`
 class MemoryCard extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        this.state = {
+            cardData: [
+                {cardName: 'card 1',
+                    cardTranslation: 'translation 1',},
+                {cardName: 'card 2',
+                    cardTranslation: 'translation 2',},
+                {cardName: 'card 3',
+                    cardTranslation: 'translation 3',}],
+        }
     }
+
 
     render() {
         return(
-            <MemoryCardStyles>
-                <div className={'memoryCard'}>
-                    <div className={'memoryCard__front-side'}>
-                        <button type={'button'} className={'memoryCard__edit-but'}>p</button>
-                        <h2 className={'memoryCard__name'}>{this.props.name}</h2>
-                        <button type={'button'} className={'memoryCard__cross-but'}>x</button>
-                    </div>
-                    <div className={'memoryCard__back-side'}>
-                        <p className={'memoryCard__translation'}>{this.props.translation}</p>
-                    </div>
-                </div>
-            </MemoryCardStyles>
+            <StyledMemoryCard>
+                {this.state.cardData.map((data, index) => {
+                    console.log(data);
+                    return(
+                            <div className={'memoryCard'} key={index} onClick={(e) => {this.props.flipCard()}}>
+                                <div className={'memoryCard__front-side'}>
+                                    <button type={'button'} className={'memoryCard__edit-but'}>p</button>
+                                    <h2 className={'memoryCard__name'}>{data.cardName}</h2>
+
+                                    <button type={'button'} className={'memoryCard__cross-but'}>x</button>
+                                </div>
+                                <div className={'memoryCard__back-side'}>
+                                    <p className={'memoryCard__translation'}>{data.cardTranslation}</p>
+                                </div>
+                            </div>
+                        )
+                })}
+
+            </StyledMemoryCard>
 
         )
     }

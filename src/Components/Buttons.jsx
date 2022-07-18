@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ButtonsStyles = styled.div`
+const StyledButtons = styled.div`
   .but {
     background-color: #32CD32;
     border: none;
@@ -30,12 +30,12 @@ class Buttons extends React.PureComponent {
 
     render() {
         return(
-            <ButtonsStyles>
+            <StyledButtons>
                 <React.Fragment>
                     <button className={'but'} type={'button'}>{this.props.innerText}</button>
                 </React.Fragment>
 
-            </ButtonsStyles>
+            </StyledButtons>
 
         )
     }

@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import MemoryCard from "./MemoryCard";
 import Buttons from "./Buttons";
+import { CARD_STATUS } from "../constants/cardStatus";
 
 const StyledBody = styled.div`
   .body{
@@ -13,7 +14,7 @@ const StyledBody = styled.div`
     }
 `
 
-const MyContext = React.createContext('oops error');
+// export const MyContext = React.createContext('error default value');
 
 class Body extends React.PureComponent {
     constructor(props) {
@@ -21,19 +22,12 @@ class Body extends React.PureComponent {
 
         this.state = {
             cardData: [
-                {
-                    cardName: 'card',
-                    cardTranslation: 'translation',
-                },
-                {
-                    cardName: 'card 2',
-                    cardTranslation: 'translation 2',
-                },
-                {
-                    cardName: 'card 3',
-                    cardTranslation: 'translation 3',
-                }
-            ],
+                {cardName: 'card 1',
+                    cardDecoding: 'decoding 1',},
+                {cardName: 'card 2',
+                    cardDecoding: 'decoding 2',},
+                {cardName: 'card 3',
+                    cardDecoding: 'decoding 3',}],
         }
     }
 
@@ -50,12 +44,13 @@ class Body extends React.PureComponent {
             <StyledBody>
                 <div className={'body'}>
                     <Buttons innerText={'Add card'}></Buttons>
-                    <MemoryCard></MemoryCard>
+                    <MemoryCard status={CARD_STATUS.learned}></MemoryCard>
                 </div>
             </StyledBody>
         )
     }
 }
+
 
 export default Body;
 

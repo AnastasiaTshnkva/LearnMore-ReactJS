@@ -5,12 +5,7 @@ import MainLayout from "./MainLayout/MainLayout";
 import Footer from "./MainLayout/Components/Footer";
 import styled from 'styled-components';
 
-// export const StyledApp = styled.div`
-//   $main_color: white;
-//   $main_text_color: black;
-//   $header_color: rgb(70, 84, 70);
-//   $header_text_color: white;
-// `
+
 
 class App extends React.PureComponent {
     constructor(props) {

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
-import { CARD_STATUS } from "../constants/cardStatus";
+import { CARD_STATUS } from "../../constants/cardStatus";
+import { CARDS_DATA } from "../../constants/cardsData";
+import CardFrontSide from "./CardFrontSide";
+
 
 const StyledMemoryCard = styled.div`
   .memoryCard {
@@ -11,17 +14,16 @@ const StyledMemoryCard = styled.div`
     border-radius: 5px;
     text-align: center;
     //background-color: #e8f8e8;
-    //background: {props => {
-    //    console.log(props.status);
-    //    switch (props.status) {
-    //      case CARD_STATUS.inProcess :
-    //          return '#e8f8e8';
-    //      case CARD_STATUS.learned :
-    //          return 'red';
-    //      default :
-    //           return '#e8f8e8';
-    //    }
-    //}};
+    background: ${props => {
+        switch (props.status) {
+          case CARD_STATUS.inProcess :
+              return '#e8f8e8';
+          case CARD_STATUS.learned :
+              return 'red';
+          default :
+              return '#e8f8e8';
+        }
+    }};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -76,29 +78,19 @@ class MemoryCard extends React.PureComponent {
         super(props);
 
         this.state = {
-            cardData: [
-                {cardName: 'card 1',
-                    cardDecoding: 'decoding 1',},
-                {cardName: 'card 2',
-                    cardDecoding: 'decoding 2',},
-                {cardName: 'card 3',
-                    cardDecoding: 'decoding 3',}],
+            name: 'name',
+            decoding: 'decoding',
         }
     }
-
 
     render() {
         return(
             <StyledMemoryCard>
-                {this.state.cardData.map((data, index) => {
+                {CARDS_DATA.map((data, index) => {
                     console.log(data);
                     return(
-                        <div className={'memoryCard'} key={index} onClick={(e) => {this.props.flipCard()}}>
-                            <div className={'memoryCard__front-side'}>
-                                <button type={'button'} className={'memoryCard__edit-but'}>p</button>
-                                <h2 className={'memoryCard__name'}>{data.cardName}</h2>
-                                    <button type={'button'} className={'memoryCard__cross-but'}>x</button>
-                            </div>
+                        <div className={'memoryCard'} key={index}>
+                            <CardFrontSide cardName={data.cardName}/>
                             <div className={'memoryCard__back-side'}>
                                 <p className={'memoryCard__decoding'}>{data.cardDecoding}</p>
                             </div>

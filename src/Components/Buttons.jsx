@@ -3,7 +3,10 @@ import styled from "styled-components";
 
 const StyledButtons = styled.div`
   .but {
-    background-color: #32CD32;
+    background-color: ${props => {
+        console.log(props.theme)
+        return props.theme.addButtonColor
+    }};
     border: none;
     color: white;
     border-radius: 5px;
@@ -14,11 +17,11 @@ const StyledButtons = styled.div`
     font-weight: 600;
 
     &:hover {
-      background-color: #5dd75d;
+      background-color: ${props => {return props.theme.addButtonHoverColor}};
     }
 
     &:active {
-      background-color: #21af21;
+      background-color: ${props => {return props.theme.addButtonColor}};
     }
   }
 `

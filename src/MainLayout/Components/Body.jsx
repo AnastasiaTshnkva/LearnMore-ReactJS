@@ -1,17 +1,16 @@
 import React from "react";
 import styled from 'styled-components';
-import MemoryCard from "./MemoryCard/MemoryCard";
-import Buttons from "./Buttons";
-import { CARD_STATUS } from "../constants/cardStatus";
+import MemoryCard from "../../Components/MemoryCard/MemoryCard";
+import Buttons from "../../Components/Buttons";
+import { CARD_STATUS } from "../../constants/cardStatus";
 
 const StyledBody = styled.div`
-  .body{
-    height: calc(100vh - 66px - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    }
+  height: calc(100vh - 66px - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${props => {return props.theme.backgroundColor}};
 `
 
 class Body extends React.PureComponent {
@@ -31,10 +30,8 @@ class Body extends React.PureComponent {
     render() {
         return(
             <StyledBody>
-                <div className={'body'}>
-                    <Buttons innerText={'Add card'}></Buttons>
-                    <MemoryCard></MemoryCard>
-                </div>
+                <Buttons innerText={'Add card'}></Buttons>
+                <MemoryCard></MemoryCard>
             </StyledBody>
 
         )

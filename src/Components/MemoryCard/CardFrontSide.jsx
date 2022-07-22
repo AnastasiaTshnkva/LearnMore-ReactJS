@@ -11,7 +11,7 @@ const StyledCardFrontSide = styled.div`
   .memoryCard__edit-but, .memoryCard__cross-but {
     background-color: transparent;
     border: none;
-    color: rgb(70, 84, 70);
+    color: ${props => {return props.theme.textColor}};
   }
   .memoryCard__name {
     font-size: 18px;

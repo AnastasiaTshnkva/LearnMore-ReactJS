@@ -10,20 +10,20 @@ const StyledMemoryCard = styled.div`
     margin: 5px auto;
     height: 100px;
     width: 200px;
-    border: #c4efc4 2px solid;
+    border: ${props => {return props.theme.cardBorderColor}} 2px solid;
     border-radius: 5px;
     text-align: center;
-    //background-color: #e8f8e8;
-    background: ${props => {
-        switch (props.status) {
-          case CARD_STATUS.inProcess :
-              return '#e8f8e8';
-          case CARD_STATUS.learned :
-              return 'red';
-          default :
-              return '#e8f8e8';
-        }
-    }};
+    background-color: ${props => {return props.theme.cardColor}};
+    // background: {props => {
+    //     switch (props.status) {
+    //       case CARD_STATUS.inProcess :
+    //           return '#e8f8e8';
+    //       case CARD_STATUS.learned :
+    //           return 'red';
+    //       default :
+    //           return '#e8f8e8';
+    //     }
+    // }};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -39,7 +39,6 @@ class MemoryCard extends React.PureComponent {
     constructor(props) {
         super(props);
     }
-
 
     changeCondition() {
         return

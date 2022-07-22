@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const FooterStyles = styled.div`
     .footer {
       width: 100vw;
-      background-color: rgb(70, 84, 70);
+      background-color: ${props => {return props.theme.headerBackgroundColor}};
       height: 50px;
-      color: white;
+      color: ${props => {return props.theme.headerTextColor}};
       text-align: center;
       p {
         display: block;

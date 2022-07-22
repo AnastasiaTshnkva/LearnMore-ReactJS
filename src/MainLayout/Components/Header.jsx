@@ -1,9 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
+import { MyContext } from "../../HOC/GlobalThemeProvider";
+
 
 const StyledHeader = styled.div`
-  background-color: rgb(70, 84, 70);
-  color: white;
+  background: ${props => {return props.theme.headerBackgroundColor}};
+  color: ${props => {return props.theme.headerTextColor}};
   width: 100vw;
 
   .header {
@@ -40,6 +42,7 @@ class Header extends React.PureComponent {
                 <ul className={'header'}>
                     <li className={'header__logo'}>Learn more</li>
                     <li className={'header__user'}>
+                        <button type={'button'}>L</button>
                         <p className={'header__user-avatar'}>avatar</p>
                         <p className={'header__user-name'}>name</p>
                     </li>

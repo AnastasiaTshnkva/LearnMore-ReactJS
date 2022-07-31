@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from 'styled-components';
-import {THEME_COLORS} from "../constants/themeColors";
+import {THEME_COLORS} from "../constants/globalTheme/themeColors";
 
 
 class GlobalThemeProvider extends React.PureComponent {

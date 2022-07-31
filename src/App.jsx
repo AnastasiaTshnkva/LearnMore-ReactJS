@@ -1,23 +1,23 @@
 import React from "react";
-import MainLayout from "./MainLayout/MainLayout";
+import MainLayout from "./Layouts/MainLayout";
 import styled from 'styled-components';
 import GlobalThemeProvider from "./HOC/GlobalThemeProvider";
+import GlobalModalProvider from "./HOC/GlobalModalProvider";
 
+const StyledApp = styled.div `
+  min-height: 100vh;
+`
 
-class App extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return(
-            <div className={'app'}>
-                <GlobalThemeProvider>
+const App = () => {
+    return(
+        <StyledApp className={'app'}>
+            <GlobalThemeProvider>
+                <GlobalModalProvider>
                     <MainLayout/>
-                </GlobalThemeProvider>
-            </div>
-        )
-    }
+                </GlobalModalProvider>
+            </GlobalThemeProvider>
+        </StyledApp>
+    )
 }
 
 export default App;

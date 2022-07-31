@@ -1,11 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
-import Body from "./Components/Body";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import Body from "../MainLayout/Components/Body";
+import Header from "../MainLayout/Components/Header";
+import Footer from "../MainLayout/Components/Footer";
 
 const StyledMainLayout = styled.div`
- margin: 0 auto;
+  margin: 0 auto;
+  min-height: 100vh;
   color: ${props => {return props.theme.textColor}};
 `
 

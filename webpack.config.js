@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ReactRefreshWebpackPlagin } = require('@pmmmwh/react-refresh-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -18,6 +19,15 @@ module.exports = {
         historyApiFallback: {index: '/'},
         open: true,
     },
+
+     plugins:[
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './pablic/index.html',
+            filename: './index.html',
+        }),
+         //new ReactRefreshWebpackPlagin(),
+     ],
     module: {
         rules: [
             {
@@ -32,14 +42,11 @@ module.exports = {
             },
         ]
     },
-     plugins:[
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: './index.html',
-        }),
-     ],
     resolve: {
+        modules: [
+            path.resolve((__dirname, 'src')),
+            path.resolve((__dirname, 'node_modules')),
+        ],
         extensions: ['.json', '.js', '.jsx'],
     },
 };

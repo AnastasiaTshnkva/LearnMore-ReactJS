@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-import { CARD_STATUS } from "../../constants/cardStatus";
-import { CARDS_DATA } from "../../constants/cardsData";
+import { CARD_STATUS } from "../../constants/memoryCards/cardStatus";
+import { CARDS_DATA } from "../../constants/memoryCards/cardsData";
 import CardFrontSide from "./CardFrontSide";
 import CardBackSide from "./CardBackSide";
 
@@ -29,10 +29,17 @@ const StyledMemoryCard = styled.div`
     justify-content: space-around;
     align-items: center;
     &:active {
-      background-color: #d1f3d1;
-      transform: rotate3d(0, 1, 0, 180deg);
-      transition-duration: 0.8s;
+      animation-duration: 0.3s;
+      animation-name: flip;
     }
+  
+  @keyframes flip {
+    20% {transform: rotate3d(0, 1, 0, 36deg);}
+    40% {transform: rotate3d(0, 1, 0, 72deg);}
+    60% {transform: rotate3d(0, 1, 0, 108deg);}
+    80% {transform: rotate3d(0, 1, 0, 144deg);}
+    100% {transform: rotate3d(0, 1, 0, 180deg);}
+  }
 `
 
 class MemoryCard extends React.PureComponent {
@@ -40,22 +47,21 @@ class MemoryCard extends React.PureComponent {
         super(props);
     }
 
-    changeCondition() {
-        return
-        if(CARDS_DATA.condition === 'front'){
-            CARDS_DATA.condition = 'back';
-            console.log(CARDS_DATA.condition)
-        } else if (CARDS_DATA.condition === 'back') {
-            CARDS_DATA.condition = 'front';
-            console.log(CARDS_DATA.condition)
-        }
-
-    }
+    //changeCondition() {
+    //    return
+    //    if(CARDS_DATA.condition === 'front'){
+    //        CARDS_DATA.condition = 'back';
+    //        console.log(CARDS_DATA.condition)
+    //    } else if (CARDS_DATA.condition === 'back') {
+    //        CARDS_DATA.condition = 'front';
+    //        console.log(CARDS_DATA.condition)
+    //    }
+    //}
 
     render() {
         return(
-            CARDS_DATA.map((data, index) => {
-                console.log(data.condition);
+            this.props.cardsData.map((data, index) => {
+                console.log(data);
                 switch (data.condition) {
                     case 'front' :
                         return (

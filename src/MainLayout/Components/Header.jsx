@@ -1,14 +1,13 @@
 import React from "react";
 import styled from 'styled-components';
-import { MyContext } from "../../HOC/GlobalThemeProvider";
 
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   background: ${props => {return props.theme.headerBackgroundColor}};
   color: ${props => {return props.theme.headerTextColor}};
   width: 100vw;
 
-  .header {
+  .header__list {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +20,6 @@ const StyledHeader = styled.div`
     display: block;
     margin-left: 20px;
   }
-  
   .header__user {
     display: flex;
     margin-right: 10px;
@@ -31,26 +29,19 @@ const StyledHeader = styled.div`
   }
 `
 
-class Header extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return(
-            <StyledHeader>
-                <ul className={'header'}>
-                    <li className={'header__logo'}>Learn more</li>
-                    <li className={'header__user'}>
-                        <button type={'button'}>L</button>
-                        <p className={'header__user-avatar'}>avatar</p>
-                        <p className={'header__user-name'}>name</p>
-                    </li>
-                </ul>
-            </StyledHeader>
-
-        )
-    }
+const Header = () => {
+    return(
+        <StyledHeader>
+            <ul className={'header__list'}>
+                <li className={'header__logo'}>Learn more</li>
+                <li className={'header__user'}>
+                    <button type={'button'}>L</button>
+                    <p className={'header__user-avatar'}>avatar</p>
+                    <p className={'header__user-name'}>name</p>
+                </li>
+            </ul>
+        </StyledHeader>
+    )
 };
 
 export default Header;

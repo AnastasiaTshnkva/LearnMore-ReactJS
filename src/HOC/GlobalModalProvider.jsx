@@ -8,8 +8,6 @@ const StyledModalProvider = styled.div`
   z-index: 2;
   top: 50%;
   left: 50%;
-  //margin-top: 50%;
-  //margin-left: -50%;
   background-color: ${props => {return props.theme.cardColor}};
 `
 

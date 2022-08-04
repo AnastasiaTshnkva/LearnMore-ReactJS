@@ -18,6 +18,9 @@ module.exports = {
         port: 3000,
         historyApiFallback: {index: '/'},
         open: true,
+        proxy: {
+            '/api': 'http://localhost:3000/',
+        }
     },
 
      plugins:[

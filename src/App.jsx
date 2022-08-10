@@ -5,22 +5,17 @@ import GlobalThemeProvider from "./HOC/GlobalThemeProvider";
 import GlobalModalProvider from "./HOC/GlobalModalProvider";
 import GlobalStyleWrapper from "./HOC/GlobalThemeWraper";
 import RootRouter from "./Routs/RootRouter";
-
-const StyledApp = styled.div `
-  min-height: 100vh;
-`
+import Login from "./Sceens/Login";
+import LoginPage from "./Sceens/Login";
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
     return(
-        <StyledApp className={'app'}>
-            {/*<RootRouter>*/}
+        <BrowserRouter>
                 <GlobalStyleWrapper>
-                    <GlobalModalProvider>
-                        <MainLayout/>
-                    </GlobalModalProvider>
+                    <RootRouter/>
                 </GlobalStyleWrapper>
-            {/*</RootRouter>*/}
-        </StyledApp>
+        </BrowserRouter>
     )
 }
 

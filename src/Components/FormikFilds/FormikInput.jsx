@@ -1,18 +1,25 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Form, formik, useField} from 'formik'
+import {useField} from "formik";
 
 const StyledFormikInput = styled.div`
-    background-color: aliceblue;
+    background-color: ${props => props.theme.partBackgroundColor};
 `
 
-const FormikInput = () => {
+const FormikInput = (props) => {
+    const {field, meta, helpers} =useField(props);
+
     return (
         <StyledFormikInput>
-           <input/>
+           <input type={'text'} {...field} {...props}/>
         </StyledFormikInput>
     )
+}
+
+FormikInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
 }
 
 export default FormikInput;

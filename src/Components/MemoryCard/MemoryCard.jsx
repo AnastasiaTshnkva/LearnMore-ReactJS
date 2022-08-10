@@ -10,10 +10,11 @@ const StyledMemoryCard = styled.div`
     margin: 5px auto;
     height: 100px;
     width: 200px;
-    border: ${props => {return props.theme.cardBorderColor}} 2px solid;
-    border-radius: 5px;
+    border: ${props => props.theme.cardBorderColor} 2px solid;
+    border-radius: 10px;
+    padding: 10px;
     text-align: center;
-    background-color: ${props => {return props.theme.cardColor}};
+    background-color: ${props => props.theme.cardColor};
     // background: {props => {
     //     switch (props.status) {
     //       case CARD_STATUS.inProcess :

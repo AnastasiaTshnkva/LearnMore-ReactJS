@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const GlobalThemeProvider = (props) => {
-    let [theme, setTheme] = useState('dark');
+    let [theme, setTheme] = useState('light');
 
     const themeColors = {
     backgroundColor: theme === 'dark' ? THEME_COLORS.dark.backgroundColor : THEME_COLORS.light.backgroundColor,
@@ -21,6 +21,7 @@ const GlobalThemeProvider = (props) => {
     cardBorderColor: theme === 'dark' ? THEME_COLORS.dark.cardBorderColor : THEME_COLORS.light.cardBorderColor,
     addButtonColor: theme === 'dark' ? THEME_COLORS.dark.addButtonColor : THEME_COLORS.light.addButtonColor,
     addButtonHoverColor: theme === 'dark' ? THEME_COLORS.dark.addButtonHoverColor : THEME_COLORS.light.addButtonHoverColor,
+    partBackgroundColor: theme === 'dark' ? THEME_COLORS.dark.partBackgroundColor : THEME_COLORS.light.partBackgroundColor,
     }
 
     // themeSwitch(){

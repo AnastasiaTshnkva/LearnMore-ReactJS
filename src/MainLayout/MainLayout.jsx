@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Body from "../Sceens/LearningMemoryCards";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import Login from "../Sceens/Login";
+import LoginPage from "../Sceens/Login";
 
 const StyledMainLayout = styled.div`
   margin: 0 auto;
@@ -24,6 +26,7 @@ const MainLayout = (props) => {
         <StyledMainLayout>
             <Header/>
             <div className={'main'}>
+                {/*<LoginPage/>*/}
                 {props.children}
             </div>
             <Footer/>

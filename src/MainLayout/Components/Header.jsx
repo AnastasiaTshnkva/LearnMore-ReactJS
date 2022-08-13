@@ -1,5 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
+import IcomoonReact from "icomoon-react";
+import iconSet from "../../assets/Icons/selection.json";
 
 
 const StyledHeader = styled.header`
@@ -33,9 +35,10 @@ const Header = () => {
     return(
         <StyledHeader>
             <ul className={'header__list'}>
-                <li className={'header__logo'}>Learn more</li>
+                <li className={'header__logo'}>LearnMore</li>
                 <li className={'header__user'}>
-                    <button type={'button'}>L</button>
+                  <IcomoonReact iconSet={iconSet} color="#f7faf7" size={15} icon="moon"/>
+                  <IcomoonReact iconSet={iconSet} color="#f7faf7" size={20} icon="sun"/>
                     <p className={'header__user-avatar'}>avatar</p>
                     <p className={'header__user-name'}>name</p>
                 </li>

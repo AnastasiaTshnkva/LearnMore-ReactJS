@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {useField} from "formik";
 
 const StyledFormikInput = styled.div`
-    background-color: ${props => props.theme.partBackgroundColor};
+    
 `
 
 const FormikInput = (props) => {

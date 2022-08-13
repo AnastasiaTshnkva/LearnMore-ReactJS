@@ -4,9 +4,15 @@ import {THEME_COLORS} from "../constants/globalTheme/themeColors";
 import GlobalThemeProvider from "./GlobalThemeProvider";
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
     body {
       margin: 0 auto;
       min-height: 100vh;
+      font-family: "open sans",arial,helvetica,sans-serif;
+      font-weight: 400;
+      font-size: 18/20px;
     }
 `
 

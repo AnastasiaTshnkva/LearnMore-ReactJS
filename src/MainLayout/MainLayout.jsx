@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import Body from "../Sceens/LearningMemoryCards";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import Login from "../Sceens/Login";
-import LoginPage from "../Sceens/Login";
+
 
 const StyledMainLayout = styled.div`
   margin: 0 auto;
@@ -15,9 +14,9 @@ const StyledMainLayout = styled.div`
     min-height: calc(100vh - 80px - 50px);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    background-color: ${props => {return props.theme.backgroundColor}};
+    background-color: ${props => {return props.theme.mainBackgroundColor}};
   }
 `
 

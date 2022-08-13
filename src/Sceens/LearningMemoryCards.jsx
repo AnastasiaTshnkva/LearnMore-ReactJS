@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import MemoryCard from "../Components/MemoryCard/MemoryCard";
+import MemoryCard from "./BundleOfCards/Components/MemoryCard";
 import {MyContext} from "../HOC/GlobalModalProvider";
 import CreateMemoryCard from "../HOC/CreateMemoryCard";
 
@@ -68,7 +68,6 @@ class LearningMemoryCards extends React.PureComponent {
     render() {
         return(
             <StyledLearningMemoryCards>
-                <MyContext.Consumer>
                     {value => (
                         <button onClick={() => {
                             value(
@@ -78,7 +77,6 @@ class LearningMemoryCards extends React.PureComponent {
                             Add card
                         </button>
                     )}
-                </MyContext.Consumer>
                 <div className={'cards-box'}>
                     <MemoryCard cardsData={this.state.cardsData}></MemoryCard>
                 </div>

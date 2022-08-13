@@ -1,6 +1,5 @@
 import React from "react";
 import styled from 'styled-components';
-import Body from "../Sceens/LearningMemoryCards";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
@@ -25,7 +24,6 @@ const MainLayout = (props) => {
         <StyledMainLayout>
             <Header/>
             <div className={'main'}>
-                {/*<LoginPage/>*/}
                 {props.children}
             </div>
             <Footer/>

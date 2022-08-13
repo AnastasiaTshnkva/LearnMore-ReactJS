@@ -13,18 +13,12 @@ const StyledCardBackSide = styled.div`
   }
 `
 
-class CardBackSide extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return(
-            <StyledCardBackSide>
-                <p className={'memoryCard__decoding'}>{this.props.cardDecoding}</p>
-            </StyledCardBackSide>
-        )
-    }
+const CardBackSide = (props) => {
+    return(
+        <StyledCardBackSide>
+            <p className={'memoryCard__decoding'}>{props.cardDecoding}</p>
+        </StyledCardBackSide>
+    )
 }
 
 export default CardBackSide;

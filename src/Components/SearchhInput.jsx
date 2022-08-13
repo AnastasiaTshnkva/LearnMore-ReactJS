@@ -30,7 +30,7 @@ const SearchInput = () => {
         <StyledSearchInput>
                 <div className={'search'}>
                     <IcomoonReact iconSet={iconSet} color={'#d5d9d3'} size={20} icon="search" className={'search__icon'}/>
-                    <input type={'text'} placeholder={'search category'} className={'search__input'}/>
+                    <input type={'text'} placeholder={'search'} className={'search__input'}/>
                 </div>
         </StyledSearchInput>
     )

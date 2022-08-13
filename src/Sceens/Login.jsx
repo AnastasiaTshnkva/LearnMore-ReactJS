@@ -28,6 +28,9 @@ const StyledLoginPage = styled.div`
         border: 1px solid ${props => props.theme.inputBorderColor};
         padding: 7px;
         border-radius: 3px;
+        &:focus {
+          outline: none;
+        }
       }
       .button {
         padding: 10px;

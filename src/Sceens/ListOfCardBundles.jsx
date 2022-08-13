@@ -2,23 +2,57 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledListOfCardBundles = styled.div`
-  .search {
-    width: 50vw;
-    padding: 7px;
-    border: 5px solid ${props => props.theme.inputBorderColor};
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  // background-color: ${props => props.theme.partBackgroundColor};
+  margin-bottom: 20px;
+  .bundle-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 130px;
+    background-color: ${props => props.theme.cardColor};
+    margin: 10px;
+    border: 3px solid ${props => props.theme.cardBorderColor};
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      &:hover {
+        box-shadow: 0 0 5px ${props => props.theme.buttonHoverShadow};
+      }
+    }
+    .description {
+      display: block;
+      text-align: center;
+      font-size: 22px;
+      line-height: 26px;
+    }
   }
 `
 
 const ListOfCardBundles = () => {
+    const bundlesData = [
+        {id: '1', bundlesName: 'xcvbnm', description: 'fghjkl',},
+        {id: '2', bundlesName: 'cvhjkl', description: 'fghjkl',},
+        {id: '3', bundlesName: 'sdfghjkl;', description: 'fghjkl',},
+        {id: '4', bundlesName: 'wertyuio', description: 'fghjkl',},
+        {id: '5', bundlesName: 'wefghji', description: 'fghjkl',},
+        {id: '6', bundlesName: 'wertyuio', description: 'fghjkl',},
+        {id: '7', bundlesName: 'qwfghjkl fvghjk fghjk dfghjkl dfghjk', description: 'fghjkl',},
+    ];
+
+
     return (
-        <React.Fragment>
-            <input type={'text'} placeholder={'search category'} className={'search'}/>
-            <ul>
-                <li>fghjkl</li>
-                <li>fghjkl</li>
-                <li>fghjkl</li>
-            </ul>
-        </React.Fragment>
+        <StyledListOfCardBundles>
+            {bundlesData.map((data, index) => {
+            return(
+                <div key={index} className={'bundle-box'}>
+                    <p className={'description'}>{data.bundlesName}</p>
+                </div>
+            )})}
+
+        </StyledListOfCardBundles>
+
 
     )
 

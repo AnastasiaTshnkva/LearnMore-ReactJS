@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack server"
+    "start": "webpack server",
+    "server": "json-server ./fakeServer/db.json --port 3004"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "axios": "^0.27.2",
     "formic": "^0.0.10",
     "formik": "^2.2.9",
     "icomoon-react": "^3.0.0",

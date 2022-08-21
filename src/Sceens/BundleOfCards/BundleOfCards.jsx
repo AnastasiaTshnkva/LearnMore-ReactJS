@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import IcomoonReact from "icomoon-react";
 import iconSet from "../../assets/Icons/selection.json";
 import {fetchCardsData} from "../../api/fakeServer/cardsApi";
+import {useLocation} from "react-router-dom";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -105,20 +106,15 @@ const StyledBundleOfCards = styled.div`
 
 const BundleOfCards = (props) => {
     const [cardsData, setCardsData] = useState([]);
-    const bundleData = {id: '1', bundlesName: 'xcvbnm', description: 'dfghjkl dfghj sdfghj sdfgh cvbn sdfghjj sdfghjkl sdfghj dfghj d dfgh',}
 
     useEffect(() => {
         fetchCardsData().then(({data}) => setCardsData(data))
     }, [])
 
+    const bundleData = {id: '1', bundlesName: 'xcvbnm', description: 'dfghjkl dfghj sdfghj sdfgh cvbn sdfghjj sdfghjkl sdfghj dfghj d dfgh',}
+
 
     const [activeIndex, setActiveIndex] = useState(0);
-    //
-    // setActiveIndex((current) => {
-    //     const res = current === bundleCards.length - 1
-    // })
-
-
 
     return (
         <StyledBundleOfCards>

@@ -1,7 +1,14 @@
 {
+  "categories" : [
+    {"categoryID": "1", "categoryName": "English", "categoryDescription": "Here I am trying to learn more English words" },
+    {"categoryID": "2", "categoryName": "Space", "categoryDescription": "Here I am trying to learn more about space" }
+  ],
   "cards": [
-    {"id": "1", "cardName": "card 1", "cardDecoding": "decoding 1", "condition": "front"},
-    {"id": "2", "cardName": "card 2", "cardDecoding": "decoding 2", "condition": "back"},
-    {"id": "1", "cardName": "card 3", "cardDecoding": "decoding 3", "condition": "front"}
+    {"CardId": "1", "cardName": "cat", "cardDecoding": "кот", "condition": "front", "category":"1"},
+    {"CardId": "2", "cardName": "dog", "cardDecoding": "собака", "condition": "back", "category":"1"},
+    {"CardId": "3", "cardName": "horse", "cardDecoding": "лошадь", "condition": "front", "category":"1"},
+    {"CardId": "4", "cardName": "how old is the earth", "cardDecoding": "4.543 billion years", "condition": "front", "category":"2"},
+    {"CardId": "5", "cardName": "when the first man went to space", "cardDecoding": "1961", "condition": "front", "category":"2"},
+    {"CardId": "6", "cardName": "how many humans have been on the moon", "cardDecoding": "12", "condition": "front", "category":"2"}
   ]
 }

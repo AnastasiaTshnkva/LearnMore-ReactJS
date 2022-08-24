@@ -56,14 +56,11 @@ class LearningMemoryCards extends React.PureComponent {
         }
     }
 
-
-
     flipCard() {
         this.setState((state) => {this.cardsData.condition === 'front' ? 'back' : 'front'}, () => {
             console.log('flip', this.state.cardsData);
         })
     }
-
 
     render() {
         return(

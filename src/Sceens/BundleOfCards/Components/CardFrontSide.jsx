@@ -21,9 +21,11 @@ const StyledCardFrontSide = styled.div`
     align-self: center;
   }
 `
+// const deleteButton = () => {return <button type={'button'} className={'memoryCard__cross-but'}>}
+
 
 const CardFrontSide = (props) => {
-    return(
+        return(
         <StyledCardFrontSide>
             <button type={'button'} className={'memoryCard__edit-but'}>
                 <IcomoonReact iconSet={iconSet} color="#000" size={15} icon="pencil"/>

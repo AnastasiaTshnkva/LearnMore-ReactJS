@@ -3,11 +3,11 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {THEME_COLORS} from "../constants/globalTheme/themeColors";
 
 const GlobalStyle = createGlobalStyle`
-    //body {
-    //  margin: 0 auto;
-    //  min-height: 100vh;
-    //  box-sizing: border-box;
-    //}
+    body {
+      margin: 0 auto;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
 `
 
 const GlobalThemeProvider = (props) => {
@@ -33,9 +33,7 @@ const GlobalThemeProvider = (props) => {
         descriptionPartColor: theme === 'dark' ? THEME_COLORS.dark.descriptionPartColor : THEME_COLORS.light.descriptionPartColor,
     }
 
-    // themeSwitch(){
-    //     this.setState(state => {return{theme: state.theme === 'dark' ? 'light':'dark'}})
-    // }
+    const themeSwitch = () => {theme === 'dark' ? setTheme('light') : setTheme('dark')};
 
     return (
         <ThemeProvider theme={themeColors}>

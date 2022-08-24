@@ -36,8 +36,8 @@ const RootRouter = () => {
 
     return (
         <Routes>
-            {/*<Route path={'/login'} element={renderForGuestUser(<LoginLayout><Login/></LoginLayout>)}/>*/}
-            <Route path={'/login'} element={<LoginLayout><Login/></LoginLayout>}/>
+            <Route path={'/login'} element={<LoginLayout><Login/></LoginLayout>}>
+            </Route>
             <Route path={'/category_list'} element={<ListsLayout><CategoryList/></ListsLayout>}/>
             <Route path={'/list_of_bundles'} element={<ListsLayout><ListOfCardBundles/></ListsLayout>}/>
             <Route path={'/bundles_of_cards'} element={<MainLayout><BundleOfCards/></MainLayout>}/>

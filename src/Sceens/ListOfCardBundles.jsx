@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledListOfCardBundles = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  // background-color: ${props => props.theme.partBackgroundColor};
+  // background-color: {props => props.theme.partBackgroundColor};
   margin-bottom: 20px;
   .bundle-box {
     display: flex;

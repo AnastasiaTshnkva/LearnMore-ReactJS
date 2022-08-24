@@ -37,6 +37,7 @@ const Header = () => {
             <ul className={'header__list'}>
                 <li className={'header__logo'}>LearnMore</li>
                 <li className={'header__user'}>
+
                   <IcomoonReact iconSet={iconSet} color="#f7faf7" size={15} icon="moon"/>
                   <IcomoonReact iconSet={iconSet} color="#f7faf7" size={20} icon="sun"/>
                     <p className={'header__user-avatar'}>avatar</p>

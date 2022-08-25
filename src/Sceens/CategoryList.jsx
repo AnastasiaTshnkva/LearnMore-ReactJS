@@ -34,14 +34,14 @@ const StyledCategoryList = styled.div`
 `
 
 const CategoryList = () => {
+    // useEffect( () => {
+    //     fetchCategoryData().then(({data}) => setCategoryData(data))
+    // }, []);
+
     const [categoryData, setCategoryData] = useState([
         {"categoryID": "1", "categoryName": "English", "categoryDescription": "Here I am trying to learn more English words" },
         {"categoryID": "2", "categoryName": "Space", "categoryDescription": "Here I am trying to learn more about space" }
     ]);
-
-    // useEffect( () => {
-    //     fetchCategoryData().then(({data}) => setCategoryData(data))
-    // }, []);
 
     const [categoryName, setCategoryName] = useState('');
 
@@ -58,7 +58,7 @@ const CategoryList = () => {
     return (
         <StyledCategoryList>
             <input type={'text'} value={categoryName} onChange={event => event.target.value} onKeyPress={addCard}/>
-            <AddButton>+New</AddButton>
+            {/*<AddButton>+New</AddButton>*/}
             <ul className={'category__list'}>
                 {categoryData.map((data, index) => {
                     return (

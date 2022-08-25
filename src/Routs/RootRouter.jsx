@@ -43,7 +43,7 @@ const RootRouter = () => {
             <Route path={'/bundles_of_cards'} element={<MainLayout><BundleOfCards/></MainLayout>}/>
             <Route path={'/list'} element={<MainLayout><LearningMemoryCards/></MainLayout>}/>
 
-            <Route path={'*'} element={<Navigate to={'/login'}/>}/>
+            <Route path={'*'} element={<Navigate to={'/category_list'}/>}/>
         </Routes>
     );
 }

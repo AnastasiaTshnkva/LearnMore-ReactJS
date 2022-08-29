@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import IcomoonReact from "icomoon-react";
 import iconSet from "../../assets/Icons/selection.json";
-import {fetchCardsData} from "../../api/fakeServer/cardsApi";
+import {fetchCardsData} from "../../api/fakeServer/Api";
 import {useLocation} from "react-router-dom";
 
 const StyledBundleOfCards = styled.div`

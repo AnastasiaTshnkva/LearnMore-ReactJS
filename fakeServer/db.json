@@ -1,14 +1,20 @@
 {
   "categories" : [
     {"categoryID": "1", "categoryName": "English", "categoryDescription": "Here I am trying to learn more English words" },
-    {"categoryID": "2", "categoryName": "Space", "categoryDescription": "Here I am trying to learn more about space" }
+    {"categoryID": "2", "categoryName": "History", "categoryDescription": "Here I am trying to learn more about space" }
   ],
+  "bundles" : [
+    {"bundlesID": "1", "bundlesName": "Animals", "bundlesDescription": "animals", "categoryID": "1" },
+    {"bundlesID": "2", "bundlesName": "Animals", "bundlesDescription": "animals", "categoryID": "1" },
+    {"bundlesID": "3", "bundlesName": "Space", "bundlesDescription": "dates", "categoryID": "2" }
+     ],
+
   "cards": [
-    {"CardId": "1", "cardName": "cat", "cardDecoding": "кот", "condition": "front", "category":"1"},
-    {"CardId": "2", "cardName": "dog", "cardDecoding": "собака", "condition": "back", "category":"1"},
-    {"CardId": "3", "cardName": "horse", "cardDecoding": "лошадь", "condition": "front", "category":"1"},
-    {"CardId": "4", "cardName": "how old is the earth", "cardDecoding": "4.543 billion years", "condition": "front", "category":"2"},
-    {"CardId": "5", "cardName": "when the first man went to space", "cardDecoding": "1961", "condition": "front", "category":"2"},
-    {"CardId": "6", "cardName": "how many humans have been on the moon", "cardDecoding": "12", "condition": "front", "category":"2"}
+    {"CardId": "1", "cardName": "cat", "cardDecoding": "кот", "condition": "front", "bundlesID":"1", "answersCounter": 0},
+    {"CardId": "2", "cardName": "dog", "cardDecoding": "собака", "condition": "back", "bundlesID":"1", "answersCounter": 0},
+    {"CardId": "3", "cardName": "horse", "cardDecoding": "лошадь", "condition": "front", "bundlesID":"1", "answersCounter": 0},
+    {"CardId": "4", "cardName": "how old is the earth", "cardDecoding": "4.543 billion years", "condition": "front", "bundlesID":"2", "answersCounter": 0},
+    {"CardId": "5", "cardName": "when the first man went to space", "cardDecoding": "1961", "condition": "front", "bundlesID":"2", "answersCounter": 0},
+    {"CardId": "6", "cardName": "how many humans have been on the moon", "cardDecoding": "12", "condition": "front", "bundlesID":"2", "answersCounter": 0}
   ]
 }

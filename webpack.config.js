@@ -26,7 +26,7 @@ module.exports = {
      plugins:[
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './pablic/index.html',
+            template: './public/index.html',
             filename: './index.html',
         }),
          //new ReactRefreshWebpackPlagin(),

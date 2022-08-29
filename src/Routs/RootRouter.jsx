@@ -20,8 +20,7 @@ const RootRouter = () => {
         if(!user) {
             return Scene
         } else {
-
-           return <Navigate to={redirectLocation || '/list'}/>
+           return <Navigate to={redirectLocation || '/category_list'}/>
         }
     }
 

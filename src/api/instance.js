@@ -6,4 +6,12 @@ const fakeServerInstance = axios.create({
     headers: {'x-auth': 'ghjk'}
     })
 
+fakeServerInstance.interceptors.response.use(
+    (response) => {return response},
+    (response) => {
+
+        throw new Error(response.error.message)
+    }
+)
+
 export default fakeServerInstance;

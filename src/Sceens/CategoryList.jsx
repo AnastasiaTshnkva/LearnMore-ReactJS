@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {fetchCategoryData} from "../api/fakeServer/categoryApi";
+import {fetchCategoryData} from "../api/fakeServer/Api";
 import AddButton from "../Components/AddButton";
 
 const StyledCategoryList = styled.div`
@@ -34,15 +34,17 @@ const StyledCategoryList = styled.div`
 `
 
 const CategoryList = () => {
-    // useEffect( () => {
-    //     fetchCategoryData().then(({data}) => setCategoryData(data))
-    // }, []);
+    const [categoryData, setCategoryData] = useState(undefined);
 
-    const [categoryData, setCategoryData] = useState([
-        {"categoryID": "1", "categoryName": "English", "categoryDescription": "Here I am trying to learn more English words" },
-        {"categoryID": "2", "categoryName": "Space", "categoryDescription": "Here I am trying to learn more about space" }
-    ]);
+    const getCategoryDataFromServer = () => {
+        fetchCategoryData().then(({data}) => setCategoryData(data)).catch(() => {})
+    }
 
+    useEffect(() => {
+        getCategoryDataFromServer()
+    }, []);
+
+    console.log(categoryData);
     const [categoryName, setCategoryName] = useState('');
 
     const addCard = event => {
@@ -55,19 +57,27 @@ const CategoryList = () => {
         }
     }
 
+    const getCategoriesList = () => {
+        if (categoryData === undefined) return <div>Categories list loading...</div>
+        if (!categoryData.length) return <div>No categories created yet</div>
+        return (
+            categoryData.map((data, index) => {
+                return (
+                    <li key={index} className={'category__list-item'}>
+                        <p className={'category__list-item__title'}>{data.categoryName}</p>
+                        <p className={'category__list-item__description'}>{data.categoryDescription}</p>
+                    </li>
+                )
+            })
+        )
+    }
+
     return (
         <StyledCategoryList>
-            <input type={'text'} value={categoryName} onChange={event => event.target.value} onKeyPress={addCard}/>
-            {/*<AddButton>+New</AddButton>*/}
+            <input type={'text'} value={categoryName} onChange={event => setCategoryName(event.target.value)} onKeyPress={addCard}/>
+            <AddButton onClick={addCard}>+New</AddButton>
             <ul className={'category__list'}>
-                {categoryData.map((data, index) => {
-                    return (
-                        <li key={index} className={'category__list-item'}>
-                            <p className={'category__list-item__title'}>{data.categoryName}</p>
-                            <p className={'category__list-item__description'}>{data.categoryDescription}</p>
-                        </li>
-                    )
-                })}
+                {getCategoriesList()}
             </ul>
         </StyledCategoryList>
     )

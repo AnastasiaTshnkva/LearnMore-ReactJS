@@ -95,7 +95,7 @@ const LoginPage = () => {
             }}>
                 <Form className={'form'}>
                     <h2 className={'title'}>Log in to LearnMore</h2>
-                    <FormikInput name={'login'} placeholder={'input login'} type={'email'} className={'input'}/>
+                    <FormikInput name={'email'} placeholder={'input login'} type={'email'} className={'input'}/>
                     <FormikInput name={'password'} placeholder={'input password'} type={'password'} className={'input'}/>
                     <button type={'submit'} className={'button'}>Login</button>
                     <div className={'help'}>

@@ -1,14 +1,14 @@
 import React, {useContext, useState} from "react";
 import PropTypes from 'prop-types';
 import {Route, Routes, Outlet, Navigate, useLocation} from "react-router-dom";
-import Login from "Sceens/Login";
+import LoginPage from "Sceens/LoginPage";
 import LearningMemoryCards from "Sceens/LearningMemoryCards";
 import MainLayout from "MainLayout/MainLayout";
 import LoginLayout from "MainLayout/LoginLayout";
 import ListOfCardBundles from "Sceens/ListOfCardBundles";
 import CategoryList from "Sceens/CategoryList";
 import ListsLayout from "MainLayout/ListsLayout";
-import BundleOfCards from "../Sceens/BundleOfCards/BundleOfCards";
+import BundleOfCards from "Sceens/BundleOfCards/BundleOfCards";
 
 const RootRouter = () => {
     // let user = useContext();
@@ -20,7 +20,7 @@ const RootRouter = () => {
         if(!user) {
             return Scene
         } else {
-           return <Navigate to={redirectLocation || '/category_list'}/>
+            return <Navigate to={redirectLocation || '/category_list'}/>
         }
     }
 
@@ -35,7 +35,7 @@ const RootRouter = () => {
 
     return (
         <Routes>
-            <Route path={'/login'} element={<LoginLayout><Login/></LoginLayout>}>
+            <Route path={'/login'} element={<LoginLayout><LoginPage/></LoginLayout>}>
             </Route>
             <Route path={'/category_list'} element={<ListsLayout><CategoryList/></ListsLayout>}/>
             <Route path={'/list_of_bundles'} element={<ListsLayout><ListOfCardBundles/></ListsLayout>}/>

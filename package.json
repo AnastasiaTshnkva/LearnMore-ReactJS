@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack server",
-    "server": "json-server ./fakeServer/db.json --port 3004"
+    "server": "json-server ./fakeServer/db.json -m ./node_modules/json-server-auth --port 3004"
   },
   "repository": {
     "type": "git",

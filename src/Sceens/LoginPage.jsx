@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Form, Formik} from 'formik';
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from "../api/fakeServer/Api";
 
 const StyledLoginPage = styled.div`
   display: flex;
@@ -63,12 +64,10 @@ const StyledLoginPage = styled.div`
         text-decoration: underline;
         &:hover {
           color: ${props => props.theme.accentTextColor};
-        }
-      }
-      }
-      
+        } 
+        } 
+      } 
     }
-  
 `
 
 const LoginPage = () => {
@@ -76,9 +75,7 @@ const LoginPage = () => {
 
     return (
         <StyledLoginPage>
-            <Formik className={'login-page'} onSubmit={() => {
-                useNavigate('/List');
-            }} validate={(formData) => {
+            <Formik className={'login-page'} onSubmit={() => {useNavigate('/List')}} validate={(formData) => {
                 let isValid = true;
                 const errors = {};
 
@@ -93,9 +90,13 @@ const LoginPage = () => {
 
                 if (!isValid) return errors;
             }}>
-                <Form className={'form'}>
+                <Form className={'form'} onSubmit={
+                    () => console.log('user logged in')
+                    // loginUser(name, login, password).then(({data}) => {setIsUserLoggedIn(data.acess, data.refresh)})
+                }>
                     <h2 className={'title'}>Log in to LearnMore</h2>
-                    <FormikInput name={'email'} placeholder={'input login'} type={'email'} className={'input'}/>
+                    <FormikInput name={'name'} placeholder={'input name'} type={'text'} className={'input'}/>
+                    <FormikInput name={'email'} placeholder={'input email'} type={'email'} className={'input'}/>
                     <FormikInput name={'password'} placeholder={'input password'} type={'password'} className={'input'}/>
                     <button type={'submit'} className={'button'}>Login</button>
                     <div className={'help'}>

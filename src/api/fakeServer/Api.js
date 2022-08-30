@@ -4,4 +4,6 @@ export const fetchCardsData = () => fakeServerInstance.get('/cards');
 
 export const fetchCategoryData = () => fakeServerInstance.get('/categories');
 
-export const fetchBundlesDate  = fakeServerInstance.get('/bundles');
+export const fetchBundlesDate = () => fakeServerInstance.get('/bundles');
+
+export const loginUser = (name, login, password) => fakeServerInstance.post('/login', {name, login, password})

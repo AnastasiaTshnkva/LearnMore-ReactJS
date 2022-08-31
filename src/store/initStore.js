@@ -1,7 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userSlice from "./userSlice";
+import {configureStore, createStore, applyMiddleware, compose} from '@reduxjs/toolkit';
+import RootReducer from "./reducers/RootReducer";
 
-export const store = configureStore({
-    // categoryReducer: {}
-    reducer: {userSlice}
-})
+const middlewareList = [];
+const middlewareEnhancer = applyMiddleware(...middlewareList);
+
+const enhancerList = [];
+if(window.__REDUX_DEVTOOLS_EXTENSION__) enhancerList.push(window.__REDUX_DEVTOOLS_EXTENSION__())
+const composeEnhancers = compose(middlewareEnhancer, ...enhancerList);
+
+
+export const store = createStore(RootReducer, composeEnhancers)

@@ -5,6 +5,9 @@ import {Form, Formik} from 'formik';
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from "../api/fakeServer/Api";
+import {useDispatch, useSelector} from "react-redux";
+import {isLoggedIn} from "store/selectors/userSelectors";
+import {createUserLogInAction} from "../store/actions/userActionCreators";
 
 const StyledLoginPage = styled.div`
   display: flex;
@@ -71,11 +74,14 @@ const StyledLoginPage = styled.div`
 `
 
 const LoginPage = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const userLoggedIn = useSelector(isLoggedIn);
 
     return (
         <StyledLoginPage>
-            <Formik className={'login-page'} onSubmit={() => {useNavigate('/List')}} validate={(formData) => {
+            <Formik className={'login-page'} onSubmit={
+                () => {useNavigate('/List')}} validate={(formData) => {
                 let isValid = true;
                 const errors = {};
 
@@ -91,7 +97,10 @@ const LoginPage = () => {
                 if (!isValid) return errors;
             }}>
                 <Form className={'form'} onSubmit={
-                    () => console.log('user logged in')
+                    (event) =>
+                    {
+                        event.nativeEvent.preventDefault();
+                        dispatch(createUserLogInAction('someToken'))}
                     // loginUser(name, login, password).then(({data}) => {setIsUserLoggedIn(data.acess, data.refresh)})
                 }>
                     <h2 className={'title'}>Log in to LearnMore</h2>

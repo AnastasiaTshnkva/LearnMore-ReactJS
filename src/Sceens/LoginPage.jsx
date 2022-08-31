@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Form, Formik} from 'formik';
+import { Form, Formik } from 'formik';
 import FormikInput from "../Components/FormikFilds/FormikInput";
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from "../api/fakeServer/Api";
-import {useDispatch, useSelector} from "react-redux";
-import {isLoggedIn} from "store/selectors/userSelectors";
-import {createUserLogInAction} from "../store/actions/userActionCreators";
+import { useDispatch } from "react-redux";
+import checkUsersLoginHook from "hooks/checkUsersLoginHook";
+import {setNotValidUserAction, setValidUserAction} from "store/actions/userActionCreators";
 
 const StyledLoginPage = styled.div`
   display: flex;
@@ -26,15 +24,6 @@ const StyledLoginPage = styled.div`
         text-align: center;
         font-size: 22px;
       }
-      .input {
-        margin-top: 30px;
-        width: 100%;
-        border: 1px solid ${props => props.theme.inputBorderColor};
-        padding: 7px;
-        border-radius: 3px;
-        &:focus {
-          outline: none;
-        }
       }
       .button {
         padding: 10px;
@@ -78,41 +67,57 @@ const LoginPage = () => {
     // const navigate = useNavigate();
     // const userLoggedIn = useSelector(isLoggedIn);
 
+    const handleOnSubmit = (event) => {
+        event.nativeEvent.preventDefault();
+        const userName = document.getElementById('name').value;
+        const userEmail = document.getElementById('email').value;
+        const userPassword = document.getElementById('password').value;
+        const user = {
+            userName,
+            userEmail,
+            userPassword,
+        }
+        const isUserLogIn = checkUsersLoginHook(user);
+        console.log(isUserLogIn);
+        if(isUserLogIn) {
+            dispatch(setValidUserAction());
+        } else {
+            dispatch(setNotValidUserAction());
+        }
+    };
+
+    const handleValidate = (formData) => {
+        let isValid = true;
+        const errors = {};
+
+        if(!formData.email) {
+            isValid = false;
+            errors.email = 'email is mandatory';
+        }
+        if(!formData.password) {
+            isValid = false;
+            errors.password = 'password is mandatory';
+        }
+
+        if (!isValid) return errors;
+    };
+
     return (
         <StyledLoginPage>
-            <Formik className={'login-page'} onSubmit={
-                () => {useNavigate('/List')}} validate={(formData) => {
-                let isValid = true;
-                const errors = {};
-
-                if(!formData.login) {
-                    isValid = false;
-                    errors.login = 'login is mandatory';
-                }
-                if(!formData.password) {
-                    isValid = false;
-                    errors.password = 'password is mandatory';
-                }
-
-                if (!isValid) return errors;
-            }}>
-                <Form className={'form'} onSubmit={
-                    (event) =>
-                    {
-                        event.nativeEvent.preventDefault();
-                        dispatch(createUserLogInAction('someToken'))}
-                    // loginUser(name, login, password).then(({data}) => {setIsUserLoggedIn(data.acess, data.refresh)})
-                }>
+            <Formik className={'login-page'} validate={handleValidate}>
+                <Form
+                    className={'form'}
+                    onSubmit={handleOnSubmit}
+                >
                     <h2 className={'title'}>Log in to LearnMore</h2>
-                    <FormikInput name={'name'} placeholder={'input name'} type={'text'} className={'input'}/>
-                    <FormikInput name={'email'} placeholder={'input email'} type={'email'} className={'input'}/>
-                    <FormikInput name={'password'} placeholder={'input password'} type={'password'} className={'input'}/>
+                    <FormikInput name={'name'} placeholder={'input name'} type={'text'}/>
+                    <FormikInput name={'email'} placeholder={'input email'} type={'email'}/>
+                    <FormikInput name={'password'} placeholder={'input password'} type={'password'}/>
                     <button type={'submit'} className={'button'}>Login</button>
                     <div className={'help'}>
                         <p className={'text'}>Help me!</p>
                         <p className={'text'}>Sign up</p>
                     </div>
-
                 </Form>
             </Formik>
         </StyledLoginPage>
@@ -127,6 +132,5 @@ LoginPage.defoltprops ={
 };
 
 export default LoginPage;
-
 
 

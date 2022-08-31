@@ -1,18 +1,21 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {useField} from "formik";
 
-const StyledFormikInput = styled.div`
-    
+const StyledFormikInput = styled.input`
+    margin-top: 30px;
+    width: 100%;
+    border: 1px solid ${props => props.theme.inputBorderColor};
+    padding: 7px;
+    border-radius: 3px;
+    &:focus {
+      outline: none;
+    }
 `
 
 const FormikInput = (props) => {
-    const {field, meta, helpers} =useField(props);
-
     return (
-        <StyledFormikInput>
-           <input type={'text'} {...field} {...props}/>
+        <StyledFormikInput id={props.name} type={props.type} name={props.name} placeholder={props.placeholder} className='input'>
         </StyledFormikInput>
     )
 }

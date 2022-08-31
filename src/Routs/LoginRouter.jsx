@@ -1,16 +1,13 @@
-import React, {useContext, useState} from "react";
-import {Route, Routes, Outlet, Navigate, useLocation} from "react-router-dom";
+import React from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "Sceens/LoginPage";
 import LoginLayout from "MainLayout/LoginLayout";
 import RootRouter from "./RootRouter";
-import {useSelector} from "react-redux";
-import {isLoggedIn} from 'store/selectors/userSelectors'
+import { connect } from "react-redux";
 
 
-const LoginRouter = () => {
-    const userLoggedIn = useSelector(isLoggedIn);
-    const location = useLocation()
-
+const LoginRouter = ({userLoggedIn}) => {
+    // const location = useLocation()
     // gotUserStartPage = () => {
     //     if(storedLocation) return storedLocation
     // }
@@ -20,7 +17,6 @@ const LoginRouter = () => {
         return <Navigate to={'/login'}/>
     }
     const renderForNotLoggedInUser = (Scene) => {
-        // dispatch({type: 'loginRedirect', payload: location})
         if(!userLoggedIn) return Scene
         return <Navigate to={'/category_list'}/>
     }
@@ -33,4 +29,10 @@ const LoginRouter = () => {
     )
 }
 
-export default LoginRouter;
+const mapStateToProps = function (state) {
+    return {
+        userLoggedIn: state.users.isLoggedIn,
+    };
+};
+
+export default connect(mapStateToProps)(LoginRouter);

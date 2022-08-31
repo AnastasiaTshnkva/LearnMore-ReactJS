@@ -11,7 +11,6 @@
       "categoryDescription": "Here I am trying to learn more about space"
     }
   ],
-
   "bundles" : [
     {
       "bundlesID": "1",
@@ -83,6 +82,18 @@
       "bundlesID":"2",
       "bundlesName": "Space",
       "answersCounter": 0
+    }
+  ],
+  "users": [
+    {
+      "userName": "Nastya",
+      "userEmail": "nastya@mail.ru",
+      "userPassword": "123456"
+    },
+    {
+      "userName": "Sasha",
+      "userEmail": "sasha@mail.ru",
+      "userPassword": "654321"
     }
   ]
 }

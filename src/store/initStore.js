@@ -9,4 +9,4 @@ if(window.__REDUX_DEVTOOLS_EXTENSION__) enhancerList.push(window.__REDUX_DEVTOOL
 const composeEnhancers = compose(middlewareEnhancer, ...enhancerList);
 
 
-export const store = createStore(RootReducer, composeEnhancers)
+export const store = createStore(RootReducer, composeEnhancers);

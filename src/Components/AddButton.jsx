@@ -17,10 +17,9 @@ const StyledAddButton = styled.button`
   }
 `
 
-const AddButton = () => {
+const AddButton = ({onClickProps}) => {
     return(
-        <StyledAddButton className={'button'} type={'button'}>+New</StyledAddButton>
-
+        <StyledAddButton className={'button'} type={'button'} onClick={onClickProps ? onClickProps : null}>+New</StyledAddButton>
     )
 }
 

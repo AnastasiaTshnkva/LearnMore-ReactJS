@@ -101,7 +101,7 @@ const CategoryList = () => {
             return <div>No categories created yet</div>
         }else {
             return (
-                categoriesData.map((data, index) => {
+                categoriesData.map((data) => {
                     return (
                         <li key={data.categoryID} className={'category__list-item'}>
                             <Link to={'listOfBundles'} className={'category__list-item__title'}>{data.categoryName}</Link>

@@ -19,7 +19,7 @@ const LoginLayout = (props) => {
     return (
         <StyledLoginLayout>
             <main className={'main'}>
-                {/*<Outlet/>*/}
+                <Outlet/>
                 {/*<LoginPage/>*/}
                 {props.children}
             </main>

@@ -11,7 +11,7 @@ const App = () => {
         <Provider store={store}>
             <BrowserRouter>
                 <GlobalStyleWrapper>
-                    <LoginRouter/>
+                    <RootRouter/>
                 </GlobalStyleWrapper>
             </BrowserRouter>
         </Provider>

@@ -25,7 +25,6 @@ const LoginRouter = () => {
     const renderForNotLoggedInUser = (Scene) => {
         if(!userLoggedInFromStore.userLoggedIn) return Scene
         return <Navigate to={'/categoryList'}/>
-        // return <Navigate to={'/main'}/>
     };
 
     return (

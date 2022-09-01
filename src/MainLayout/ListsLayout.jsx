@@ -1,9 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
+import { Outlet } from "react-router-dom";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import SearchInput from "../Components/SearchhInput";
-import AddButton from "../Components/AddButton";
 
 
 const StyledListsLayout = styled.div`
@@ -24,9 +24,9 @@ const ListsLayout = (props) => {
         <StyledListsLayout>
             <Header/>
             <div className={'main'}>
-                {/*<AddButton className={'button'}/>*/}
                 <SearchInput className={'search'}/>
-                {props.children}
+                <Outlet/>
+                {/*{props.children}*/}
             </div>
             <Footer/>
         </StyledListsLayout>

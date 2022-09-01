@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styled from 'styled-components';
+import {Formik, Form} from "formik";
+import { Link } from "react-router-dom";
 import {fetchCategoryData} from "../api/fakeServer/Api";
 import AddButton from "../Components/AddButton";
 import {
@@ -9,6 +11,7 @@ import {
     getCategoriesSuccessAction,
     getCategoriesFailureAction,
 } from 'store/actions/categoriesActionCreators'
+import FormikInput from "../Components/FormikFilds/FormikInput";
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -32,7 +35,6 @@ const StyledCategoryList = styled.div`
         font-size: 14px;
         line-height: 16px;
       }
-      
       &:last-child {
         margin-bottom: 15px;
       }
@@ -40,10 +42,18 @@ const StyledCategoryList = styled.div`
  }
 `
 
-const CategoryList = ({loading, error, categoriesDataFromState}) => {
+const CategoryList = () => {
     const dispatch = useDispatch();
     const [categoriesData, setCategoriesData] = useState([]);
     const [categoryName, setCategoryName] = useState('');
+    const [categoryDescription, setCategoryDescription] = useState('');
+    const categoryDataFromStore = useSelector(state => {
+        return {
+            loading: state.categories.loading,
+            error: state.categories.error,
+            categoriesDataFromState: state.categories.categoriesData,
+        };
+    });
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
@@ -61,52 +71,59 @@ const CategoryList = ({loading, error, categoriesDataFromState}) => {
     }, []);
 
     useEffect(() => {
-        setCategoriesData(categoriesDataFromState)
-    }, [categoriesDataFromState]);
+        setCategoriesData(categoryDataFromStore.categoriesDataFromState)
+    }, [categoryDataFromStore.categoriesDataFromState]);
 
     const handleAddCategory = () => {
             const newCategory = {
                 "categoryID": Date.now(),
                 "categoryName": categoryName,
-                "categoryDescription": "Here I am trying to learn more about space"
+                "categoryDescription": categoryDescription,
             }
             dispatch(createNewCategoriesAction([...categoriesData, newCategory]));
-    }
+            setCategoryName('');
+            setCategoryDescription('');
+    };
+
+    const handleOnChangeCategoryNameInput = (event) => {
+        return setCategoryName(event.target.value);
+    };
+
+    const handleOnChangeCategoryDescriptionInput = (event) => {
+        return setCategoryDescription(event.target.value);
+    };
+
 
     const getCategoriesList = () => {
-        if (loading) {return <div>Categories list loading...</div>}
-        if (error) {
-            console.log('error', error)
+        if (categoryDataFromStore.loading) {return <div>Categories list loading...</div>}
+        if (categoryDataFromStore.error) {
+            console.log('error', categoryDataFromStore.error)
             return <div>No categories created yet</div>
         }else {
             return (
                 categoriesData.map((data, index) => {
                     return (
-                        <li key={index} className={'category__list-item'}>
-                            <p className={'category__list-item__title'}>{data.categoryName}</p>
+                        <li key={data.categoryID} className={'category__list-item'}>
+                            <Link to={'listOfBundles'} className={'category__list-item__title'}>{data.categoryName}</Link>
                             <p className={'category__list-item__description'}>{data.categoryDescription}</p>
                         </li>
                     )
                 })
             )
         }
-
-        // return (
-        //     categoriesData.map((data, index) => {
-        //         return (
-        //             <li key={index} className={'category__list-item'}>
-        //                 <p className={'category__list-item__title'}>{data.categoryName}</p>
-        //                 <p className={'category__list-item__description'}>{data.categoryDescription}</p>
-        //             </li>
-        //         )
-        //     })
-        // )
     }
 
     return (
         <StyledCategoryList>
-            <input type={'text'} value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
-            <AddButton onClickProps={handleAddCategory}/>
+            <Formik className={'add-category-block'}>
+                <Form className={'add-category-block'}>
+                    <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}
+                    onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
+                    <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
+                    onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
+                    <AddButton type={'button'} onClickProps={handleAddCategory} title={'Add new category'}/>
+                </Form>
+            </Formik>
             <ul className={'category__list'}>
                 {getCategoriesList()}
             </ul>
@@ -114,12 +131,4 @@ const CategoryList = ({loading, error, categoriesDataFromState}) => {
     )
 }
 
-const mapStateToProps = function (state) {
-    return {
-        loading: state.categories.loading,
-        error: state.categories.error,
-        categoriesDataFromState: state.categories.categoriesData,
-    };
-};
-
-export default connect(mapStateToProps)(CategoryList);
+export default CategoryList;

@@ -13,16 +13,16 @@
   ],
   "bundles" : [
     {
-      "bundlesID": "1",
-      "bundlesName": "Animals",
-      "bundlesDescription": "animals",
+      "bundleID": "1",
+      "bundleName": "Animals",
+      "bundleDescription": "animals",
       "categoryID": "1",
       "categoryName": "English"
     },
     {
-      "bundlesID": "2",
-      "bundlesName": "Space",
-      "bundlesDescription": "dates",
+      "bundleID": "2",
+      "bundleName": "Space",
+      "bundleDescription": "dates",
       "categoryID": "2",
       "categoryName": "History"
     }

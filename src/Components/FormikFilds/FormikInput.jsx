@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledFormikInput = styled.input`
-    margin-top: 30px;
+    margin-top: 25px;
     width: 100%;
     border: 1px solid ${props => props.theme.inputBorderColor};
     padding: 7px;
@@ -15,7 +15,8 @@ const StyledFormikInput = styled.input`
 
 const FormikInput = (props) => {
     return (
-        <StyledFormikInput id={props.name} type={props.type} name={props.name} placeholder={props.placeholder} className='input'>
+        <StyledFormikInput id={props.name} type={props.type} name={props.name}
+        placeholder={props.placeholder} value={props.value} onChange={props.onChangeProps ? props.onChangeProps : null}>
         </StyledFormikInput>
     )
 }

@@ -76,7 +76,7 @@ const LoginPage = () => {
             userName,
             userEmail,
             userPassword,
-        }
+        };
         const isUserLogIn = checkUsersLoginHook(user);
         console.log(isUserLogIn);
         if(isUserLogIn) {

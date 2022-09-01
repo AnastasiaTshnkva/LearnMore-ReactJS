@@ -1,5 +1,4 @@
-import {fetchCategoryData, fetchUsersDate} from 'api/fakeServer/Api'
-import {getCategoriesFailureAction, getCategoriesSuccessAction} from "../store/actions/categoriesActionCreators";
+import { fetchUsersDate } from 'api/fakeServer/Api';
 
 const checkUsersLoginHook = async (userData) => {
      await fetchUsersDate()

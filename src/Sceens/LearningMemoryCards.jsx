@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import MemoryCard from "./BundleOfCards/Components/MemoryCard";
-import {MyContext} from "../HOC/GlobalModalProvider";
 import CreateMemoryCard from "../HOC/CreateMemoryCard";
 
 const StyledLearningMemoryCards = styled.div`

@@ -9,6 +9,7 @@ const StyledAddButton = styled.button`
   line-height: 22px;
   border: 2px solid ${props => props.theme.mainBackgroundColor};
   border-radius: 3px;
+  margin-top: 10px;
   &:hover {
     box-shadow: 0 0 5px ${props => props.theme.buttonHoverShadow};
   }
@@ -17,9 +18,9 @@ const StyledAddButton = styled.button`
   }
 `
 
-const AddButton = ({onClickProps}) => {
+const AddButton = (props) => {
     return(
-        <StyledAddButton className={'button'} type={'button'} onClick={onClickProps ? onClickProps : null}>+New</StyledAddButton>
+        <StyledAddButton className={'button'} type={props.type} onClick={props.onClickProps ? props.onClickProps : null}>{props.title}</StyledAddButton>
     )
 }
 

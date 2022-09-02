@@ -4,6 +4,7 @@ import {
 } from 'store/actions/userActionCreators'
 
 const initState = {
+    userData: [],
     isLoggedIn: false,
 }
 const usersReducer = (state = initState, action) => {

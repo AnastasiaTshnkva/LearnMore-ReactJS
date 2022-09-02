@@ -86,14 +86,16 @@
   ],
   "users": [
     {
-      "userName": "Nastya",
-      "userEmail": "nastya@mail.ru",
-      "userPassword": "123456"
-    },
-    {
+      "userId": "2",
       "userName": "Sasha",
       "userEmail": "sasha@mail.ru",
       "userPassword": "654321"
+    },
+    {
+      "userId": "1",
+      "userName": "Nastya",
+      "userEmail": "nastya@mail.ru",
+      "userPassword": "123456"
     }
   ]
 }

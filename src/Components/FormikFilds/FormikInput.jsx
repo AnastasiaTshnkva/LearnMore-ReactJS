@@ -15,15 +15,16 @@ const StyledFormikInput = styled.input`
 
 const FormikInput = (props) => {
     return (
-        <StyledFormikInput id={props.name} type={props.type} name={props.name}
-        placeholder={props.placeholder} value={props.value} onChange={props.onChangeProps ? props.onChangeProps : null}>
+        <StyledFormikInput type={props.type} name={props.name} placeholder={props.placeholder}
+        value={props.value} onChange={props.onChangeProps ? props.onChangeProps : null}>
         </StyledFormikInput>
     )
-}
+};
 
 FormikInput.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-}
+    value: PropTypes.string,
+};
 
 export default FormikInput;

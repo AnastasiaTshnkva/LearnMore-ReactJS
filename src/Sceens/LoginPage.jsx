@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import { useDispatch } from "react-redux";
-import checkUsersLoginHook from "hooks/checkUsersLoginHook";
+import checkUsersLogin from "scripts/checkUsersLogin";
 import {setNotValidUserAction, setValidUserAction} from "store/actions/userActionCreators";
+import {fetchUsersDate} from "api/fakeServer/Api";
 
 const StyledLoginPage = styled.div`
   display: flex;
@@ -64,20 +65,31 @@ const StyledLoginPage = styled.div`
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const [userData, setUserData] = useState();
     // const navigate = useNavigate();
     // const userLoggedIn = useSelector(isLoggedIn);
 
+   useEffect(() => {
+        fetchUsersDate().then(({data}) => {
+            setUserData(data)
+        });
+   },[]);
+
     const handleOnSubmit = (event) => {
         event.nativeEvent.preventDefault();
-        const userName = document.getElementById('name').value;
-        const userEmail = document.getElementById('email').value;
-        const userPassword = document.getElementById('password').value;
+        const userName = document.getElementsByName('name')[0].value;
+        const userEmail = document.getElementsByName('email')[0].value;
+        const userPassword = document.getElementsByName('password')[0].value;
         const user = {
             userName,
             userEmail,
             userPassword,
         };
-        const isUserLogIn = checkUsersLoginHook(user);
+        const isUserLogIn = checkUsersLogin(user, userData);
+        // const currentUserData = userData.filter(() => {
+        //
+        //    }
+        // }
         console.log(isUserLogIn);
         if(isUserLogIn) {
             dispatch(setValidUserAction());
@@ -115,7 +127,7 @@ const LoginPage = () => {
                     <FormikInput name={'password'} placeholder={'input password'} type={'password'}/>
                     <button type={'submit'} className={'button'}>Login</button>
                     <div className={'help'}>
-                        <p className={'text'}>Help me!</p>
+                        {/*<p className={'text'}>Help me!</p>*/}
                         <p className={'text'}>Sign up</p>
                     </div>
                 </Form>

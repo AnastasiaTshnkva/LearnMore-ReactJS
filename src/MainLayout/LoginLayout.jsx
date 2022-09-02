@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import { Outlet } from "react-router-dom";
+import LoginPage from "Sceens/LoginPage";
 
 
 const StyledLoginLayout = styled.div`
@@ -19,7 +20,7 @@ const LoginLayout = (props) => {
     return (
         <StyledLoginLayout>
             <main className={'main'}>
-                <Outlet/>
+                {/*<Outlet/>*/}
                 {/*<LoginPage/>*/}
                 {props.children}
             </main>

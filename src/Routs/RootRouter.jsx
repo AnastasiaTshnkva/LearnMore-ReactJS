@@ -19,7 +19,7 @@ const RootRouter = () => {
         <Routes>
             <Route index path={'/'} element={<MainLayout><StartPage/></MainLayout>}/>
 
-            <Route path={'/login'} element={<LoginLayout><LoginRouter/></LoginLayout>}/>
+            <Route path={'/login'} element={<LoginLayout><LoginPage/></LoginLayout>}/>
 
             <Route element={<ListsLayout/>}>
                 <Route path={'/categoryList'} element={<CategoryList/>}/>

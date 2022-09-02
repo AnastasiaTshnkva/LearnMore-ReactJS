@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from "react-router-dom";
 
 const StyledStartPage = styled.div`
   display: flex;
@@ -91,11 +92,9 @@ const StartPage = () => {
                 </div>
             </div>
             <div className={'buttons-box'}>
-                <button type={'button'} className={'button'}>Login</button>
-                <button type={'button'} className={'button'}>Join</button>
+                <Link to={'/login'}><button type={'button'} className={'button'}>Login</button></Link>
+                <Link to={'/login'}><button type={'button'} className={'button'}>Join</button></Link>
             </div>
-
-
         </StyledStartPage>
     )
 };

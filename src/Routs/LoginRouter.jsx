@@ -6,24 +6,19 @@ import LoginLayout from "MainLayout/LoginLayout";
 import RootRouter from "./RootRouter";
 
 const LoginRouter = () => {
-    const userLoggedInFromStore = useSelector(state => {
-        console.log(state.users.isLoggedIn);
+    const isUserLoggedIn = useSelector(state => {
         return {
-            userLoggedIn: state.users.isLoggedIn
+            userLoggedIn: state.users.isLoggedIn,
         };
     });
 
-    // const location = useLocation()
-    // gotUserStartPage = () => {
-    //     if(storedLocation) return storedLocation
-    // }
-
     const renderForLoggedInUser = (Scene) => {
-        if(userLoggedInFromStore.userLoggedIn) return Scene
+        if(isUserLoggedIn.userLoggedIn) return Scene
         return <Navigate to={'/login'}/>
     };
+
     const renderForNotLoggedInUser = (Scene) => {
-        if(!userLoggedInFromStore.userLoggedIn) return Scene
+        if(!isUserLoggedIn.userLoggedIn) return Scene
         return <Navigate to={'/categoryList'}/>
     };
 

@@ -66,8 +66,6 @@ const StyledLoginPage = styled.div`
 const LoginPage = () => {
     const dispatch = useDispatch();
     const [userData, setUserData] = useState();
-    // const navigate = useNavigate();
-    // const userLoggedIn = useSelector(isLoggedIn);
 
    useEffect(() => {
         fetchUsersDate().then(({data}) => {
@@ -85,15 +83,17 @@ const LoginPage = () => {
             userEmail,
             userPassword,
         };
-        const isUserLogIn = checkUsersLogin(user, userData);
-        // const currentUserData = userData.filter(() => {
-        //
-        //    }
-        // }
-        console.log(isUserLogIn);
-        if(isUserLogIn) {
-            dispatch(setValidUserAction());
+        const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
+        console.log('currentUserData is', currentUserData, 'user.userName is', user);
+        if(currentUserData.userName === user.userName && currentUserData.userPassword === user.userPassword) {
+            console.log('user valid');
+            dispatch(setValidUserAction(
+                {
+                    userName: user.userName,
+                    userEmail: user.userEmail,
+                }));
         } else {
+            console.log('user not valid');
             dispatch(setNotValidUserAction());
         }
     };

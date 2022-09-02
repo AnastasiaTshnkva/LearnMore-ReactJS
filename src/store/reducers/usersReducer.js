@@ -4,7 +4,7 @@ import {
 } from 'store/actions/userActionCreators'
 
 const initState = {
-    userData: [],
+    currentUserData: {},
     isLoggedIn: false,
 }
 const usersReducer = (state = initState, action) => {
@@ -12,7 +12,8 @@ const usersReducer = (state = initState, action) => {
         case SET_VALID_USER:
             return {
                 ...state,
-                isLoggedIn: true
+                currentUserData: action.payload,
+                isLoggedIn: true,
             };
 
         case SET_NOT_VALID_USER:

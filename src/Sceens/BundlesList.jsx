@@ -13,7 +13,7 @@ import FormikInput from "../Components/FormikFilds/FormikInput";
 import AddButton from "../Components/AddButton";
 import { createNewCategoriesAction } from "../store/actions/categoriesActionCreators";
 
-const StyledListOfCardBundles = styled.div`
+const StyledBundlesList = styled.div`
   .bundle{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -44,7 +44,7 @@ const StyledListOfCardBundles = styled.div`
   }
 `
 
-const ListOfCardBundles = () => {
+const BundlesList = () => {
     const dispatch = useDispatch();
     const [bundlesData, setBundlesData] = useState([]);
     const [bundleName, setBundleName] = useState();
@@ -106,7 +106,7 @@ const ListOfCardBundles = () => {
                 bundlesData.map((data) => {
                     return(
                         <div key={data.bundleID} className={'bundle-box'}>
-                            <p className={'description'}>{data.bundleName}</p>
+                            <Link to={'/categoryList/listOfBundles'} className={'description'}>{data.bundleName}</Link>
                         </div>
                     )
                 })
@@ -115,7 +115,7 @@ const ListOfCardBundles = () => {
     }
 
     return (
-        <StyledListOfCardBundles>
+        <StyledListBundlesList>
             <Formik className={'add-category-block'}>
                 <Form className={'add-category-block'}>
                     <FormikInput type={'text'} value={bundleName} name={'addBundleNameInput'}
@@ -128,8 +128,8 @@ const ListOfCardBundles = () => {
             <div className={'bundle'}>
                 {getBundlesList()}
             </div>
-        </StyledListOfCardBundles>
+        </StyledListBundlesList>
     );
 }
 
-export default ListOfCardBundles
+export default BundlesList;

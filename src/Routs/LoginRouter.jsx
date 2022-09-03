@@ -2,30 +2,38 @@ import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginPage from "Sceens/LoginPage";
-import LoginLayout from "MainLayout/LoginLayout";
 import RootRouter from "./RootRouter";
+import CategoryList from "../Sceens/CategoryList";
+
+// const isUserLoggedIn = false;
 
 const LoginRouter = () => {
-    const isUserLoggedIn = useSelector(state => {
-        return {
-            userLoggedIn: state.users.isLoggedIn,
-        };
-    });
+    // const isUserLoggedIn = useSelector(state => state.users.isLoggedIn);
+    //
+
+
+    console.log('isUserLoggedIn is' ,isUserLoggedIn);
 
     const renderForLoggedInUser = (Scene) => {
-        if(isUserLoggedIn.userLoggedIn) return Scene
-        return <Navigate to={'/login'}/>
+        if(isUserLoggedIn) {
+            return Scene
+        } else {
+            return <Navigate to={'/login'}/>
+        }
     };
 
     const renderForNotLoggedInUser = (Scene) => {
-        if(!isUserLoggedIn.userLoggedIn) return Scene
-        return <Navigate to={'/categoryList'}/>
+        if(!isUserLoggedIn) {
+            return Scene
+        } else {
+            return <Navigate to={'/categoryList'}/>
+        }
     };
 
     return (
         <Routes>
-            <Route index path={'/login'} element={renderForNotLoggedInUser(<LoginLayout><LoginPage/></LoginLayout>)}></Route>
-            <Route path={'/*'} element={renderForLoggedInUser(<RootRouter/>)}></Route>
+            <Route path={'/login'} element={renderForNotLoggedInUser(<LoginPage/>)}/>
+            <Route path={'/*'} element={renderForLoggedInUser(<CategoryList/>)}/>
         </Routes>
     );
 };

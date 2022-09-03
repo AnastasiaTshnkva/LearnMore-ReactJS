@@ -8,10 +8,11 @@ import {
     setBundlesRequestAction
 } from "store/actions/bunldlesActionCreators";
 import { Form, Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import AddButton from "../Components/AddButton";
-import { createNewCategoriesAction } from "../store/actions/categoriesActionCreators";
+import { createNewCategoriesAction } from "store/actions/categoriesActionCreators";
+import { showBundles } from "store/selectors/selectors";
 
 const StyledBundlesList = styled.div`
   .bundle{
@@ -46,21 +47,17 @@ const StyledBundlesList = styled.div`
 
 const BundlesList = () => {
     const dispatch = useDispatch();
+    const { param } = useParams();
     const [bundlesData, setBundlesData] = useState([]);
     const [bundleName, setBundleName] = useState();
     const [bundleDescription, setBundleDescription] = useState();
-    const bundlesDataFromStore = useSelector((state) => {
-        return {
-            loading: state.bundles.loading,
-            error: state.bundles.error,
-            bundlesDataFromState: state.bundles.bundlesData,
-        };
-    });
+
+    const bundlesDataFromStore = useSelector(showBundles);
+
 
     const getBundlesDataFromServer = () => {
-        fetchBundlesDate()
+        fetchBundlesDate(param)
             .then(({data}) => {
-                // console.log(data);
                 dispatch(getBundlesSuccessAction(data));
             }).catch((error) => {
             dispatch(getBundlesFailureAction(error));
@@ -73,8 +70,8 @@ const BundlesList = () => {
     }, []);
 
     useEffect(() => {
-        setBundlesData(bundlesDataFromStore.bundlesDataFromState);
-    }, [bundlesDataFromStore.bundlesDataFromState]);
+        setBundlesData(bundlesDataFromStore.bundlesData);
+    }, [bundlesDataFromStore.bundlesData]);
 
     const handleAddBundle = () => {
         const newBundle = {
@@ -101,7 +98,7 @@ const BundlesList = () => {
             console.log('error', error);
             return <div>No bundles created yet</div>
         }
-        if(bundlesDataFromStore.bundlesDataFromState) {
+        if(bundlesDataFromStore.bundlesData) {
             return(
                 bundlesData.map((data) => {
                     return(
@@ -115,7 +112,7 @@ const BundlesList = () => {
     }
 
     return (
-        <StyledListBundlesList>
+        <StyledBundlesList>
             <Formik className={'add-category-block'}>
                 <Form className={'add-category-block'}>
                     <FormikInput type={'text'} value={bundleName} name={'addBundleNameInput'}
@@ -128,7 +125,7 @@ const BundlesList = () => {
             <div className={'bundle'}>
                 {getBundlesList()}
             </div>
-        </StyledListBundlesList>
+        </StyledBundlesList>
     );
 }
 

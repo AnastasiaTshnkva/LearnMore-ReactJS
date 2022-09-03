@@ -47,18 +47,16 @@ const CategoryList = () => {
     const [categoriesData, setCategoriesData] = useState([]);
     const [categoryName, setCategoryName] = useState('');
     const [categoryDescription, setCategoryDescription] = useState('');
-    const categoryDataFromStore = useSelector(state => {
-        return {
-            loading: state.categories.loading,
-            error: state.categories.error,
-            categoriesDataFromState: state.categories.categoriesData,
-        };
-    });
+    const categoryDataFromStore = useSelector(state => state.categories);
+        // return {
+        //     loading: state.categories.loading,
+        //     error: state.categories.error,
+        //     categoriesDataFromState: state.categories.categoriesData,
+        // };
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
             .then(({data}) => {
-                console.log(data);
                 dispatch(getCategoriesSuccessAction(data));
             }).catch((error) => {
                 dispatch(getCategoriesFailureAction(error));
@@ -71,8 +69,8 @@ const CategoryList = () => {
     }, []);
 
     useEffect(() => {
-        setCategoriesData(categoryDataFromStore.categoriesDataFromState)
-    }, [categoryDataFromStore.categoriesDataFromState]);
+        setCategoriesData(categoryDataFromStore.categoriesData)
+    }, [categoryDataFromStore.categoriesData]);
 
     const handleAddCategory = () => {
             const newCategory = {
@@ -104,7 +102,7 @@ const CategoryList = () => {
                 categoriesData.map((data) => {
                     return (
                         <li key={data.categoryID} className={'category__list-item'}>
-                            <Link to={'listOfBundles'} className={'category__list-item__title'}>{data.categoryName}</Link>
+                            <Link to={`${data.categoryID}`} className={'category__list-item__title'}>{data.categoryName}</Link>
                             <p className={'category__list-item__description'}>{data.categoryDescription}</p>
                         </li>
                     )

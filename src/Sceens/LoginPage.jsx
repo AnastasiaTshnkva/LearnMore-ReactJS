@@ -1,15 +1,24 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {useNavigate} from "react-router-dom";
 import { Form, Formik } from 'formik';
-import FormikInput from "../Components/FormikFilds/FormikInput";
+import FormikInput from "Components/FormikFilds/FormikInput";
 import { useDispatch } from "react-redux";
-import checkUsersLogin from "scripts/checkUsersLogin";
 import {setNotValidUserAction, setValidUserAction} from "store/actions/userActionCreators";
 import {fetchUsersDate} from "api/fakeServer/Api";
 
 const StyledLoginPage = styled.div`
+  margin: 0 auto;
+  min-height: 100vh;
+  color: ${props => {return props.theme.textColor}};
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to right, ${props => props.theme.loginBackgroundColorLeft}, ${props => props.theme.loginBackgroundColorRight});
+  .main{
+    display: flex;
   justify-content: center;
   width: 35vw;
   min-height: 50vh;
@@ -25,7 +34,7 @@ const StyledLoginPage = styled.div`
         text-align: center;
         font-size: 22px;
       }
-      }
+    }
       .button {
         padding: 10px;
         margin-top: 30px;
@@ -61,11 +70,14 @@ const StyledLoginPage = styled.div`
         } 
       } 
     }
+  }
 `
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState();
+    const [validateError, setValidateError] = useState('');
 
    useEffect(() => {
         fetchUsersDate().then(({data}) => {
@@ -74,7 +86,7 @@ const LoginPage = () => {
    },[]);
 
     const handleOnSubmit = (event) => {
-        event.nativeEvent.preventDefault();
+        event.preventDefault();
         const userName = document.getElementsByName('name')[0].value;
         const userEmail = document.getElementsByName('email')[0].value;
         const userPassword = document.getElementsByName('password')[0].value;
@@ -84,54 +96,38 @@ const LoginPage = () => {
             userPassword,
         };
         const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
-        console.log('currentUserData is', currentUserData, 'user.userName is', user);
-        if(currentUserData.userName === user.userName && currentUserData.userPassword === user.userPassword) {
-            console.log('user valid');
+        if(currentUserData
+            && (currentUserData.userName === user.userName && currentUserData.userPassword === user.userPassword)) {
             dispatch(setValidUserAction(
                 {
                     userName: user.userName,
                     userEmail: user.userEmail,
                 }));
+            navigate('/categoryList');
         } else {
-            console.log('user not valid');
             dispatch(setNotValidUserAction());
+            setValidateError('entered values is not correct');
         }
-    };
-
-    const handleValidate = (formData) => {
-        let isValid = true;
-        const errors = {};
-
-        if(!formData.email) {
-            isValid = false;
-            errors.email = 'email is mandatory';
-        }
-        if(!formData.password) {
-            isValid = false;
-            errors.password = 'password is mandatory';
-        }
-
-        if (!isValid) return errors;
     };
 
     return (
         <StyledLoginPage>
-            <Formik className={'login-page'} validate={handleValidate}>
-                <Form
-                    className={'form'}
-                    onSubmit={handleOnSubmit}
-                >
-                    <h2 className={'title'}>Log in to LearnMore</h2>
-                    <FormikInput name={'name'} placeholder={'input name'} type={'text'}/>
-                    <FormikInput name={'email'} placeholder={'input email'} type={'email'}/>
-                    <FormikInput name={'password'} placeholder={'input password'} type={'password'}/>
-                    <button type={'submit'} className={'button'}>Login</button>
-                    <div className={'help'}>
-                        {/*<p className={'text'}>Help me!</p>*/}
-                        <p className={'text'}>Sign up</p>
-                    </div>
-                </Form>
-            </Formik>
+            <main className={'main'}>
+                <Formik className={'login-page'}>
+                    <Form className={'form'} onSubmit={handleOnSubmit}>
+                        <h2 className={'title'}>Log in to LearnMore</h2>
+                        <FormikInput name={'name'} placeholder={'input name'} type={'text'}/>
+                        <FormikInput name={'email'} placeholder={'input email'} type={'email'}/>
+                        <FormikInput name={'password'} placeholder={'input password'} type={'password'}/>
+                        {validateError ? <span>{validateError}</span> : null}
+                        <button type={'submit'} className={'button'}>Login</button>
+                        <div className={'help'}>
+                            {/*<p className={'text'}>Help me!</p>*/}
+                            <p className={'text'}>Sign up</p>
+                        </div>
+                    </Form>
+                </Formik>
+            </main>
         </StyledLoginPage>
     )
 }

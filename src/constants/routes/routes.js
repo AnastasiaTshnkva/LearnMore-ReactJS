@@ -1,53 +1,56 @@
+import React from "react";
 import StartPage from "Sceens/StartPage";
 import LoginRouter from "Routs/LoginRouter";
 import CategoryList from "Sceens/CategoryList";
 import BundlesList from "Sceens/BundlesList";
 import BundleOfCards from "Sceens/BundleOfCards/BundleOfCards";
 
-export const routesNames = {
-    startPage: '/',
-    login: '/login',
-    categories: '/categoryList',
-    categoryPage: '/categoryList/:categoryId',
-    bundlePage: '/categoryList/:categoryId/:bundleId',
+export const ROUTES_NAMES = {
+    START_PAGE: '/',
+    LOGIN: '/login',
+    CATEGORIES: '/categoryList',
+    CATEGORY_PAGE: '/categoryList/:categoryId',
+    BUNDLE_PAGE: '/categoryList/:categoryId/:bundleId',
 };
 
 export const routesForLoggedInUser = [
     {
-        path: routesNames.startPage,
+        path: ROUTES_NAMES.START_PAGE,
         element: <StartPage/>,
         exact: false,
     },
+    // {
+    //     path: ROUTES_NAMES.LOGIN,
+    //     element: <LoginRouter/>,
+    //     exact: false,
+    // },
     {
-        path: routesNames.login,
-        element: <LoginRouter/>,
-        exact: false,
-    },
-    {
-        path: routesNames.categories,
+        path: ROUTES_NAMES.CATEGORIES,
         element: <CategoryList/>,
         exact: true,
     },
     {
-        path: routesNames.categoryPage,
+        path: ROUTES_NAMES.CATEGORY_PAGE,
         element: <BundlesList/>,
         exact: true,
     },
     {
-        path: routesNames.bundlePage,
+        path: ROUTES_NAMES.BUNDLE_PAGE,
         element: <BundleOfCards/>,
         exact: true,
     },
 ];
 
-export const routesForLoggedInUser = [
+export const routesForLoggedOutUser = [
     {
-        path: routesNames.startPage,
+        path: ROUTES_NAMES.START_PAGE,
         element: <StartPage/>,
+        exact: false,
     },
     {
-        path: routesNames.login,
+        path: ROUTES_NAMES.LOGIN,
         element: <LoginRouter/>,
+        exact: false,
     },
 ];
 

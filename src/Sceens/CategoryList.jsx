@@ -1,17 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
-import {Formik, Form} from "formik";
+import { Formik, Form } from "formik";
 import { Link } from "react-router-dom";
-import {fetchCategoryData} from "../api/fakeServer/Api";
-import AddButton from "../Components/AddButton";
+import { fetchCategoryData } from "api/fakeServer/Api";
+import AddButton from "Components/AddButton";
 import {
     createNewCategoriesAction,
     setCategoriesRequestAction,
     getCategoriesSuccessAction,
     getCategoriesFailureAction,
 } from 'store/actions/categoriesActionCreators'
-import FormikInput from "../Components/FormikFilds/FormikInput";
+import FormikInput from "Components/FormikFilds/FormikInput";
+import { REVIEW_CATEGORY_LIST } from "constants/reviews/reviewCategoryList";
+// import {
+//     categoriesDataIsLoading,
+//     categoriesDataIsFailure,
+//     showCategoriesDataFromStore,
+// } from "store/selectors/selectors";
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -24,7 +30,7 @@ const StyledCategoryList = styled.div`
     .category__list-item {
       display: block;
       margin-top: 20px;
-      .category__list-item__title {
+      .category__list-item__title{
         text-decoration: underline;
         cursor: pointer;
         &:hover {
@@ -34,6 +40,7 @@ const StyledCategoryList = styled.div`
       .category__list-item__description {
         font-size: 14px;
         line-height: 16px;
+        text-decoration: none;
       }
       &:last-child {
         margin-bottom: 15px;
@@ -48,11 +55,7 @@ const CategoryList = () => {
     const [categoryName, setCategoryName] = useState('');
     const [categoryDescription, setCategoryDescription] = useState('');
     const categoryDataFromStore = useSelector(state => state.categories);
-        // return {
-        //     loading: state.categories.loading,
-        //     error: state.categories.error,
-        //     categoriesDataFromState: state.categories.categoriesData,
-        // };
+
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
@@ -95,7 +98,7 @@ const CategoryList = () => {
     const getCategoriesList = () => {
         if (categoryDataFromStore.loading) {return <div>Categories list loading...</div>}
         if (categoryDataFromStore.error) {
-            console.log('error', categoryDataFromStore.error)
+            console.error(categoryDataFromStore.error);
             return <div>No categories created yet</div>
         }else {
             return (
@@ -119,7 +122,7 @@ const CategoryList = () => {
                     onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
                     <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
                     onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
-                    <AddButton type={'button'} onClickProps={handleAddCategory} title={'Add new category'}/>
+                    <AddButton type={'button'} onClickProps={handleAddCategory} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>
                 </Form>
             </Formik>
             <ul className={'category__list'}>

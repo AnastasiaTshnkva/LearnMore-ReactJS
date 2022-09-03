@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
+import { REVIEW_START_PAGE } from "constants/reviews/reviewStartPage";
 
 const StyledStartPage = styled.div`
   display: flex;
@@ -75,25 +76,25 @@ const StyledStartPage = styled.div`
 const StartPage = () => {
     return (
         <StyledStartPage>
-            <h1 className={'title'}>Hi!</h1>
-            <p className={'description'}>We love learning new things, but flashcards are awkward to carry around. We've come up with a solution! Now all the cards are saved here!</p>
+            <h1 className={'title'}>{REVIEW_START_PAGE.MAIN_TITLE}</h1>
+            <p className={'description'}>{REVIEW_START_PAGE.MAIN_DESCRIPTION}</p>
             <div className={'advantages-box'}>
                 <div className={'advantage__item'}>
-                    <p className={'advantage__title'}>You can add categories to separate your cards</p>
+                    <p className={'advantage__title'}>{REVIEW_START_PAGE.ADVANTAGES_DESCRIPTION_ABOUT_CATEGORIES}</p>
                     <img src={'https://fotosale.by/wp-content/uploads/2020/07/superior-7100.jpg'} className={'advantage__img'}/>
                 </div>
                 <div className={'advantage__item'}>
                     <img src={'https://fotosale.by/wp-content/uploads/2020/07/superior-7100.jpg'} className={'advantage__img'}/>
-                    <p className={'advantage__title'}>You can add bundles of cards to study</p>
+                    <p className={'advantage__title'}>{REVIEW_START_PAGE.ADVANTAGES_DESCRIPTION_ABOUT_BUNDLES}</p>
                 </div>
                 <div className={'advantage__item'}>
-                    <p className={'advantage__title'}>You can learn flashcards and watch your progress</p>
+                    <p className={'advantage__title'}>{REVIEW_START_PAGE.ADVANTAGES_DESCRIPTION_ABOUT_CARDS}</p>
                     <img src={'https://fotosale.by/wp-content/uploads/2020/07/superior-7100.jpg'} className={'advantage__img'}/>
                 </div>
             </div>
             <div className={'buttons-box'}>
-                <Link to={'/login'}><button type={'button'} className={'button'}>Login</button></Link>
-                <Link to={'/login'}><button type={'button'} className={'button'}>Join</button></Link>
+                <Link to={'/login'}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.LOGIN_BUTTON_INNER_TEXT}</button></Link>
+                <Link to={'/login'}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.JOIN_BUTTON_INNER_TEXT}</button></Link>
             </div>
         </StyledStartPage>
     )

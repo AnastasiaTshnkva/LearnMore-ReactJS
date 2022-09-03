@@ -3,12 +3,26 @@
     {
       "categoryID": "1",
       "categoryName": "English",
-      "categoryDescription": "Here I am trying to learn more English words"
+      "categoryDescription": "Here I am trying to learn more English words",
+      "userID": "1"
     },
     {
       "categoryID": "2",
       "categoryName": "History",
-      "categoryDescription": "Here I am trying to learn more about space"
+      "categoryDescription": "Here I am trying to learn more about space",
+      "userID": "1"
+    },
+    {
+      "categoryID": "3",
+      "categoryName": "History",
+      "categoryDescription": "for dates",
+      "userID": "2"
+    },
+    {
+      "categoryID": "4",
+      "categoryName": "English",
+      "categoryDescription": "for english words",
+      "userID": "2"
     }
   ],
   "bundles" : [
@@ -17,13 +31,23 @@
       "bundleName": "Animals",
       "bundleDescription": "animals",
       "categoryID": "1",
+      "userID": "1",
       "categoryName": "English"
     },
     {
       "bundleID": "2",
+      "bundleName": "Appearance",
+      "bundleDescription": "Appearance",
+      "categoryID": "1",
+      "userID": "1",
+      "categoryName": "English"
+    },
+    {
+      "bundleID": "3",
       "bundleName": "Space",
       "bundleDescription": "dates",
       "categoryID": "2",
+      "userID": "1",
       "categoryName": "History"
     }
      ],
@@ -35,6 +59,7 @@
       "cardDecoding": "кот",
       "condition": "front",
       "bundlesID":"1",
+      "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
@@ -44,6 +69,7 @@
       "cardDecoding": "собака",
       "condition": "back",
       "bundlesID":"1",
+      "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
@@ -53,33 +79,117 @@
       "cardDecoding": "лошадь",
       "condition": "front",
       "bundlesID":"1",
+      "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
       "cardId": "4",
-      "cardName": "how old is the earth",
-      "cardDecoding": "4.543 billion years",
+      "cardName": "rabbit",
+      "cardDecoding": "кролик",
       "condition": "front",
-      "bundlesID":"2",
-      "bundlesName": "Space",
+      "bundlesID":"1",
+      "userID": "1",
+      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
       "cardId": "5",
-      "cardName": "when the first man went to space",
-      "cardDecoding": "1961",
+      "cardName": "parrot",
+      "cardDecoding": "попугай",
       "condition": "front",
-      "bundlesID":"2",
-      "bundlesName": "Space",
+      "bundlesID":"1",
+      "userID": "1",
+      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
       "cardId": "6",
+      "cardName": "fish",
+      "cardDecoding": "рыба",
+      "condition": "front",
+      "bundlesID":"1",
+      "userID": "1",
+      "bundlesName": "Animals",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "7",
+      "cardName": "how old is the earth",
+      "cardDecoding": "4.543 billion years",
+      "condition": "front",
+      "bundlesID":"3",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "8",
+      "cardName": "when the first man went to space",
+      "cardDecoding": "1961",
+      "condition": "front",
+      "bundlesID":"3",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "9",
       "cardName": "how many humans have been on the moon",
       "cardDecoding": "12",
       "condition": "front",
+      "bundlesID":"3",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "10",
+      "cardName": "nouse",
+      "cardDecoding": "нос",
+      "condition": "front",
       "bundlesID":"2",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "11",
+      "cardName": "mouth",
+      "cardDecoding": "рот",
+      "condition": "front",
+      "bundlesID":"2",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "12",
+      "cardName": "eye",
+      "cardDecoding": "глаз",
+      "condition": "front",
+      "bundlesID":"2",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "13",
+      "cardName": "mustache",
+      "cardDecoding": "усы",
+      "condition": "front",
+      "bundlesID":"2",
+      "userID": "1",
+      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "cardId": "14",
+      "cardName": "eyelashes",
+      "cardDecoding": "ресницы",
+      "condition": "front",
+      "bundlesID":"2",
+      "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     }

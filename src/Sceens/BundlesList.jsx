@@ -12,7 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import AddButton from "../Components/AddButton";
 import { createNewCategoriesAction } from "store/actions/categoriesActionCreators";
-import { showBundles } from "store/selectors/selectors";
+import { bundlesFromStore } from "store/selectors/selectors";
 
 const StyledBundlesList = styled.div`
   .bundle{
@@ -52,7 +52,7 @@ const BundlesList = () => {
     const [bundleName, setBundleName] = useState();
     const [bundleDescription, setBundleDescription] = useState();
 
-    const bundlesDataFromStore = useSelector(showBundles);
+    const bundlesDataFromStore = useSelector(bundlesFromStore);
 
 
     const getBundlesDataFromServer = () => {
@@ -101,9 +101,10 @@ const BundlesList = () => {
         if(bundlesDataFromStore.bundlesData) {
             return(
                 bundlesData.map((data) => {
+                    console.log(`/bundle/${data.bundleID}`);
                     return(
                         <div key={data.bundleID} className={'bundle-box'}>
-                            <Link to={'/categoryList/listOfBundles'} className={'description'}>{data.bundleName}</Link>
+                            <Link to={`/bundle/${data.bundleID}`} className={'description'}>{data.bundleName}</Link>
                         </div>
                     )
                 })

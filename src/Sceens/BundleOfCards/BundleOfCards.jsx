@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import IcomoonReact from "icomoon-react";
 import iconSet from "../../assets/Icons/selection.json";
 import {fetchCardsData} from "../../api/fakeServer/Api";
-import {useLocation} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -105,9 +105,10 @@ const StyledBundleOfCards = styled.div`
 `
 
 const BundleOfCards = (props) => {
+    const { param } = useParams();
     const [cardsData, setCardsData] = useState([]);
 
-    useEffect(() => {
+    useEffect((param) => {
         fetchCardsData().then(({data}) => setCardsData(data))
     }, [])
 
@@ -158,7 +159,6 @@ const BundleOfCards = (props) => {
             </div>
         </StyledBundleOfCards>
     )
-
 }
 
 export default BundleOfCards;

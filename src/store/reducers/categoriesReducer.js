@@ -13,7 +13,7 @@ const initState = {
     categoriesData: [],
     }
 
-const categoriesReducer = (state=initState, action) => {
+const categoriesReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_CATEGORIES_REQUEST:
             return {

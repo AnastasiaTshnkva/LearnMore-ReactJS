@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 import { Form, Formik } from 'formik';
-import FormikInput from "Components/FormikFilds/FormikInput";
 import { useDispatch } from "react-redux";
+import FormikInput from "Components/FormikFilds/FormikInput";
 import {setNotValidUserAction, setValidUserAction} from "store/actions/userActionCreators";
 import {fetchUsersDate} from "api/fakeServer/Api";
+import { REVIEW_LOGIN_PAGE } from "constants/reviews/reviewLoginPage";
 
 const StyledLoginPage = styled.div`
   margin: 0 auto;
@@ -37,7 +38,7 @@ const StyledLoginPage = styled.div`
     }
       .button {
         padding: 10px;
-        margin-top: 30px;
+        margin-top: 20px;
         border: 2px solid ${props => props.theme.mainBackgroundColor};
         border-radius: 3px;
         width: 100%;
@@ -70,6 +71,13 @@ const StyledLoginPage = styled.div`
         } 
       } 
     }
+  }
+  .validate-error-box {
+    font-size: 12px;
+    line-height: 14px;
+    color: #FF0000FF;
+    margin-top: 5px;
+    margin-left: 5px;
   }
 `
 
@@ -106,7 +114,7 @@ const LoginPage = () => {
             navigate('/categoryList');
         } else {
             dispatch(setNotValidUserAction());
-            setValidateError('entered values is not correct');
+            setValidateError(REVIEW_LOGIN_PAGE.INVALID_VALUES_ERROR_MASSAGE);
         }
     };
 
@@ -115,15 +123,14 @@ const LoginPage = () => {
             <main className={'main'}>
                 <Formik className={'login-page'}>
                     <Form className={'form'} onSubmit={handleOnSubmit}>
-                        <h2 className={'title'}>Log in to LearnMore</h2>
-                        <FormikInput name={'name'} placeholder={'input name'} type={'text'}/>
-                        <FormikInput name={'email'} placeholder={'input email'} type={'email'}/>
-                        <FormikInput name={'password'} placeholder={'input password'} type={'password'}/>
-                        {validateError ? <span>{validateError}</span> : null}
-                        <button type={'submit'} className={'button'}>Login</button>
+                        <h2 className={'title'}>{REVIEW_LOGIN_PAGE.FORM_TITLE}</h2>
+                        <FormikInput name={'name'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_NAME_INPUT} type={'text'}/>
+                        <FormikInput name={'email'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_EMAIL_INPUT} type={'email'}/>
+                        <FormikInput name={'password'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_PASSWORD_INPUT} type={'password'}/>
+                        {validateError ? <div className={'validate-error-box'}>{validateError}</div> : null}
+                        <button type={'submit'} className={'button'}>{REVIEW_LOGIN_PAGE.BUTTON_INNER_TEXT}</button>
                         <div className={'help'}>
-                            {/*<p className={'text'}>Help me!</p>*/}
-                            <p className={'text'}>Sign up</p>
+                            <p className={'text'}>{REVIEW_LOGIN_PAGE.LINK_TO_SIGH_UP}</p>
                         </div>
                     </Form>
                 </Formik>

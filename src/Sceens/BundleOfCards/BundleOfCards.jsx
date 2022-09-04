@@ -1,9 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from "react-router-dom";
 import IcomoonReact from "icomoon-react";
-import iconSet from "../../assets/Icons/selection.json";
-import {fetchCardsData} from "../../api/fakeServer/Api";
-import {useLocation, useParams} from "react-router-dom";
+import iconSet from "assets/Icons/selection.json";
+import {
+    fetchBundleOfCardsData,
+    fetchCurrentBundleData,
+} from "api/fakeServer/Api";
+import { REVIEW_BUNDLE_OF_CARDS } from "constants/reviews/reviewBandleOfCards";
+import AddButton from "Components/AddButton";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    showCurrentBundleDataIsLoading,
+    showCurrentBundleDataError,
+    showCurrentBundleDataFromStore,
+    showCardsDataIsLoading,
+    showCardsDataError,
+    showCardsDataFromStore,
+} from "store/selectors/selectors";
+import {
+    setCurrentBundleRequestAction,
+    getCurrentBundleSuccessAction,
+    getCurrentBundleFailureAction,
+    setBundleOfCardsRequestAction,
+    getBundleOfCardSuccessAction,
+    getBundleOfCardFailureAction,
+} from 'store/actions/bundleOfCardsCreators';
+import {setCategoriesRequestAction} from "../../store/actions/categoriesActionCreators";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -30,6 +53,15 @@ const StyledBundleOfCards = styled.div`
       display: block;
       margin-top: 20px;
     }
+    .cards-counter {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 14px;
+      .counter {
+        font-weight: 600;
+      }
+    }
     &:last-child {
       margin-bottom: 20px;
     }
@@ -43,119 +75,210 @@ const StyledBundleOfCards = styled.div`
       margin: 20px 30px;
       width: 45vw;
       border-radius: 10px;
+      background-color: ${props => {return props.theme.partBackgroundColor}};
       box-shadow: inset 0 0 7px ${props => props.theme.cardBorderColor};
+    }
+    .interaction {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      padding-left: 30px;
+      padding-right: 30px;
+      .counter {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
     }
     .cards__arr {
       min-height: 50vh;
       display: flex;
-      flex-wrap: nowrap;
       justify-content: space-around;
       align-items: center;
-      background-color: ${props => {return props.theme.partBackgroundColor}};
       .card {
-        min-height: 100px;
-        margin-top: 25px;
-        margin-bottom: 25px;
-        border-radius: 10px;
-        border-color: ${props => props.theme.cardBorderColor};
+        min-height: 150px;
+        min-width: 250px;
+        margin: 25px 15px;
+        border-radius: 5px;
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
+        padding: 5px;
         background-color: ${props => {return props.theme.cardColor}};
+        box-shadow: 0 0 7px ${props => props.theme.cardBorderColor};
+        font-size: 22px;
+        line-height: 24px;
+        aspect-ratio: 3/2;
       }
       .card__front-side {
         display: flex;
         justify-content: space-between;
         align-items: start;
-        height: 100px;
+        width: 100%;
+        border: 2px solid ${props => props.theme.cardBorderColor};
         transition: transform 0.8s;
         transform-style: preserve-3d;
+        padding-top: 5px;
         .memoryCard__but {
           background-color: transparent;
           border: none;
         }
+        .card__front-side__title {
+          align-self: center;
+        }
+      }
       .card__back-side {
-        display: flex;
-        position: relative;
+        display: none;
+        position: absolute;
         justify-content: center;
         align-items: center;
         width: 100%;
       }
-      }
-    }
-  }
-  .button {
-    background-color: ${props => props.theme.buttonColor};
-    padding: 7px;
-    color: ${props => props.theme.lightTextColor};
-    font-size: 18px;
-    line-height: 22px;
-    border: none;
-    border-radius: 3px;
-
-    &:hover {
-      box-shadow: 0 0 7px ${props => props.theme.buttonHoverShadow};
-    }
-
-    &:active {
-      background-color: ${props => props.theme.buttonColor};
     }
   }
 `
 
 const BundleOfCards = (props) => {
-    const { param } = useParams();
+    const dispatch = useDispatch();
+    const { bundleID } = useParams();
     const [cardsData, setCardsData] = useState([]);
+    const [currentBundleData, setCurrentBundleData] = useState([]);
+    const [activeCardIndex, setActiveCardIndex] = useState(0);
 
-    useEffect((param) => {
-        fetchCardsData().then(({data}) => setCardsData(data))
-    }, [])
+    const currentBundleIsLoading = useSelector(showCurrentBundleDataIsLoading);
+    const currentBundleDataError = useSelector(showCurrentBundleDataError);
+    const currentBundleDataFromStore = useSelector(showCurrentBundleDataFromStore);
+    const cardsDataIsLoading = useSelector(showCardsDataIsLoading);
+    const cardsDataError = useSelector(showCardsDataError);
+    const cardsDataFromStore = useSelector(showCardsDataFromStore);
 
-    const bundleData = {id: '1', bundlesName: 'xcvbnm', description: 'dfghjkl dfghj sdfghj sdfgh cvbn sdfghjj sdfghjkl sdfghj dfghj d dfgh',}
+    const getCurrentBundleFromServer = () => {
+        fetchCurrentBundleData(bundleID)
+            .then(({data}) => {
+                dispatch(getCurrentBundleSuccessAction(data));
+            })
+            .catch((error) => {
+                dispatch(getCurrentBundleFailureAction(error))
+            });
+    };
 
+    useEffect(() => {
+        dispatch(setCurrentBundleRequestAction());
+        getCurrentBundleFromServer()
+    }, []);
 
-    const [activeIndex, setActiveIndex] = useState(0);
+    useEffect(() => {
+        setCurrentBundleData(currentBundleDataFromStore[0])
+    }, [currentBundleDataFromStore]);
+
+    console.log('currentBundleData is' ,currentBundleData)
+
+    const getCardsDataFromServer = () => {
+        fetchBundleOfCardsData(bundleID)
+            .then(({data}) => {
+                dispatch(getBundleOfCardSuccessAction(data));
+            })
+            .catch((error) => {
+                dispatch(getBundleOfCardFailureAction(error))
+            })
+    }
+
+    useEffect(() => {
+        dispatch(setBundleOfCardsRequestAction());
+        getCardsDataFromServer()
+    }, []);
+
+    useEffect(() => {
+        setCardsData(cardsDataFromStore)
+    }, [cardsDataFromStore]);
+
+    console.log('cardsData is',cardsData);
+
+    const handleOnClickNextCardButton = (event) => {
+        if(activeCardIndex < cardsData.length - 1) {
+            setActiveCardIndex(activeCardIndex + 1);
+            console.log('click next');
+        } else {
+            setActiveCardIndex(0);
+        }
+    };
+
+    const handleOnClickPreviousCardButton = (event) => {
+        if(activeCardIndex > 0) {
+            setActiveCardIndex(activeCardIndex - 1);
+            console.log('click previous');
+        } else {
+            setActiveCardIndex(0);
+        }
+    };
+
+    const getCurrentBundle = () => {
+        if(currentBundleIsLoading) {return <div>Bundle loading...</div>}
+        if(currentBundleDataError) {
+            console.error(currentBundleDataError);
+            return <div>No data</div>
+        }
+        if(currentBundleDataFromStore) {
+        console.log(currentBundleData);
+        //     return (
+        //         <div className={'bundle-data'}>
+        //             <p className={'bundle__title'}>{currentBundleData.bundleName}</p>
+        //             <p className={'bundle__description'}>{currentBundleData.bundleDescription}</p>
+        //         </div>
+        //     );
+        }
+    };
+
+    const getCurrentCard = (index) => {
+        if(cardsDataIsLoading) {return <div>cards are loading...</div>}
+        if(cardsDataError) {
+            console.error(cardsDataError);
+            return <div>no cards yet</div>
+        }
+        if(cardsData) {
+            const activeCard = cardsData[index];
+            console.log(activeCard);
+            // return (
+            //     <div key={index} className={'card'}>
+            //         <div className={'card__front-side'}>
+            //             <button type={'button'} className={'memoryCard__but'}>
+            //                 <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
+            //             </button>
+            //             <p className={'card__front-side__title'}>{activeCard.cardName}</p>
+            //             <button type={'button'} className={'memoryCard__but'}>
+            //                 <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+            //             </button>
+            //         </div>
+            //         <div className={'card__back-side'}>
+            //             <p>{activeCard.cardDecoding}</p>
+            //         </div>
+            //     </div>
+            // );
+        };
+    };
 
     return (
         <StyledBundleOfCards>
             <div></div>
             <div className={'bundle-part'}>
                 <div className={'bundle-data'}>
-                    <p className={'bundle__title'}>{bundleData.bundlesName}</p>
-                    <p className={'bundle__description'}>{bundleData.description}</p>
+                    {getCurrentBundle()}
+                    <p className={'cards-counter'}>{REVIEW_BUNDLE_OF_CARDS.NUMBER_OF_CARDS}<span className={'counter'}>{cardsData.length}</span></p>
                 </div>
-                <button type={'button'} className={'button'}>+New card</button>
+                <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.ADD_NEW_CARD_BUTTON_INNER_TEXT}/>
             </div>
             <div className={'cards'}>
                 <div className={'cards__box'}>
                     <div className={'cards__arr'}>
-                        {cardsData.map((data, index) => {
-                            return (
-                                <div key={index} className={'card'}>
-                                    <div className={'card__front-side'}>
-                                        <button type={'button'} className={'memoryCard__but'}>
-                                            <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="pencil"/>
-                                        </button>
-                                        <p>{data.cardName}</p>
-                                        <button type={'button'} className={'memoryCard__but'}>
-                                            <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="close"/>
-                                        </button>
-                                    </div>
-                                    <div className={'card__back-side'}>
-                                        <p>{data.cardDecoding}</p>
-                                    </div>
-                                </div>
-                            )})}
+                        {getCurrentCard(activeCardIndex)}
                     </div>
                     <div className={'interaction'}>
-                        <button type={'button'} className={'button'}>Previous</button>
-                        <p className={'counter'}>{activeIndex + 1}/{cardsData.length}</p>
-                        <button type={'button'} className={'button'}>Next</button>
+                        <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.PREVIOUS_BUTTON_INNER_TEXT}
+                                   onClickProps={handleOnClickPreviousCardButton}/>
+                        <p className={'counter'}>{activeCardIndex + 1}/{cardsData.length}</p>
+                        <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.NEXT_BUTTON_INNER_TEXT}
+                                   onClickProps={handleOnClickNextCardButton}/>
                     </div>
 
                 </div>
-                <button type={'button'} className={'button'}>To learn</button>
+                <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.START_LEARNING_BUTTON_INNER_TEXT}/>
             </div>
         </StyledBundleOfCards>
     )

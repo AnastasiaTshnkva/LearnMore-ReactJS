@@ -89,7 +89,7 @@ const StartPage = () => {
                 </div>
                 <div className={'advantage__item'}>
                     <p className={'advantage__title'}>{REVIEW_START_PAGE.ADVANTAGES_DESCRIPTION_ABOUT_CARDS}</p>
-                    <img src={'https://fotosale.by/wp-content/uploads/2020/07/superior-7100.jpg'} className={'advantage__img'}/>
+                    <img src={'assets/images/superior-7100.jpg'} className={'advantage__img'}/>
                 </div>
             </div>
             <div className={'buttons-box'}>

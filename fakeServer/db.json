@@ -54,7 +54,7 @@
 
   "cards": [
     {
-      "cardId": "1",
+      "cardID": "1",
       "cardName": "cat",
       "cardDecoding": "кот",
       "condition": "front",
@@ -64,7 +64,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "2",
+      "cardID": "2",
       "cardName": "dog",
       "cardDecoding": "собака",
       "condition": "back",
@@ -74,7 +74,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "3",
+      "cardID": "3",
       "cardName": "horse",
       "cardDecoding": "лошадь",
       "condition": "front",
@@ -84,7 +84,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "4",
+      "cardID": "4",
       "cardName": "rabbit",
       "cardDecoding": "кролик",
       "condition": "front",
@@ -94,7 +94,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "5",
+      "cardID": "5",
       "cardName": "parrot",
       "cardDecoding": "попугай",
       "condition": "front",
@@ -104,7 +104,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "6",
+      "cardID": "6",
       "cardName": "fish",
       "cardDecoding": "рыба",
       "condition": "front",
@@ -114,7 +114,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "7",
+      "cardID": "7",
       "cardName": "how old is the earth",
       "cardDecoding": "4.543 billion years",
       "condition": "front",
@@ -124,7 +124,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "8",
+      "cardID": "8",
       "cardName": "when the first man went to space",
       "cardDecoding": "1961",
       "condition": "front",
@@ -134,7 +134,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "9",
+      "cardID": "9",
       "cardName": "how many humans have been on the moon",
       "cardDecoding": "12",
       "condition": "front",
@@ -144,7 +144,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "10",
+      "cardID": "10",
       "cardName": "nouse",
       "cardDecoding": "нос",
       "condition": "front",
@@ -154,7 +154,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "11",
+      "cardID": "11",
       "cardName": "mouth",
       "cardDecoding": "рот",
       "condition": "front",
@@ -164,7 +164,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "12",
+      "cardID": "12",
       "cardName": "eye",
       "cardDecoding": "глаз",
       "condition": "front",
@@ -174,7 +174,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "13",
+      "cardID": "13",
       "cardName": "mustache",
       "cardDecoding": "усы",
       "condition": "front",
@@ -184,7 +184,7 @@
       "answersCounter": 0
     },
     {
-      "cardId": "14",
+      "cardID": "14",
       "cardName": "eyelashes",
       "cardDecoding": "ресницы",
       "condition": "front",
@@ -196,13 +196,13 @@
   ],
   "users": [
     {
-      "userId": "2",
+      "cardID": "2",
       "userName": "Sasha",
       "userEmail": "sasha@mail.ru",
       "userPassword": "321"
     },
     {
-      "userId": "1",
+      "cardID": "1",
       "userName": "Nastya",
       "userEmail": "nastya@mail.ru",
       "userPassword": "123"

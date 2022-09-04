@@ -1,11 +1,19 @@
 import fakeServerInstance from "../instance";
 
-export const fetchCardsData = () => fakeServerInstance.get('/cards');
-
+//category
 export const fetchCategoryData = () => fakeServerInstance.get('/categories');
 
-export const fetchBundlesDate = (id) => fakeServerInstance.get(`/bundles?categoryID=${id}`);
+//bundle
+export const fetchBundlesData = (categoryID) => fakeServerInstance.get(`/bundles/?categoryID=${categoryID}`);
+export const fetchCurrentBundleData = (bundleID) => fakeServerInstance.get(`/bundles/?bundleID=${bundleID}`);
+export const fetchBundleData = () => fakeServerInstance.get('/bundles');
 
+//cards
+export const fetchBundleOfCardsData = (bundleID) => fakeServerInstance.get(`/cards/?bundlesID=${bundleID}`);
+export const fetchCurrentCardsData = (cardID) => fakeServerInstance.get(`/cards/?cardID=${cardID}`);
+export const fetchCardsData = () => fakeServerInstance.get('/cards');
+
+
+//users
 export const fetchUsersDate = () => fakeServerInstance.get('/users');
-
 export const loginUser = (name, login, password) => fakeServerInstance.post('/login', {name, login, password})

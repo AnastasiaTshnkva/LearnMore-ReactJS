@@ -9,9 +9,9 @@ export const ROUTES_NAMES = {
     START_PAGE: '/',
     LOGIN: '/login',
     CATEGORIES: '/categoryList',
-    BUNDLES: '/bundleList',
-    CATEGORY_PAGE: '/categoryList/:categoryId',
-    BUNDLE_PAGE: '/categoryList/:categoryId/:bundleId',
+    // BUNDLES: '/bundleList',
+    // CATEGORY_PAGE: '/categoryList/:categoryId',
+    // BUNDLE_PAGE: '/categoryList/:categoryId/:bundleId',
 };
 
 // export const routesForLoggedInUser = [

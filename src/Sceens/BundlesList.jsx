@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBundlesDate } from "../api/fakeServer/Api";
+import {fetchBundlesData, fetchBundlesDate} from "../api/fakeServer/Api";
 import {
     getBundlesFailureAction,
     getBundlesSuccessAction,
@@ -12,7 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import FormikInput from "../Components/FormikFilds/FormikInput";
 import AddButton from "../Components/AddButton";
 import { createNewCategoriesAction } from "store/actions/categoriesActionCreators";
-import { bundlesFromStore } from "store/selectors/selectors";
+import { showBundlesFromStore } from "store/selectors/selectors";
 
 const StyledBundlesList = styled.div`
   .bundle{
@@ -47,16 +47,16 @@ const StyledBundlesList = styled.div`
 
 const BundlesList = () => {
     const dispatch = useDispatch();
-    const { param } = useParams();
+    const { categoryID } = useParams();
     const [bundlesData, setBundlesData] = useState([]);
     const [bundleName, setBundleName] = useState();
     const [bundleDescription, setBundleDescription] = useState();
+    const bundlesDataFromStore = useSelector(showBundlesFromStore);
 
-    const bundlesDataFromStore = useSelector(bundlesFromStore);
-
+    console.log(categoryID);
 
     const getBundlesDataFromServer = () => {
-        fetchBundlesDate(param)
+        fetchBundlesData(categoryID)
             .then(({data}) => {
                 dispatch(getBundlesSuccessAction(data));
             }).catch((error) => {
@@ -101,10 +101,9 @@ const BundlesList = () => {
         if(bundlesDataFromStore.bundlesData) {
             return(
                 bundlesData.map((data) => {
-                    console.log(`/bundle/${data.bundleID}`);
                     return(
                         <div key={data.bundleID} className={'bundle-box'}>
-                            <Link to={`/bundle/${data.bundleID}`} className={'description'}>{data.bundleName}</Link>
+                            <Link to={`/categoryList/${categoryID}/bundle/${data.bundleID}`} className={'description'}>{data.bundleName}</Link>
                         </div>
                     )
                 })

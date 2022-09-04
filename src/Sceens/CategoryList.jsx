@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
-import { fetchCategoryData } from "api/fakeServer/Api";
+import {Link, useParams} from "react-router-dom";
+import {
+    fetchBundleData,
+    fetchBundleOfCardsData,
+    fetchCategoryData,
+} from "api/fakeServer/Api";
 import AddButton from "Components/AddButton";
 import {
     createNewCategoriesAction,
@@ -13,11 +17,11 @@ import {
 } from 'store/actions/categoriesActionCreators'
 import FormikInput from "Components/FormikFilds/FormikInput";
 import { REVIEW_CATEGORY_LIST } from "constants/reviews/reviewCategoryList";
-// import {
-//     categoriesDataIsLoading,
-//     categoriesDataIsFailure,
-//     showCategoriesDataFromStore,
-// } from "store/selectors/selectors";
+import {
+    showCategoriesDataIsLoading,
+    showCategoriesDataError,
+    showCategoriesDataFromStore,
+} from 'store/selectors/selectors'
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -54,8 +58,11 @@ const CategoryList = () => {
     const [categoriesData, setCategoriesData] = useState([]);
     const [categoryName, setCategoryName] = useState('');
     const [categoryDescription, setCategoryDescription] = useState('');
-    const categoryDataFromStore = useSelector(state => state.categories);
+    const categoryDataFromStore = useSelector(showCategoriesDataFromStore);
+    const categoriesDataError = useSelector(showCategoriesDataError);
+    const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
 
+    console.log('categoryDataFromStore is', categoryDataFromStore);
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
@@ -63,8 +70,8 @@ const CategoryList = () => {
                 dispatch(getCategoriesSuccessAction(data));
             }).catch((error) => {
                 dispatch(getCategoriesFailureAction(error));
-        })
-    }
+        });
+    };
 
     useEffect(() => {
         dispatch(setCategoriesRequestAction());
@@ -72,8 +79,8 @@ const CategoryList = () => {
     }, []);
 
     useEffect(() => {
-        setCategoriesData(categoryDataFromStore.categoriesData)
-    }, [categoryDataFromStore.categoriesData]);
+        setCategoriesData(categoryDataFromStore)
+    }, [categoryDataFromStore]);
 
     const handleAddCategory = () => {
             const newCategory = {
@@ -96,9 +103,9 @@ const CategoryList = () => {
 
 
     const getCategoriesList = () => {
-        if (categoryDataFromStore.loading) {return <div>Categories list loading...</div>}
-        if (categoryDataFromStore.error) {
-            console.error(categoryDataFromStore.error);
+        if (categoriesDataIsLoading) {return <div>Categories list loading...</div>}
+        if (categoriesDataError) {
+            console.error(categoriesDataError);
             return <div>No categories created yet</div>
         }else {
             return (

@@ -12,9 +12,7 @@ const App = () => {
         <Provider store={store}>
             <BrowserRouter>
                 <GlobalStyleWrapper>
-                    {/*<MainLayout>*/}
                         <RootRouter/>
-                    {/*</MainLayout>*/}
                 </GlobalStyleWrapper>
             </BrowserRouter>
         </Provider>

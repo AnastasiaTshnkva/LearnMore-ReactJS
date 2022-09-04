@@ -59,5 +59,3 @@ const bundlesReducer = (state=initState, action) => {
 }
 
 export default bundlesReducer;
-
-

@@ -13,11 +13,9 @@ import StartPage from "Sceens/StartPage";
 import LoginPage from "Sceens/LoginPage";
 import BundleOfCards from "Sceens/BundleOfCards/BundleOfCards";
 import { ROUTES_NAMES } from 'constants/routes/routes';
+import StudyPage from "Sceens/StudyPage";
 
 const RootRouter = () => {
-    const { param } =  useParams();
-    console.log(param);
-
     return (
         <Routes>
             <Route path={ROUTES_NAMES.START_PAGE} element={<MainLayout><StartPage/></MainLayout>}/>
@@ -26,14 +24,10 @@ const RootRouter = () => {
 
             <Route path={ROUTES_NAMES.CATEGORIES} element={<ListsLayout/>}>
                 <Route index element={<CategoryList/>}/>
-                <Route path={':param'} element={<BundlesList/>}>
-                    <Route path={'bundle/:param'} element={<BundleOfCards/>}/>
-                </Route>
-
+                <Route path={':categoryID'} element={<BundlesList/>}/>
             </Route>
-            {/*<Route path={'/bundleOfCards'} element={<BundleOfCards/>}/>*/}
-            {/*<Route path={'/listOfBundles'} element={<ListsLayout><ListOfCardBundles/></ListsLayout>}/>*/}
-            {/*<Route path={'/bundleOfCards'} element={<MainLayout><BundleOfCards/></MainLayout>}/>*/}
+            <Route path={`${ROUTES_NAMES.CATEGORIES}/:categoryID/bundle/:bundleID`}
+                   element={<MainLayout><BundleOfCards/></MainLayout>}/>
             <Route path={'*'} element={<Navigate to={'/'}/>}/>
         </Routes>
     );

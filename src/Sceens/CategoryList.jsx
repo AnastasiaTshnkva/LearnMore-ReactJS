@@ -62,8 +62,6 @@ const CategoryList = () => {
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
 
-    console.log('categoryDataFromStore is', categoryDataFromStore);
-
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
             .then(({data}) => {
@@ -101,13 +99,13 @@ const CategoryList = () => {
         return setCategoryDescription(event.target.value);
     };
 
-
     const getCategoriesList = () => {
         if (categoriesDataIsLoading) {return <div>Categories list loading...</div>}
         if (categoriesDataError) {
             console.error(categoriesDataError);
-            return <div>No categories created yet</div>
-        }else {
+            return <div>Ops! Something went wrong</div>
+        }
+        if (!!categoriesData.length) {
             return (
                 categoriesData.map((data) => {
                     return (
@@ -119,6 +117,7 @@ const CategoryList = () => {
                 })
             )
         }
+        return <div>No categories created yet</div>
     }
 
     return (

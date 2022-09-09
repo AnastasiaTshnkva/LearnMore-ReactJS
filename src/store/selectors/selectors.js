@@ -16,7 +16,6 @@ export const showCurrentBundleDataIsLoading = (state) => state.bundleOfCards.cur
 export const showCurrentBundleDataError = (state) => state.bundleOfCards.currentBundleError;
 export const showCurrentBundleDataFromStore = (state) => state.bundleOfCards.currentBundleData;
 
-
 //cards data
 export const showCardsDataIsLoading = (state) => state.bundleOfCards.cardsLoading;
 export const showCardsDataError = (state) => state.bundleOfCards.cardsError;

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from "react-router-dom";
-import IcomoonReact from "icomoon-react";
-import iconSet from "assets/Icons/selection.json";
 import {
     fetchBundleOfCardsData,
     fetchCurrentBundleData,
@@ -26,7 +24,7 @@ import {
     getBundleOfCardSuccessAction,
     getBundleOfCardFailureAction,
 } from 'store/actions/bundleOfCardsCreators';
-import {setCategoriesRequestAction} from "../../store/actions/categoriesActionCreators";
+import MemoryCard from "Components/MemoryCard";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -94,43 +92,6 @@ const StyledBundleOfCards = styled.div`
       display: flex;
       justify-content: space-around;
       align-items: center;
-      .card {
-        min-height: 150px;
-        min-width: 250px;
-        margin: 25px 15px;
-        border-radius: 5px;
-        display: flex;
-        padding: 5px;
-        background-color: ${props => {return props.theme.cardColor}};
-        box-shadow: 0 0 7px ${props => props.theme.cardBorderColor};
-        font-size: 22px;
-        line-height: 24px;
-        aspect-ratio: 3/2;
-      }
-      .card__front-side {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
-        width: 100%;
-        border: 2px solid ${props => props.theme.cardBorderColor};
-        transition: transform 0.8s;
-        transform-style: preserve-3d;
-        padding-top: 5px;
-        .memoryCard__but {
-          background-color: transparent;
-          border: none;
-        }
-        .card__front-side__title {
-          align-self: center;
-        }
-      }
-      .card__back-side {
-        display: none;
-        position: absolute;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-      }
     }
   }
 `
@@ -165,10 +126,8 @@ const BundleOfCards = (props) => {
     }, []);
 
     useEffect(() => {
-        setCurrentBundleData(currentBundleDataFromStore[0])
+        setCurrentBundleData(currentBundleDataFromStore[0]);
     }, [currentBundleDataFromStore]);
-
-    console.log('currentBundleData is' ,currentBundleData)
 
     const getCardsDataFromServer = () => {
         fetchBundleOfCardsData(bundleID)
@@ -189,12 +148,9 @@ const BundleOfCards = (props) => {
         setCardsData(cardsDataFromStore)
     }, [cardsDataFromStore]);
 
-    console.log('cardsData is',cardsData);
-
     const handleOnClickNextCardButton = (event) => {
         if(activeCardIndex < cardsData.length - 1) {
             setActiveCardIndex(activeCardIndex + 1);
-            console.log('click next');
         } else {
             setActiveCardIndex(0);
         }
@@ -203,9 +159,8 @@ const BundleOfCards = (props) => {
     const handleOnClickPreviousCardButton = (event) => {
         if(activeCardIndex > 0) {
             setActiveCardIndex(activeCardIndex - 1);
-            console.log('click previous');
         } else {
-            setActiveCardIndex(0);
+            setActiveCardIndex(cardsData.length - 1);
         }
     };
 
@@ -213,45 +168,33 @@ const BundleOfCards = (props) => {
         if(currentBundleIsLoading) {return <div>Bundle loading...</div>}
         if(currentBundleDataError) {
             console.error(currentBundleDataError);
-            return <div>No data</div>
+            return <div>Ops! Something went wrong</div>
         }
-        if(currentBundleDataFromStore) {
-        console.log(currentBundleData);
-        //     return (
-        //         <div className={'bundle-data'}>
-        //             <p className={'bundle__title'}>{currentBundleData.bundleName}</p>
-        //             <p className={'bundle__description'}>{currentBundleData.bundleDescription}</p>
-        //         </div>
-        //     );
+        if (currentBundleData) {
+            return (
+                <div className={'bundle-data'}>
+                    <p className={'bundle__title'}>{currentBundleData.bundleName}</p>
+                    <p className={'bundle__description'}>{currentBundleData.bundleDescription}</p>
+                </div>
+            );
         }
+        return <div>No data</div>
     };
 
     const getCurrentCard = (index) => {
         if(cardsDataIsLoading) {return <div>cards are loading...</div>}
         if(cardsDataError) {
             console.error(cardsDataError);
-            return <div>no cards yet</div>
+            return <div>Ops! Something went wrong</div>
         }
-        if(cardsData) {
+        if (!!cardsData.length){
             const activeCard = cardsData[index];
-            console.log(activeCard);
-            // return (
-            //     <div key={index} className={'card'}>
-            //         <div className={'card__front-side'}>
-            //             <button type={'button'} className={'memoryCard__but'}>
-            //                 <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
-            //             </button>
-            //             <p className={'card__front-side__title'}>{activeCard.cardName}</p>
-            //             <button type={'button'} className={'memoryCard__but'}>
-            //                 <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
-            //             </button>
-            //         </div>
-            //         <div className={'card__back-side'}>
-            //             <p>{activeCard.cardDecoding}</p>
-            //         </div>
-            //     </div>
-            // );
-        };
+            return (
+                <MemoryCard keyProps={activeCard.cardID} activeCardName={activeCard.cardName}
+                activeCardDecoding={activeCard.cardDecoding}/>
+            );
+        }
+        return <div>No data</div>
     };
 
     return (

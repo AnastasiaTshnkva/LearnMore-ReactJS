@@ -5,13 +5,8 @@ import LoginPage from "Sceens/LoginPage";
 import RootRouter from "./RootRouter";
 import CategoryList from "../Sceens/CategoryList";
 
-// const isUserLoggedIn = false;
 
 const LoginRouter = () => {
-    // const isUserLoggedIn = useSelector(state => state.users.isLoggedIn);
-    //
-
-
     console.log('isUserLoggedIn is' ,isUserLoggedIn);
 
     const renderForLoggedInUser = (Scene) => {

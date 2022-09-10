@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     fetchBundleOfCardsData,
     fetchCurrentBundleData,
-} from "api/fakeServer/Api";
-import { REVIEW_BUNDLE_OF_CARDS } from "constants/reviews/reviewBandleOfCards";
-import AddButton from "Components/AddButton";
-import {useDispatch, useSelector} from "react-redux";
+} from 'api/fakeServer/Api';
+import { REVIEW_BUNDLE_OF_CARDS } from 'constants/reviews/reviewBandleOfCards';
+import AddButton from 'Components/AddButton';
 import {
     showCurrentBundleDataIsLoading,
     showCurrentBundleDataError,
@@ -15,7 +15,7 @@ import {
     showCardsDataIsLoading,
     showCardsDataError,
     showCardsDataFromStore,
-} from "store/selectors/selectors";
+} from 'store/selectors/selectors';
 import {
     setCurrentBundleRequestAction,
     getCurrentBundleSuccessAction,
@@ -24,7 +24,8 @@ import {
     getBundleOfCardSuccessAction,
     getBundleOfCardFailureAction,
 } from 'store/actions/bundleOfCardsCreators';
-import MemoryCard from "Components/MemoryCard";
+import MemoryCard from 'Components/MemoryCard';
+import { ROUTES_NAMES } from 'constants/routes/routes';
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -98,6 +99,7 @@ const StyledBundleOfCards = styled.div`
 
 const BundleOfCards = (props) => {
     const dispatch = useDispatch();
+    const { categoryID } = useParams();
     const { bundleID } = useParams();
     const [cardsData, setCardsData] = useState([]);
     const [currentBundleData, setCurrentBundleData] = useState([]);
@@ -221,7 +223,10 @@ const BundleOfCards = (props) => {
                     </div>
 
                 </div>
-                <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.START_LEARNING_BUTTON_INNER_TEXT}/>
+                <Link to={`${ROUTES_NAMES.CATEGORIES}/${categoryID}/bundle/${bundleID}/studying`}>
+                    <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.START_LEARNING_BUTTON_INNER_TEXT}/>
+                </Link>
+
             </div>
         </StyledBundleOfCards>
     )

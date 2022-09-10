@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import IcomoonReact from "icomoon-react";
-import iconSet from "../../assets/Icons/selection.json";
-
+import IcomoonReact from 'icomoon-react';
+import { useSelector } from 'react-redux';
+import iconSet from 'assets/Icons/selection.json';
+import { showUserData } from 'store/selectors/selectors';
 
 const StyledHeader = styled.header`
   background: ${props => {return props.theme.headerBackgroundColor}};
@@ -32,6 +33,9 @@ const StyledHeader = styled.header`
 `
 
 const Header = () => {
+    const [user, setUser] = useState({});
+    const userFromStore = useSelector(showUserData);
+
     return(
         <StyledHeader>
             <ul className={'header__list'}>

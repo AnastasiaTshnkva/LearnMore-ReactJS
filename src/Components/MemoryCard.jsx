@@ -4,7 +4,6 @@ import IcomoonReact from "icomoon-react";
 import iconSet from "assets/Icons/selection.json";
 import PropTypes from "prop-types";
 
-
 const StyledMemoryCard = styled.div`
     display: flex;
     position: relative;

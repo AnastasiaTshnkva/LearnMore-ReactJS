@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from "react-router-dom";
-import { REVIEW_START_PAGE } from "constants/reviews/reviewStartPage";
+import {Link} from 'react-router-dom';
+import { REVIEW_START_PAGE } from 'constants/reviews/reviewStartPage';
+import {ROUTES_NAMES} from 'constants/routes/routes';
 
 const StyledStartPage = styled.div`
   display: flex;
@@ -38,17 +39,13 @@ const StyledStartPage = styled.div`
       padding: 15px;
       font-size: 20px;
       line-height: 22px;
-      //width: 50vw;
       text-align: center;
     }
     .advantage__img {
-      //width: 49vw;
       height: 100%;
     }
   }
   .buttons-box {
-    //display: grid;
-    //grid-template-columns: repeat(2, 1fr);
     display: flex;
     justify-content: space-around;
     width: 100vw;
@@ -93,8 +90,8 @@ const StartPage = () => {
                 </div>
             </div>
             <div className={'buttons-box'}>
-                <Link to={'/login'}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.LOGIN_BUTTON_INNER_TEXT}</button></Link>
-                <Link to={'/login'}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.JOIN_BUTTON_INNER_TEXT}</button></Link>
+                <Link to={ROUTES_NAMES.LOGIN}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.LOGIN_BUTTON_INNER_TEXT}</button></Link>
+                <Link to={ROUTES_NAMES.LOGIN}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.JOIN_BUTTON_INNER_TEXT}</button></Link>
             </div>
         </StyledStartPage>
     )

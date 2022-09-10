@@ -1,6 +1,6 @@
 // user selectors
-export const userData = (state) => state.users.currentUserData;
-export const isUserLoggedIn = (state) => state.users.isLoggedIn;
+export const showUserData = (state) => state.users.currentUserData;
+export const showIsUserLoggedIn = (state) => state.users.isLoggedIn;
 
 //categories selectors
 export const showCategoriesDataIsLoading = (state) => state.categories.loading;

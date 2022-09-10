@@ -31,6 +31,8 @@ const GlobalThemeProvider = (props) => {
         inputBorderColor: theme === 'dark' ? THEME_COLORS.dark.inputBorderColor : THEME_COLORS.light.inputBorderColor,
         partBackgroundColor: theme === 'dark' ? THEME_COLORS.dark.partBackgroundColor : THEME_COLORS.light.partBackgroundColor,
         descriptionPartColor: theme === 'dark' ? THEME_COLORS.dark.descriptionPartColor : THEME_COLORS.light.descriptionPartColor,
+        iDoNotKnowButtonColor: theme === 'dark' ? THEME_COLORS.dark.iDoNotKnowButtonColor : THEME_COLORS.light.iDoNotKnowButtonColor,
+        iDoNotKnowHoverButtonColor: theme === 'dark' ? THEME_COLORS.dark.iDoNotKnowHoverButtonColor : THEME_COLORS.light.iDoNotKnowHoverButtonColor,
     }
 
     const themeSwitch = () => {theme === 'dark' ? setTheme('light') : setTheme('dark')};

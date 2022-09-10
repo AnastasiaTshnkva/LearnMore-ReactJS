@@ -61,6 +61,7 @@ const CategoryList = () => {
     const categoryDataFromStore = useSelector(showCategoriesDataFromStore);
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
+    const [modalWindow, setModalWindow] = useState(true);
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()

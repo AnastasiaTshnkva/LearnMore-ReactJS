@@ -15,6 +15,7 @@ const StyledMemoryCard = styled.div`
     perspective: 1000px;
   .card__front-side, .card__back-side {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     box-shadow: 0 0 7px ${props => props.theme.cardBorderColor};
@@ -27,20 +28,29 @@ const StyledMemoryCard = styled.div`
     backface-visibility: hidden;
   }
   .card__front-side{
-    justify-content: space-between;
-    align-items: start;
+    position: relative;
+    .buttons-box {
+      display: flex;
+      position: absolute;
+      justify-self: center;
+      justify-content: space-between;
+      width: 100%;
+      .memoryCard__but {
+        background-color: transparent;
+        border: none;
+      }
+    }
+    .card__front-side__title {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      align-self: center;
+    }
   }
   .card__back-side {
     justify-content: center;
     align-items: center;
     transform: rotateY(180deg);
-  }
-  .memoryCard__but {
-    background-color: transparent;
-    border: none;
-  }
-  .card__front-side__title {
-    align-self: center;
   }
   .card__front-side__turn {
     transform: rotateY(180deg);
@@ -70,13 +80,17 @@ const MemoryCard = (props) => {
     return (
         <StyledMemoryCard key={props.keyProps} onClick={handleOClickTurn}>
             <div className={'card__front-side'} name={'card-front-side'}>
-                <button type={'button'} className={'memoryCard__but'}>
-                    <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
-                </button>
+                { props.buttonVisible &&
+                <div className={'buttons-box'}>
+                    <button type={'button'} className={'memoryCard__but'}>
+                        <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
+                    </button>
+                    <button type={'button'} className={'memoryCard__but'}>
+                        <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+                    </button>
+                </div>
+                }
                 <p className={'card__front-side__title'}>{props.activeCardName}</p>
-                <button type={'button'} className={'memoryCard__but'}>
-                    <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
-                </button>
             </div>
             <div className={'card__back-side'} name={'card-back-side'}>
                 <p>{props.activeCardDecoding}</p>
@@ -87,7 +101,7 @@ const MemoryCard = (props) => {
 };
 
 MemoryCard.propTypes = {
-    key: PropTypes.string.isRequired,
+    keyProps: PropTypes.number.isRequired,
     activeCardName: PropTypes.string.isRequired,
     activeCardDecoding: PropTypes.string.isRequired,
     // onClick: PropTypes.func,

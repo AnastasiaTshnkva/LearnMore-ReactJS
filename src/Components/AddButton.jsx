@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const StyledAddButton = styled.button`
   background-color: ${props => props.theme.buttonColor};

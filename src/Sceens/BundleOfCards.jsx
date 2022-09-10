@@ -193,7 +193,7 @@ const BundleOfCards = (props) => {
             const activeCard = cardsData[index];
             return (
                 <MemoryCard keyProps={activeCard.cardID} activeCardName={activeCard.cardName}
-                activeCardDecoding={activeCard.cardDecoding}/>
+                activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}/>
             );
         }
         return <div>No data</div>

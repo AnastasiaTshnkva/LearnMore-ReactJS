@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from 'styled-components';
-import {Navigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import MemoryCard from 'Components/MemoryCard';
 import {useDispatch, useSelector} from "react-redux";
 import {showCardsDataError, showCardsDataFromStore, showCardsDataIsLoading} from "store/selectors/selectors";
@@ -10,7 +10,7 @@ import {
     getBundleOfCardSuccessAction,
     setBundleOfCardsRequestAction
 } from "store/actions/bundleOfCardsCreators";
-import {ROUTES_NAMES} from "../constants/routes/routes";
+import {ROUTES_NAMES} from "constants/routes/routes";
 
 const StyledStudyPage = styled.div`
   padding-top: 20px;
@@ -29,13 +29,12 @@ const StyledStudyPage = styled.div`
     }
   .cards-box {
     position: relative;
-    width: 40%;
+    max-width: 40%;
   }
   .buttons-box {
     margin-top: 30px;
     .button  {
       padding: 10px;
-      border: none;
       border-radius: 5px;
       font-size: 20px;
       line-height: 22px;
@@ -59,10 +58,12 @@ const StyledStudyPage = styled.div`
 
 const StudyPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { bundleID } = useParams();
     const { categoryID } = useParams();
     const [cardsData, setCardsData] = useState([]);
     const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const [mixedCardsArr, setMixedCardsArr] = useState([]);
 
     const cardsDataIsLoading = useSelector(showCardsDataIsLoading);
     const cardsDataError = useSelector(showCardsDataError);
@@ -81,14 +82,45 @@ const StudyPage = () => {
     useEffect(() => {
         dispatch(setBundleOfCardsRequestAction());
         getCardsDataFromServer()
-    },[])
+    },[]);
 
     useEffect(() => {
         setCardsData(cardsDataFromStore);
-    }, [cardsDataFromStore])
+        setMixedCardsArr(cardsDataFromStore.slice().sort(() => Math.random() -0.5));
+    }, [cardsDataFromStore]);
 
-    const cardsArr = cardsData.slice();
-    const mixedCardsArr = cardsArr.sort(() => Math.random() - 0.5);
+    // console.log('cardsDataFromStore is', cardsDataFromStore,'cardsData is', cardsData, 'mixedCardsArr is', mixedCardsArr)
+
+    const handleIKnowButton = () => {
+        if(!!mixedCardsArr.length && activeCardIndex < mixedCardsArr.length - 1) {
+            const currentCardID = mixedCardsArr[activeCardIndex].cardID;
+            const newCardsData = cardsData.map((card) => {
+                if(card.cardID === currentCardID) {
+                   card.answersCounter += 1;
+                }
+                return card;
+            });
+            const newMixedArr = mixedCardsArr.filter(card => card.cardID !== currentCardID);
+            setMixedCardsArr(newMixedArr);
+            setCardsData(newCardsData);
+        }
+        if (mixedCardsArr.length === 1) {
+            navigate(-1);
+        } else {
+            setActiveCardIndex(0);
+        }
+    }
+
+    console.log('mixedCardsArr is', mixedCardsArr);
+
+    const handleIDoNotKnow = () => {
+        if(activeCardIndex < mixedCardsArr.length -1 ) {
+            setActiveCardIndex(activeCardIndex + 1);
+        } else {
+            setActiveCardIndex(0);
+        }
+    }
+
 
     const getCards = (index) => {
         if (cardsDataIsLoading) return <div>card is loading...</div>
@@ -98,29 +130,13 @@ const StudyPage = () => {
         }
         if (!!cardsData.length) {
             const activeCard = mixedCardsArr[index];
+            console.log('activeCard is' ,activeCard, 'activeCardIndex', activeCardIndex);
             return (
-                <MemoryCard key={index} activeCardName={activeCard.cardName}
-                            activeCardDecoding={activeCard.cardDecoding}/>
+                <MemoryCard keyProps={index} activeCardName={activeCard.cardName}
+                activeCardDecoding={activeCard.cardDecoding} buttonVisible={false}/>
             )
         }
         return <div>no cards yet</div>
-    }
-
-    const handleIKnowButton = () => {
-        if(activeCardIndex < mixedCardsArr.length && mixedCardsArr.length) {
-            mixedCardsArr[activeCardIndex].answersCounter += 1;
-            console.log(mixedCardsArr[activeCardIndex].answersCounter);
-            mixedCardsArr.splice(activeCardIndex, 1);
-            setActiveCardIndex(activeCardIndex + 1);
-        }
-        if(!mixedCardsArr.length) {
-            console.log(mixedCardsArr);
-            return <Navigate to={`${ROUTES_NAMES.CATEGORIES}/${categoryID}/bundle/${bundleID}`}/>
-        }
-    }
-
-    const handleIDoNotKnow = () => {
-        console.log('I do not know');
     }
 
     return (

@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     body {
       margin: 0 auto;
       min-height: 100vh;
-      font-family: "open sans",arial,helvetica,sans-serif;
+      font-family: 'open sans',arial,helvetica,sans-serif;
       font-weight: 400;
       font-size: 18/20px;
     }

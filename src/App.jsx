@@ -6,14 +6,17 @@ import {store} from "store/initStore";
 import LoginRouter from "./Routs/LoginRouter";
 import {Provider} from 'react-redux'
 import MainLayout from "./MainLayout/MainLayout";
+import GlobalModalProvider from "./HOC/GlobalModalProvider";
 
 const App = () => {
     return(
         <Provider store={store}>
             <BrowserRouter>
+                {/*<GlobalModalProvider>*/}
                 <GlobalStyleWrapper>
                         <RootRouter/>
                 </GlobalStyleWrapper>
+                {/*</GlobalModalProvider>*/}
             </BrowserRouter>
         </Provider>
 

@@ -3,11 +3,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {THEME_COLORS} from "../constants/globalTheme/themeColors";
 
 const GlobalStyle = createGlobalStyle`
-    body {
-      margin: 0 auto;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
+    
 `
 
 const GlobalThemeProvider = (props) => {

@@ -10,7 +10,7 @@ const StyledAddButton = styled.button`
   line-height: 22px;
   border: 2px solid transparent;
   border-radius: 3px;
-  margin-top: 10px;
+  margin-top: 20px;
   &:hover {
     box-shadow: 0 0 5px ${props => props.theme.buttonHoverShadow};
   }

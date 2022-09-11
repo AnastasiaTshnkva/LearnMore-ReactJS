@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import SearchInput from "../Components/SearchhInput";
+import GlobalModalProvider from "../HOC/GlobalModalProvider";
 
 
 const StyledListsLayout = styled.div`
@@ -21,15 +22,18 @@ const StyledListsLayout = styled.div`
 
 const ListsLayout = (props) => {
     return (
-        <StyledListsLayout>
-            <Header/>
-            <div className={'main'}>
-                <SearchInput className={'search'}/>
-                <Outlet/>
-                {/*{props.children}*/}
-            </div>
-            <Footer/>
-        </StyledListsLayout>
+        <GlobalModalProvider>
+            <StyledListsLayout>
+                <Header/>
+                <main className={'main'}>
+                    <SearchInput className={'search'}/>
+                    <Outlet/>
+                    {/*{props.children}*/}
+                </main>
+                <Footer/>
+            </StyledListsLayout>
+        </GlobalModalProvider>
+
     );
 }
 

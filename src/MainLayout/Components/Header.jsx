@@ -8,7 +8,7 @@ import { showUserData } from 'store/selectors/selectors';
 const StyledHeader = styled.header`
   background: ${props => {return props.theme.headerBackgroundColor}};
   color: ${props => {return props.theme.headerTextColor}};
-  width: 100vw;
+  //width: 100vw;
 
   .header__list {
     display: flex;

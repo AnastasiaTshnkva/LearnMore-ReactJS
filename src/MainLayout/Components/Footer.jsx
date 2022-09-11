@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 
 const FooterStyles = styled.footer`
-  width: 100vw;
+  //width: 100vw;
   background-color: ${props => {return props.theme.headerBackgroundColor}};
   height: 50px;
   color: ${props => {return props.theme.headerTextColor}};

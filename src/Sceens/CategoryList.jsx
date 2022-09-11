@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Formik, Form } from "formik";
-import {Link, useParams} from "react-router-dom";
+import { Formik, Form } from 'formik';
+import {Link, useParams} from 'react-router-dom';
 import {
     fetchBundleData,
     fetchBundleOfCardsData,
     fetchCategoryData,
-} from "api/fakeServer/Api";
-import AddButton from "Components/AddButton";
+} from 'api/fakeServer/Api';
+import AddButton from 'Components/AddButton';
 import {
     createNewCategoriesAction,
     setCategoriesRequestAction,
     getCategoriesSuccessAction,
     getCategoriesFailureAction,
 } from 'store/actions/categoriesActionCreators'
-import FormikInput from "Components/FormikFilds/FormikInput";
-import { REVIEW_CATEGORY_LIST } from "constants/reviews/reviewCategoryList";
+import FormikInput from 'Components/FormikFilds/FormikInput';
+import { REVIEW_CATEGORY_LIST } from 'constants/reviews/reviewCategoryList';
 import {
     showCategoriesDataIsLoading,
     showCategoriesDataError,
     showCategoriesDataFromStore,
 } from 'store/selectors/selectors'
+import  {MyContext} from 'HOC/GlobalModalProvider';
+import ModalWindowCreate from 'Components/ModalWindowCreate';
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -61,7 +63,7 @@ const CategoryList = () => {
     const categoryDataFromStore = useSelector(showCategoriesDataFromStore);
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
-    const [modalWindow, setModalWindow] = useState(true);
+    // const [modalWindow, setModalWindow] = useState(true);
 
     const getCategoryDataFromServer = () => {
         fetchCategoryData()
@@ -123,15 +125,41 @@ const CategoryList = () => {
 
     return (
         <StyledCategoryList>
-            <Formik className={'add-category-block'}>
-                <Form className={'add-category-block'}>
-                    <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}
-                    onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
-                    <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
-                    onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
-                    <AddButton type={'button'} onClickProps={handleAddCategory} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>
-                </Form>
-            </Formik>
+            <MyContext.Consumer>
+                {value => (
+                    <button type={'button'} onClick={() => {
+                        value (
+                            <ModalWindowCreate/>
+                            // <div className={'add-new-category'}>
+                            //     <div className={'add-category__title'}>{REVIEW_CATEGORY_LIST.MODAL_WINDOW_TITLE}</div>
+                            //     <Formik className={'add-category-form'}>
+                            //         <Form className={'add-category-block'}>
+                            //             <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}
+                            //                          onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
+                            //             <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
+                            //                          onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
+                            //             <AddButton type={'button'} onClickProps={handleAddCategory} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>
+                            //         </Form>
+                            //     </Formik>
+                            // </div>
+
+                        )
+                    }}>
+                        add
+                    </button>
+                    )
+                }
+            </MyContext.Consumer>
+
+            {/*<Formik className={'add-category-block'}>*/}
+            {/*    <Form className={'add-category-block'}>*/}
+            {/*        <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}*/}
+            {/*        onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>*/}
+            {/*        <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}*/}
+            {/*        onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>*/}
+            {/*        <AddButton type={'button'} onClickProps={handleAddCategory} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>*/}
+            {/*    </Form>*/}
+            {/*</Formik>*/}
             <ul className={'category__list'}>
                 {getCategoriesList()}
             </ul>

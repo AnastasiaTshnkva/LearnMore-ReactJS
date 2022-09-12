@@ -15,14 +15,12 @@ import {
     getCategoriesSuccessAction,
     getCategoriesFailureAction,
 } from 'store/actions/categoriesActionCreators'
-import FormikInput from 'Components/FormikFilds/FormikInput';
-import { REVIEW_CATEGORY_LIST } from 'constants/reviews/reviewCategoryList';
 import {
     showCategoriesDataIsLoading,
     showCategoriesDataError,
     showCategoriesDataFromStore,
 } from 'store/selectors/selectors'
-import  {MyContext} from 'HOC/GlobalModalProvider';
+import  { MyContext } from 'HOC/GlobalModalProvider';
 import ModalWindowCreate from 'Components/ModalWindowCreate';
 
 const StyledCategoryList = styled.div`
@@ -92,6 +90,7 @@ const CategoryList = () => {
             dispatch(createNewCategoriesAction([...categoriesData, newCategory]));
             setCategoryName('');
             setCategoryDescription('');
+
     };
 
     const handleOnChangeCategoryNameInput = (event) => {
@@ -129,20 +128,9 @@ const CategoryList = () => {
                 {value => (
                     <button type={'button'} onClick={() => {
                         value (
-                            <ModalWindowCreate/>
-                            // <div className={'add-new-category'}>
-                            //     <div className={'add-category__title'}>{REVIEW_CATEGORY_LIST.MODAL_WINDOW_TITLE}</div>
-                            //     <Formik className={'add-category-form'}>
-                            //         <Form className={'add-category-block'}>
-                            //             <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}
-                            //                          onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
-                            //             <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
-                            //                          onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
-                            //             <AddButton type={'button'} onClickProps={handleAddCategory} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>
-                            //         </Form>
-                            //     </Formik>
-                            // </div>
-
+                            <ModalWindowCreate onClickNameInputProps={handleOnChangeCategoryNameInput}
+                                               onClickDecodingInputProps={handleOnChangeCategoryDescriptionInput}
+                                               onClickAddFunc={handleAddCategory}/>
                         )
                     }}>
                         add

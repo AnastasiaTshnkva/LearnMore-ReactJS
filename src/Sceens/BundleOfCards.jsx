@@ -26,6 +26,7 @@ import {
 } from 'store/actions/bundleOfCardsCreators';
 import MemoryCard from 'Components/MemoryCard';
 import { ROUTES_NAMES } from 'constants/routes/routes';
+import getCurrentBundleThunk from "../store/thunk/bundles/getCurrentBundleThunk";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -112,42 +113,17 @@ const BundleOfCards = (props) => {
     const cardsDataError = useSelector(showCardsDataError);
     const cardsDataFromStore = useSelector(showCardsDataFromStore);
 
-    const getCurrentBundleFromServer = () => {
-        fetchCurrentBundleData(bundleID)
-            .then(({data}) => {
-                dispatch(getCurrentBundleSuccessAction(data));
-            })
-            .catch((error) => {
-                dispatch(getCurrentBundleFailureAction(error))
-            });
-    };
-
     useEffect(() => {
-        dispatch(setCurrentBundleRequestAction());
-        getCurrentBundleFromServer()
+        dispatch(getCurrentBundleThunk(bundleID));
+        dispatch(getCurrentCard(bundleID));
     }, []);
 
     useEffect(() => {
         setCurrentBundleData(currentBundleDataFromStore[0]);
     }, [currentBundleDataFromStore]);
 
-    const getCardsDataFromServer = () => {
-        fetchBundleOfCardsData(bundleID)
-            .then(({data}) => {
-                dispatch(getBundleOfCardSuccessAction(data));
-            })
-            .catch((error) => {
-                dispatch(getBundleOfCardFailureAction(error))
-            })
-    }
-
     useEffect(() => {
-        dispatch(setBundleOfCardsRequestAction());
-        getCardsDataFromServer()
-    }, []);
-
-    useEffect(() => {
-        setCardsData(cardsDataFromStore)
+        setCardsData(cardsDataFromStore);
     }, [cardsDataFromStore]);
 
     const handleOnClickNextCardButton = (event) => {

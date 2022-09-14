@@ -11,6 +11,7 @@ import {
     setBundleOfCardsRequestAction
 } from "store/actions/bundleOfCardsCreators";
 import {ROUTES_NAMES} from "constants/routes/routes";
+import getCardsThunk from "../store/thunk/cards/getCardsThunk";
 
 const StyledStudyPage = styled.div`
   padding-top: 20px;
@@ -69,27 +70,14 @@ const StudyPage = () => {
     const cardsDataError = useSelector(showCardsDataError);
     const cardsDataFromStore = useSelector(showCardsDataFromStore);
 
-    const getCardsDataFromServer = () => {
-        fetchBundleOfCardsData(bundleID)
-            .then(({data}) => {
-                dispatch(getBundleOfCardSuccessAction(data))
-            })
-            .catch((error) => {
-                dispatch(getBundleOfCardFailureAction(error))
-            });
-    }
-
     useEffect(() => {
-        dispatch(setBundleOfCardsRequestAction());
-        getCardsDataFromServer()
+        dispatch(getCardsThunk(bundleID))
     },[]);
 
     useEffect(() => {
         setCardsData(cardsDataFromStore);
         setMixedCardsArr(cardsDataFromStore.slice().sort(() => Math.random() -0.5));
     }, [cardsDataFromStore]);
-
-    // console.log('cardsDataFromStore is', cardsDataFromStore,'cardsData is', cardsData, 'mixedCardsArr is', mixedCardsArr)
 
     const handleIKnowButton = () => {
         if(!!mixedCardsArr.length && activeCardIndex < mixedCardsArr.length - 1) {

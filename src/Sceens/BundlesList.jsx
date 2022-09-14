@@ -13,6 +13,7 @@ import FormikInput from "../Components/FormikFilds/FormikInput";
 import AddButton from "../Components/AddButton";
 import { createNewCategoriesAction } from "store/actions/categoriesActionCreators";
 import { showBundlesFromStore } from "store/selectors/selectors";
+import getBundlesThunk from "../store/thunk/bundles/getBundlesThunk";
 
 const StyledBundlesList = styled.div`
   .bundle{
@@ -53,20 +54,8 @@ const BundlesList = () => {
     const [bundleDescription, setBundleDescription] = useState();
     const bundlesDataFromStore = useSelector(showBundlesFromStore);
 
-    console.log(categoryID);
-
-    const getBundlesDataFromServer = () => {
-        fetchBundlesData(categoryID)
-            .then(({data}) => {
-                dispatch(getBundlesSuccessAction(data));
-            }).catch((error) => {
-            dispatch(getBundlesFailureAction(error));
-        });
-    };
-
     useEffect(() => {
-        dispatch(setBundlesRequestAction());
-        getBundlesDataFromServer();
+        dispatch(getBundlesThunk(categoryID));
     }, []);
 
     useEffect(() => {

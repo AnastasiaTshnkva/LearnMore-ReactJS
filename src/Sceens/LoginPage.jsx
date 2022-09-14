@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { useDispatch } from "react-redux";
-import FormikInput from "Components/FormikFilds/FormikInput";
-import {setNotValidUserAction, setValidUserAction} from "store/actions/userActionCreators";
+import FormikInput from 'Components/FormikFilds/FormikInput';
+import {setNotValidUserAction, setValidUserAction} from 'store/actions/userActionCreators';
 import {fetchUsersDate} from "api/fakeServer/Api";
-import { REVIEW_LOGIN_PAGE } from "constants/reviews/reviewLoginPage";
+import { REVIEW_LOGIN_PAGE } from 'constants/reviews/reviewLoginPage';
+import getUsersThunk from 'store/thunk/users/getUsersThunk';
 
 const StyledLoginPage = styled.div`
   margin: 0 auto;
@@ -91,6 +92,7 @@ const LoginPage = () => {
         fetchUsersDate().then(({data}) => {
             setUserData(data)
         });
+        // dispatch(getUsersThunk());
    },[]);
 
     const handleOnSubmit = (event) => {

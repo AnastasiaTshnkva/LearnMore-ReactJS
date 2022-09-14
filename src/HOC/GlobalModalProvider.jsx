@@ -24,6 +24,9 @@ const StyledModalProvider = styled.div`
 const GlobalModalProvider = (props) => {
     const [modalContext, setModalContext] = useState(false);
 
+    // console.log(props);
+    // console.log(modalContext);
+
     return (
         <MyContext.Provider value={(modalContext) => {setModalContext(modalContext)}}>
             {modalContext &&

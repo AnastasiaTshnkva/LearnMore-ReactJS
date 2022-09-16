@@ -27,6 +27,7 @@ import {
 import MemoryCard from 'Components/MemoryCard';
 import { ROUTES_NAMES } from 'constants/routes/routes';
 import getCurrentBundleThunk from "../store/thunk/bundles/getCurrentBundleThunk";
+import getCardsThunk from "../store/thunk/cards/getCardsThunk";
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -115,7 +116,7 @@ const BundleOfCards = (props) => {
 
     useEffect(() => {
         dispatch(getCurrentBundleThunk(bundleID));
-        dispatch(getCurrentCard(bundleID));
+        dispatch(getCardsThunk(bundleID));
     }, []);
 
     useEffect(() => {
@@ -125,6 +126,8 @@ const BundleOfCards = (props) => {
     useEffect(() => {
         setCardsData(cardsDataFromStore);
     }, [cardsDataFromStore]);
+
+    console.log(currentBundleDataFromStore);
 
     const handleOnClickNextCardButton = (event) => {
         if(activeCardIndex < cardsData.length - 1) {

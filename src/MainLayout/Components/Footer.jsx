@@ -16,7 +16,7 @@ const FooterStyles = styled.footer`
 const Footer = () => {
     return(
         <FooterStyles>
-            <p>Made by me in 2022</p>
+            <p>Made by Anastasiya Tsyhankova in 2022</p>
         </FooterStyles>
     )
 };

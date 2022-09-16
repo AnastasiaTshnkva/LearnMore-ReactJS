@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom';
-import { Form, Formik } from 'formik';
-import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { Form, Formik } from 'formik'
 import FormikInput from 'Components/FormikFilds/FormikInput';
-import {setNotValidUserAction, setValidUserAction} from 'store/actions/userActionCreators';
-import {fetchUsersDate} from "api/fakeServer/Api";
+import { setNotValidUserAction, setValidUserAction } from 'store/actions/userActionCreators';
 import { REVIEW_LOGIN_PAGE } from 'constants/reviews/reviewLoginPage';
 import getUsersThunk from 'store/thunk/users/getUsersThunk';
+import { showUserData } from 'store/selectors/selectors';
 
 const StyledLoginPage = styled.div`
   margin: 0 auto;
@@ -87,38 +87,60 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState();
     const [validateError, setValidateError] = useState('');
+    const userDataFromState = useSelector(showUserData);
+    const [newUserRegistration, setNewUserRegistration] = useState(false);
 
    useEffect(() => {
-        fetchUsersDate().then(({data}) => {
-            setUserData(data)
-        });
-        // dispatch(getUsersThunk());
+       dispatch(getUsersThunk());
    },[]);
+
+   useEffect(() => {
+       setUserData(userDataFromState);
+   }, [userDataFromState])
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        const userName = document.getElementsByName('name')[0].value;
-        const userEmail = document.getElementsByName('email')[0].value;
-        const userPassword = document.getElementsByName('password')[0].value;
-        const user = {
-            userName,
-            userEmail,
-            userPassword,
-        };
-        const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
-        if(currentUserData
-            && (currentUserData.userName === user.userName && currentUserData.userPassword === user.userPassword)) {
-            dispatch(setValidUserAction(
-                {
-                    userName: user.userName,
-                    userEmail: user.userEmail,
-                }));
-            navigate('/categoryList');
-        } else {
-            dispatch(setNotValidUserAction());
-            setValidateError(REVIEW_LOGIN_PAGE.INVALID_VALUES_ERROR_MASSAGE);
+        if(!newUserRegistration) {
+            // const userName = document.getElementsByName('name')[0].value;
+            const userEmail = document.getElementsByName('email')[0].value;
+            const userPassword = document.getElementsByName('password')[0].value;
+            const user = {
+                // userName,
+                userEmail,
+                userPassword,
+            };
+            const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
+            if(currentUserData
+                && (
+                    // currentUserData.userName === user.userName &&
+                    currentUserData.userPassword === user.userPassword)) {
+                dispatch(setValidUserAction(
+                    {
+                        // userName: user.userName,
+                        userEmail: user.userEmail,
+                    }));
+                navigate('/categoryList');
+            } else {
+                dispatch(setNotValidUserAction());
+                setValidateError(REVIEW_LOGIN_PAGE.INVALID_VALUES_ERROR_MASSAGE);
+            }
         }
+        if(newUserRegistration) {
+            const headers = {
+
+            }
+        }
+
     };
+
+   const handleRedirectUser = () => {
+       if(!newUserRegistration) {
+           setNewUserRegistration(true);
+       }
+       if(newUserRegistration) {
+           setNewUserRegistration(false);
+       }
+   };
 
     return (
         <StyledLoginPage>
@@ -126,13 +148,16 @@ const LoginPage = () => {
                 <Formik className={'login-page'}>
                     <Form className={'form'} onSubmit={handleOnSubmit}>
                         <h2 className={'title'}>{REVIEW_LOGIN_PAGE.FORM_TITLE}</h2>
-                        <FormikInput name={'name'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_NAME_INPUT} type={'text'}/>
+                        {newUserRegistration &&
+                            <FormikInput name={'name'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_NAME_INPUT} type={'text'}/>
+                        }
                         <FormikInput name={'email'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_EMAIL_INPUT} type={'email'}/>
                         <FormikInput name={'password'} placeholder={REVIEW_LOGIN_PAGE.PLACEHOLDER_TO_PASSWORD_INPUT} type={'password'}/>
                         {validateError ? <div className={'validate-error-box'}>{validateError}</div> : null}
-                        <button type={'submit'} className={'button'}>{REVIEW_LOGIN_PAGE.BUTTON_INNER_TEXT}</button>
+                        <button type={'submit'} className={'button'}>{!newUserRegistration ? REVIEW_LOGIN_PAGE.BUTTON_INNER_TEXT_LOGIN : REVIEW_LOGIN_PAGE.BUTTON_INNER_TEXT_SIGN_UP}</button>
                         <div className={'help'}>
-                            <p className={'text'}>{REVIEW_LOGIN_PAGE.LINK_TO_SIGH_UP}</p>
+                            <p className={'text'} onClick={handleRedirectUser}>{!newUserRegistration ?
+                                REVIEW_LOGIN_PAGE.LINK_TO_SIGH_UP : REVIEW_LOGIN_PAGE.LINK_TO_LOGIN}</p>
                         </div>
                     </Form>
                 </Formik>

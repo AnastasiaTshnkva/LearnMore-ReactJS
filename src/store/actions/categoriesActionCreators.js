@@ -9,22 +9,22 @@ export const CORRECT_CATEGORY = 'CORRECT_CATEGORY';
 export const setCategoriesRequestAction = () => {
     return {
         type: SET_CATEGORIES_REQUEST
-    }
+    };
 };
 
 export const getCategoriesSuccessAction = (value) => {
     return {
         type: GET_CATEGORIES_SUCCESS,
         payload: value,
-    }
-}
+    };
+};
 
 export const getCategoriesFailureAction = (value) => {
     return {
         type: GET_CATEGORIES_FAILURE,
         payload: value,
-    }
-}
+    };
+};
 
 export const createNewCategoriesAction = (value) => {
     return {

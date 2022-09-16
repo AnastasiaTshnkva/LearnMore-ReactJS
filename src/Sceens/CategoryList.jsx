@@ -2,19 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
-import {Link, useParams} from 'react-router-dom';
-import {
-    fetchBundleData,
-    fetchBundleOfCardsData,
-    fetchCategoryData,
-} from 'api/fakeServer/Api';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import AddButton from 'Components/AddButton';
-import {
-    createNewCategoriesAction,
-    setCategoriesRequestAction,
-    getCategoriesSuccessAction,
-    getCategoriesFailureAction,
-} from 'store/actions/categoriesActionCreators'
 import {
     showCategoriesDataIsLoading,
     showCategoriesDataError,
@@ -26,6 +16,8 @@ import ModalWindowCreate from 'Components/ModalWindowCreate';
 import FormikInput from 'Components/FormikFilds/FormikInput';
 import { REVIEW_CATEGORY_LIST } from 'constants/reviews/reviewCategoryList';
 import getCategoriesThink from 'store/thunk/categories/getCategoriesThink';
+import { fetchAddCategoryToServer } from 'api/fakeServer/Api';
+import postNewCategoryThunk from 'store/thunk/categories/postNewCategory';
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -65,60 +57,35 @@ const CategoryList = () => {
     const categoryDataFromStore = useSelector(showCategoriesDataFromStore);
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
-    const [firstName, setFirstName] = useState('');
-
-
-    // const getCategoryDataFromServer = () => {
-    //     fetchCategoryData()
-    //         .then(({data}) => {
-    //             dispatch(getCategoriesSuccessAction(data));
-    //         }).catch((error) => {
-    //             dispatch(getCategoriesFailureAction(error));
-    //     });
-    // };
 
     useEffect(() => {
         dispatch(getCategoriesThink());
-        // dispatch(setCategoriesRequestAction());
-        // getCategoryDataFromServer()
     }, []);
 
     useEffect(() => {
         setCategoriesData(categoryDataFromStore)
     }, [categoryDataFromStore]);
 
-    const handlePut = () => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                categoryID: '1',
-                categoryName: 'English',
-                categoryDescription: 'Here I am trying to learn more English words',
-                userID: '1'
-            })
-        };
-        fetch('http://localhost:3004/categories', requestOptions)
-            .then(async response => {
-                const data = await response.json();
-                console.log(response);
-                // if (!response.ok) {
-                //     const error = (data && data.message) || response.status;
-                //     return Promise.reject(error);
-                // }
+    const handleAddCategory = () => {
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+            const newCategory = {
+                id: uuidv4(),
+                categoryID: Date.now(),
+                categoryName: categoryName,
+                categoryDescription: categoryDescription,
+                userID: '',
+            }
+        fetchAddCategoryToServer(newCategory, headers)
+            .then(({data}) => {
+                postNewCategoryThunk();
             })
             .catch(error => {
-                console.error('There was an error!', error);
+                console.error(error);
             });
-    }
-
-    const handleAddCategory = () => {
-            const newCategory = {
-                'categoryID': Date.now(),
-                'categoryName': categoryName,
-                'categoryDescription': categoryDescription,
-            }
-            dispatch(createNewCategoriesAction([...categoriesData, newCategory]));
+        //     dispatch(postNewCategoryThunk(newCategory, headers));
+            dispatch(getCategoriesThink());
             setCategoryName('');
             setCategoryDescription('');
     };
@@ -154,7 +121,7 @@ const CategoryList = () => {
 
     return (
         <StyledCategoryList>
-            <button type={'button'} onClick={handlePut}>hjk</button>
+            {/*<button type={'button'} onClick={handlePut}>hjk</button>*/}
             {/*<MyContext.Consumer>*/}
             {/*    {value => (*/}
             {/*        <button type={'button'} onClick={() => {*/}
@@ -197,8 +164,6 @@ const CategoryList = () => {
             <ul className={'category__list'}>
                 {getCategoriesList()}
             </ul>
-
-
         </StyledCategoryList>
     )
 }

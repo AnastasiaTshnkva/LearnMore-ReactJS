@@ -9,7 +9,7 @@ import {
     DELETE_CARD,
     CORRECT_CARD,
     CORRECT_BUNDLE,
-} from "../actions/bundleOfCardsCreators";
+} from '../actions/bundleOfCardsCreators';
 
 
 const initState = {

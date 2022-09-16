@@ -1,20 +1,25 @@
-import {fetchBundleOfCardsData} from "../../../api/fakeServer/Api";
+import {fetchBundleOfCardsData, fetchCurrentBundleData} from "../../../api/fakeServer/Api";
 import {
     getBundleOfCardFailureAction,
-    getBundleOfCardSuccessAction,
-    setBundleOfCardsRequestAction
+    getBundleOfCardSuccessAction, getCurrentBundleFailureAction, getCurrentBundleSuccessAction,
+    setBundleOfCardsRequestAction, setCurrentBundleRequestAction
 } from "../../actions/bundleOfCardsCreators";
+import {
+    getBundlesFailureAction,
+    getBundlesSuccessAction,
+    setBundlesRequestAction
+} from '../../actions/bunldlesActionCreators';
 
 const getCurrentBundleThunk = (bundleID) => {
     return dispatch => {
-        dispatch(setBundleOfCardsRequestAction());
+        dispatch(setCurrentBundleRequestAction());
 
-        fetchBundleOfCardsData(bundleID)
+        fetchCurrentBundleData(bundleID)
             .then(({data}) => {
-                dispatch(getBundleOfCardSuccessAction(data));
+                dispatch(getCurrentBundleSuccessAction(data));
             })
             .catch((error) => {
-                dispatch(getBundleOfCardFailureAction(error))
+                dispatch(getCurrentBundleFailureAction(error))
             })
     };
 };

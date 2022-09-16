@@ -1,32 +1,37 @@
 {
-  "categories" : [
+  "categories": [
     {
+      "id": "1",
       "categoryID": "1",
       "categoryName": "English",
       "categoryDescription": "Here I am trying to learn more English words",
       "userID": "1"
     },
     {
+      "id": "2",
       "categoryID": "2",
       "categoryName": "History",
       "categoryDescription": "Here I am trying to learn more about space",
       "userID": "1"
     },
     {
+      "id": "3",
       "categoryID": "3",
       "categoryName": "History",
       "categoryDescription": "for dates",
       "userID": "2"
     },
     {
+      "id": "4",
       "categoryID": "4",
       "categoryName": "English",
       "categoryDescription": "for english words",
       "userID": "2"
     }
   ],
-  "bundles" : [
+  "bundles": [
     {
+      "id": "1",
       "bundleID": "1",
       "bundleName": "Animals",
       "bundleDescription": "animals",
@@ -35,6 +40,7 @@
       "categoryName": "English"
     },
     {
+      "id": "2",
       "bundleID": "2",
       "bundleName": "Appearance",
       "bundleDescription": "Appearance",
@@ -43,6 +49,7 @@
       "categoryName": "English"
     },
     {
+      "id": "3",
       "bundleID": "3",
       "bundleName": "Space",
       "bundleDescription": "dates",
@@ -50,131 +57,144 @@
       "userID": "1",
       "categoryName": "History"
     }
-     ],
-
+  ],
   "cards": [
     {
+      "id": "1",
       "cardID": "1",
       "cardName": "cat",
       "cardDecoding": "кот",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "2",
       "cardID": "2",
       "cardName": "dog",
       "cardDecoding": "собака",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "3",
       "cardID": "3",
       "cardName": "horse",
       "cardDecoding": "лошадь",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "4",
       "cardID": "4",
       "cardName": "rabbit",
       "cardDecoding": "кролик",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "5",
       "cardID": "5",
       "cardName": "parrot",
       "cardDecoding": "попугай",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "6",
       "cardID": "6",
       "cardName": "fish",
       "cardDecoding": "рыба",
-      "bundlesID":"1",
+      "bundlesID": "1",
       "userID": "1",
       "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
+      "id": "7",
       "cardID": "7",
       "cardName": "how old is the earth",
       "cardDecoding": "4.543 billion years",
-      "bundlesID":"3",
+      "bundlesID": "3",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "8",
       "cardID": "8",
       "cardName": "when the first man went to space",
       "cardDecoding": "1961",
-      "bundlesID":"3",
+      "bundlesID": "3",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "9",
       "cardID": "9",
       "cardName": "how many humans have been on the moon",
       "cardDecoding": "12",
-      "bundlesID":"3",
+      "bundlesID": "3",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "10",
       "cardID": "10",
       "cardName": "nouse",
       "cardDecoding": "нос",
-      "bundlesID":"2",
+      "bundlesID": "2",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "11",
       "cardID": "11",
       "cardName": "mouth",
       "cardDecoding": "рот",
-      "bundlesID":"2",
+      "bundlesID": "2",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "12",
       "cardID": "12",
       "cardName": "eye",
       "cardDecoding": "глаз",
-      "bundlesID":"2",
+      "bundlesID": "2",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "13",
       "cardID": "13",
       "cardName": "mustache",
       "cardDecoding": "усы",
-      "bundlesID":"2",
+      "bundlesID": "2",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
     },
     {
+      "id": "14",
       "cardID": "14",
       "cardName": "eyelashes",
       "cardDecoding": "ресницы",
-      "bundlesID":"2",
+      "bundlesID": "2",
       "userID": "1",
       "bundlesName": "Space",
       "answersCounter": 0
@@ -182,12 +202,14 @@
   ],
   "users": [
     {
+      "id": "2",
       "cardID": "2",
       "userName": "Sasha",
       "userEmail": "sasha@mail.ru",
       "userPassword": "321"
     },
     {
+      "id": "1",
       "cardID": "1",
       "userName": "Nastya",
       "userEmail": "nastya@mail.ru",

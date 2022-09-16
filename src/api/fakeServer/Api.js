@@ -2,6 +2,7 @@ import fakeServerInstance from "../instance";
 
 //category
 export const fetchCategoryData = () => fakeServerInstance.get('/categories');
+export const fetchAddCategoryToServer = (newCategory, headers) => fakeServerInstance.post('/categories', newCategory, headers)
 
 //bundle
 export const fetchBundlesData = (categoryID) => fakeServerInstance.get(`/bundles/?categoryID=${categoryID}`);
@@ -16,4 +17,4 @@ export const fetchCardsData = () => fakeServerInstance.get('/cards');
 
 //users
 export const fetchUsersDate = () => fakeServerInstance.get('/users');
-export const loginUser = (name, login, password) => fakeServerInstance.post('/login', {name, login, password})
+export const fetchCreateNewUser = (newUser, headers) => fakeServerInstance.post('/login', newUser, headers);

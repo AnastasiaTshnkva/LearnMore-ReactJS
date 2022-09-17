@@ -2,7 +2,7 @@ import fakeServerInstance from "../instance";
 
 //category
 export const fetchCategoryData = () => fakeServerInstance.get('/categories');
-export const fetchAddCategoryToServer = (newCategory, headers) => fakeServerInstance.post('/categories', newCategory, headers)
+export const fetchAddCategoryToServer = (newCategory, headers) => fakeServerInstance.post('/categories', newCategory, headers);
 
 //bundle
 export const fetchBundlesData = (categoryID) => fakeServerInstance.get(`/bundles/?categoryID=${categoryID}`);

@@ -1,14 +1,17 @@
-import React from 'react';
-import  { MyContext } from 'HOC/GlobalModalProvider';
+import React from 'react'
 
-const WithModalContext = (Component, props) => {
-    return (
-        <MyContext.Consumer>
-            {updateModalContext &&
-                <Component {...props} updateModalContext={updateModalContext}/>
-            }
-        </MyContext.Consumer>
-    )
-};
+import { MyContext } from 'HOC/GlobalModalProvider';
 
-export default WithModalContext;
+const withModalContext = (Component, props) => {
+    return () => {
+            return (
+                <MyContext.Consumer>
+                    {updateModalContext => (
+                        <Component {...props} updateModalContext={updateModalContext}/>
+                    )}
+                </MyContext.Consumer>
+            )
+        }
+}
+
+export default withModalContext;

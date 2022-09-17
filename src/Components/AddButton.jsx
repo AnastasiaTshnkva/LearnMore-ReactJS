@@ -31,7 +31,12 @@ const AddButton = (props) => {
 AddButton.propTypes = {
     type: PropTypes.string.isRequired,
     onClickProps: PropTypes.func,
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
 };
+
+AddButton.defaultProps = {
+    type: 'button',
+    title: 'add',
+}
 
 export default AddButton;

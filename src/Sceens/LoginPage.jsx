@@ -127,8 +127,8 @@ const LoginPage = () => {
         }
         if(newUserRegistration) {
             const headers = {
-
-            }
+                'Content-Type': 'application/json',
+            };
         }
 
     };

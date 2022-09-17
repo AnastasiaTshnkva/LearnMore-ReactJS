@@ -2,7 +2,8 @@ import {
     SET_CATEGORIES_REQUEST,
     GET_CATEGORIES_SUCCESS,
     GET_CATEGORIES_FAILURE,
-    CREATE_NEW_CATEGORY,
+    CREATE_NEW_CATEGORY_SUCCESSFUL,
+    CREATE_NEW_CATEGORY_ERROR,
     DELETE_CATEGORY,
     CORRECT_CATEGORY,
 } from "../actions/categoriesActionCreators";
@@ -35,10 +36,16 @@ const categoriesReducer = (state = initState, action) => {
                 error: action.payload,
             };
 
-        case CREATE_NEW_CATEGORY:
+        case CREATE_NEW_CATEGORY_SUCCESSFUL:
             return {
                 ...state,
                 categoriesData: action.payload,
+            };
+
+        case CREATE_NEW_CATEGORY_ERROR:
+            return {
+                ...state,
+                error: action.payload,
             };
 
         case DELETE_CATEGORY:

@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from "react-redux";
-import {fetchBundlesData, fetchBundlesDate} from "../api/fakeServer/Api";
-import {
-    getBundlesFailureAction,
-    getBundlesSuccessAction,
-    setBundlesRequestAction
-} from "store/actions/bunldlesActionCreators";
-import { Form, Formik } from "formik";
-import { Link, useParams } from "react-router-dom";
-import FormikInput from "../Components/FormikFilds/FormikInput";
-import AddButton from "../Components/AddButton";
-import { createNewCategoriesAction } from "store/actions/categoriesActionCreators";
-import { showBundlesFromStore } from "store/selectors/selectors";
-import getBundlesThunk from "../store/thunk/bundles/getBundlesThunk";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import AddButton from 'Components/AddButton';
+import { createNewCategorySuccessfulAction } from 'store/actions/categoriesActionCreators';
+import { showBundlesFromStore } from 'store/selectors/selectors';
+import getBundlesThunk from 'store/thunk/bundles/getBundlesThunk';
+import withModalContext from 'HOC/withModalContext';
+import { REVIEW_BUNDLES_LIST } from 'constants/reviews/reviewBundlesList';
+import ModalWindowCreate from 'Components/ModalWindowCreate';
+
 
 const StyledBundlesList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .bundle{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -41,12 +40,13 @@ const StyledBundlesList = styled.div`
         text-align: center;
         font-size: 22px;
         line-height: 26px;
+        color: ${props => props.theme.textColor};
       }
     }
   }
 `
 
-const BundlesList = () => {
+const BundlesList = (props) => {
     const dispatch = useDispatch();
     const { categoryID } = useParams();
     const [bundlesData, setBundlesData] = useState([]);
@@ -68,7 +68,7 @@ const BundlesList = () => {
             "bundleName": setBundleName,
             "bundleDescription": setBundleDescription,
         }
-        dispatch(createNewCategoriesAction([...bundlesData, newBundle]));
+        dispatch(createNewCategorySuccessfulAction([...bundlesData, newBundle]));
         setBundleName('');
         setBundleDescription('');
     };
@@ -92,7 +92,9 @@ const BundlesList = () => {
                 bundlesData.map((data) => {
                     return(
                         <div key={data.bundleID} className={'bundle-box'}>
-                            <Link to={`/categoryList/${categoryID}/bundle/${data.bundleID}`} className={'description'}>{data.bundleName}</Link>
+                            <Link to={`/categoryList/${categoryID}/bundle/${data.bundleID}`}
+                                  style={{ textDecoration: 'none' }}
+                                  className={'description'}>{data.bundleName}</Link>
                         </div>
                     )
                 })
@@ -102,15 +104,27 @@ const BundlesList = () => {
 
     return (
         <StyledBundlesList>
-            <Formik className={'add-category-block'}>
-                <Form className={'add-category-block'}>
-                    <FormikInput type={'text'} value={bundleName} name={'addBundleNameInput'}
-                    onChangeProps={handleOnChangeBundleNameInput} placeholder={'input new bundle name'}/>
-                    <FormikInput type={'text'} value={bundleDescription} name={'addBundleDescriptionInput'}
-                    onChangeProps={handleOnChangeBundleDescriptionInput} placeholder={'input new bundle description'}/>
-                    <AddButton type={'button'} onClickProps={handleAddBundle} title={'Add new category'}/>
-                </Form>
-            </Formik>
+            <AddButton type={'button'} title={REVIEW_BUNDLES_LIST.ADD_BUTTON_TITLE}
+                       onClickProps={() => {
+                           props.updateModalContext(
+                               <ModalWindowCreate
+                                   blockTitle={REVIEW_BUNDLES_LIST.MODAL_WINDOW_TITLE}
+                                   inputNamePlaceholder={REVIEW_BUNDLES_LIST.MODAL_WINDOW_INPUT_PLACEHOLDER}
+                                   addButtonTitle={REVIEW_BUNDLES_LIST.ADD_NEW_CATEGORY_BUTTON}
+                                   handleAddFunc={handleAddCategory}
+                                   updateModalContext={props.updateModalContext}
+                                   handleOnChangeCategoryNameInput={handleOnChangeCategoryNameInput}
+                               />)
+                       }}/>
+            {/*<Formik className={'add-category-block'}>*/}
+            {/*    <Form className={'add-category-block'}>*/}
+            {/*        <FormikInput type={'text'} value={bundleName} name={'addBundleNameInput'}*/}
+            {/*        onChangeProps={handleOnChangeBundleNameInput} placeholder={'input new bundle name'}/>*/}
+            {/*        <FormikInput type={'text'} value={bundleDescription} name={'addBundleDescriptionInput'}*/}
+            {/*        onChangeProps={handleOnChangeBundleDescriptionInput} placeholder={'input new bundle description'}/>*/}
+            {/*        <AddButton type={'button'} onClickProps={handleAddBundle} title={'Add new category'}/>*/}
+            {/*    </Form>*/}
+            {/*</Formik>*/}
             <div className={'bundle'}>
                 {getBundlesList()}
             </div>
@@ -118,4 +132,4 @@ const BundlesList = () => {
     );
 }
 
-export default BundlesList;
+export default withModalContext(BundlesList);

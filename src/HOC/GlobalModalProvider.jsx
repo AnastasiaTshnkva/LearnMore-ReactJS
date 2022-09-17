@@ -18,19 +18,26 @@ const StyledModalProvider = styled.div`
     position: relative;
     min-width: 500px;
     background-color: ${props => {return props.theme.cardColor}};
+    border-radius: 5px;
   }
 `
 
 const GlobalModalProvider = (props) => {
     const [modalContext, setModalContext] = useState(false);
 
-    // console.log(props);
-    // console.log(modalContext);
+    const updateModalContext = (newModalContext) => {
+        setModalContext(newModalContext);
+    };
 
     return (
         <MyContext.Provider value={(modalContext) => {setModalContext(modalContext)}}>
             {modalContext &&
-                <StyledModalProvider>
+                <StyledModalProvider
+                //     onClick={() => {
+                //     updateModalContext(false);
+                // }
+                // }
+                >
                     <div className={'modal-environment'}>
                         <div className={'modal-window'}>
                             {modalContext}

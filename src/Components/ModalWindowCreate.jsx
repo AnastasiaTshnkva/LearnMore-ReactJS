@@ -1,72 +1,74 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {Form, Formik} from 'formik';
-import {REVIEW_CATEGORY_LIST} from 'constants/reviews/reviewCategoryList';
-import FormikInput from 'Components/FormikFilds/FormikInput';
+import IcomoonReact from 'icomoon-react';
+import PropTypes from 'prop-types';
 import AddButton from 'Components/AddButton';
-import {MyContext} from 'HOC/GlobalModalProvider';
+import iconSet from 'assets/Icons/selection.json';
 
 const StyledModalWindowCreate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  .title {
-    text-align: center;
-    font-size: 24px;
-    line-height: 26px;
-    font-weight: 500;
-  }
-  .form {
+  .modal-header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
+    .title {
+      text-align: center;
+      font-size: 24px;
+      line-height: 26px;
+      font-weight: 500;
+    }
+    .close-but {
+      background-color: transparent;
+      border: none;
+    }
   }
+  .modal-input {
+    margin-top: 25px;
+    width: 100%;
+    border: 1px solid ${props => props.theme.inputBorderColor};
+    padding: 7px;
+    border-radius: 3px;
+    &:focus {
+      outline: none;
+    }
+  }
+
 `
 
 const ModalWindowCreate = (props) => {
-    const [categoryName, setCategoryName] = useState('');
-    const [categoryDescription, setCategoryDescription] = useState('');
-
-    const handleAddCategory = () => {
-        const newCategory = {
-            "categoryID": Date.now(),
-            "categoryName": categoryName,
-            "categoryDescription": categoryDescription,
-        }
-        // dispatch(createNewCategoriesAction([...categoriesData, newCategory]));
-        setCategoryName('');
-        setCategoryDescription('');
-    };
-
-    const handleOnChangeCategoryNameInput = (event) => {
-        return setCategoryName(event.target.value);
-    };
-
-    const handleOnChangeCategoryDescriptionInput = (event) => {
-        return setCategoryDescription(event.target.value);
-    };
+    const [newName, setNewName] = useState('');
+    const [newDescription, setNewDescription] = useState('');
 
     return (
-        <MyContext.Consumer>
-            {modalContext &&
-                <StyledModalWindowCreate>
-                    <div className={'title'}>{REVIEW_CATEGORY_LIST.MODAL_WINDOW_TITLE}</div>
-                    <Formik className={'form'}>
-                        <Form className={'form'}>
-                            <FormikInput type={'text'} value={categoryName} name={'addCategoryNameInput'}
-                            onChangeProps={handleOnChangeCategoryNameInput} placeholder={'input new category name'}/>
-                            <FormikInput type={'text'} value={categoryDescription} name={'addCategoryDescriptionInput'}
-                            onChangeProps={handleOnChangeCategoryDescriptionInput} placeholder={'input new category description'}/>
-                            <AddButton type={'button'} onClickProps={() => {
-                                handleAddCategory()
-                                modalContext(false);
-                            }} title={REVIEW_CATEGORY_LIST.ADD_NEW_CATEGORY_BUTTON}/>
-                        </Form>
-                    </Formik>
-                </StyledModalWindowCreate>
+        <StyledModalWindowCreate>
+            <div className={'modal-header'}>
+                <p className={'title'}>{props.blockTitle}</p>
+                <button type={'button'} onClick={() => {props.updateModalContext(false)}} className={'close-but'}>
+                    <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+                </button>
+            </div>
+            <input onChange={(event) => setNewName(event.target.value)}
+                   value={newName} className={'modal-input'} placeholder={props.inputNamePlaceholder}/>
+            {props.inputDescriptionPlaceholder &&
+                <input onChange={(event) => setNewDescription(event.target.value)}
+                       value={newDescription} className={'modal-input'} placeholder={props.inputDescriptionPlaceholder}/>
             }
-        </MyContext.Consumer>
-
+            <AddButton className={'button'} title={'Add new category'} type={'button'}
+                       onClickProps={() => props.handleAddFunc(newName)}>{props.addButtonTitle}</AddButton>
+        </StyledModalWindowCreate>
     )
+
+};
+
+ModalWindowCreate.propTypes = {
+    blockTitle: PropTypes.string,
+    updateModalContext: PropTypes.func.isRequired,
+    inputNamePlaceholder: PropTypes.string,
+    inputDescriptionPlaceholder: PropTypes.string,
+    handleAddFunc:PropTypes.func.isRequired,
 };
 
 export default ModalWindowCreate;

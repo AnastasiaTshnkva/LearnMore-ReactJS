@@ -12,7 +12,6 @@ const StyledCategoryItem = styled.div `
 
 const CategoryItem = (props) => {
 
-    console.log(props);
 
 
     return (

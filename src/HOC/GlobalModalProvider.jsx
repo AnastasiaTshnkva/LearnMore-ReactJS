@@ -33,10 +33,6 @@ const GlobalModalProvider = (props) => {
         <MyContext.Provider value={(modalContext) => {setModalContext(modalContext)}}>
             {modalContext &&
                 <StyledModalProvider
-                //     onClick={() => {
-                //     updateModalContext(false);
-                // }
-                // }
                 >
                     <div className={'modal-environment'}>
                         <div className={'modal-window'}>

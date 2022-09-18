@@ -56,6 +56,8 @@ const BundlesList = (props) => {
     const [bundleDescription, setBundleDescription] = useState();
     const bundlesDataFromStore = useSelector(showBundlesFromStore);
 
+    console.log(props)
+
     useEffect(() => {
         dispatch(getBundlesThunk(categoryID));
     }, []);

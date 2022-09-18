@@ -1,8 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
-import { Outlet } from "react-router-dom";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import GlobalModalProvider from "HOC/GlobalModalProvider";
 
 
 const StyledMainLayout = styled.div`
@@ -22,14 +22,16 @@ const StyledMainLayout = styled.div`
 
 const MainLayout = (props) => {
     return (
-        <StyledMainLayout>
-            <Header/>
-            <div className={'main'}>
-                {/*<Outlet/>*/}
-                {props.children}
-            </div>
-            <Footer/>
-        </StyledMainLayout>
+        <GlobalModalProvider>
+            <StyledMainLayout>
+                <Header/>
+                <div className={'main'}>
+                    {props.children}
+                </div>
+                <Footer/>
+            </StyledMainLayout>
+        </GlobalModalProvider>
+
     );
 }
 

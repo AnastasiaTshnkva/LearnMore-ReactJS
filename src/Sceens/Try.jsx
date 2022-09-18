@@ -91,7 +91,9 @@ const StyledBundleOfCards = styled.div`
   }
 `
 
-const BundleOfCards = (props) => {
+const Try = (props) => {
+    console.log(props);
+
     const dispatch = useDispatch();
     const { categoryID } = useParams();
     const { bundleID } = useParams();
@@ -166,7 +168,7 @@ const BundleOfCards = (props) => {
             const activeCard = cardsData[index];
             return (
                 <MemoryCard keyProps={activeCard.cardID} activeCardName={activeCard.cardName}
-                activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}/>
+                            activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}/>
             );
         }
         return <div>No data</div>
@@ -227,8 +229,9 @@ const BundleOfCards = (props) => {
                 </Link>
 
             </div>
+
         </StyledBundleOfCards>
     )
-}
+};
 
-export default withModalContext(BundleOfCards);
+export default withModalContext(Try);

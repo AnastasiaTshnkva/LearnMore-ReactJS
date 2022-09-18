@@ -64,6 +64,8 @@ const CategoryList = (props) => {
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
 
+    console.log('props is', props);
+
     useEffect(() => {
         dispatch(getCategoriesThink());
     }, []);

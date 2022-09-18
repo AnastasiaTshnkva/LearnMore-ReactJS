@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import IcomoonReact from "icomoon-react";
 import iconSet from "../assets/Icons/selection.json";
 
-export const MyContext = createContext('oops');
+export const MyContext = createContext('oops, default context error');
 
 const StyledModalProvider = styled.div`
   display: flex;

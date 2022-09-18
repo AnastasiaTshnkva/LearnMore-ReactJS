@@ -25,8 +25,8 @@ const AddButton = (props) => {
                          onClick={props.onClickProps ? props.onClickProps : null}>
             {props.title}
         </StyledAddButton>
-    )
-}
+    );
+};
 
 AddButton.propTypes = {
     type: PropTypes.string.isRequired,

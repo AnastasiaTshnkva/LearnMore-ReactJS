@@ -35,7 +35,6 @@ const StyledModalWindowCreate = styled.div`
       outline: none;
     }
   }
-
 `
 
 const ModalWindowCreate = (props) => {
@@ -57,10 +56,9 @@ const ModalWindowCreate = (props) => {
                        value={newDescription} className={'modal-input'} placeholder={props.inputDescriptionPlaceholder}/>
             }
             <AddButton className={'button'} title={'Add new category'} type={'button'}
-                       onClickProps={() => props.handleAddFunc(newName)}>{props.addButtonTitle}</AddButton>
+                       onClickProps={() => props.handleAddFunc(newName, newDescription)}>{props.addButtonTitle}</AddButton>
         </StyledModalWindowCreate>
     )
-
 };
 
 ModalWindowCreate.propTypes = {
@@ -69,6 +67,7 @@ ModalWindowCreate.propTypes = {
     inputNamePlaceholder: PropTypes.string,
     inputDescriptionPlaceholder: PropTypes.string,
     handleAddFunc:PropTypes.func.isRequired,
+    addButtonTitle: PropTypes.string,
 };
 
 export default ModalWindowCreate;

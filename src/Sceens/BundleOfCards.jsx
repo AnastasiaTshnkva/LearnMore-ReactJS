@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    fetchBundleOfCardsData,
-    fetchCurrentBundleData,
-} from 'api/fakeServer/Api';
+import { v4 as uuidv4 } from 'uuid';
 import { REVIEW_BUNDLE_OF_CARDS } from 'constants/reviews/reviewBandleOfCards';
 import AddButton from 'Components/AddButton';
 import {
@@ -16,18 +13,13 @@ import {
     showCardsDataError,
     showCardsDataFromStore,
 } from 'store/selectors/selectors';
-import {
-    setCurrentBundleRequestAction,
-    getCurrentBundleSuccessAction,
-    getCurrentBundleFailureAction,
-    setBundleOfCardsRequestAction,
-    getBundleOfCardSuccessAction,
-    getBundleOfCardFailureAction,
-} from 'store/actions/bundleOfCardsCreators';
 import MemoryCard from 'Components/MemoryCard';
 import { ROUTES_NAMES } from 'constants/routes/routes';
-import getCurrentBundleThunk from "../store/thunk/bundles/getCurrentBundleThunk";
-import getCardsThunk from "../store/thunk/cards/getCardsThunk";
+import getCurrentBundleThunk from 'store/thunk/bundles/getCurrentBundleThunk';
+import getCardsThunk from 'store/thunk/cards/getCardsThunk';
+import ModalWindowCreate from 'Components/ModalWindowCreate';
+import withModalContext from 'HOC/withModalContext';
+import postNewCardThunk from 'store/thunk/cards/postNewCardThunk';
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -106,6 +98,8 @@ const BundleOfCards = (props) => {
     const [cardsData, setCardsData] = useState([]);
     const [currentBundleData, setCurrentBundleData] = useState([]);
     const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const [cardName, setCardName] = useState('');
+    const [cardDecoding, setCardDecoding] = useState('');
 
     const currentBundleIsLoading = useSelector(showCurrentBundleDataIsLoading);
     const currentBundleDataError = useSelector(showCurrentBundleDataError);
@@ -113,6 +107,8 @@ const BundleOfCards = (props) => {
     const cardsDataIsLoading = useSelector(showCardsDataIsLoading);
     const cardsDataError = useSelector(showCardsDataError);
     const cardsDataFromStore = useSelector(showCardsDataFromStore);
+
+    console.log('props is', props);
 
     useEffect(() => {
         dispatch(getCurrentBundleThunk(bundleID));
@@ -126,8 +122,6 @@ const BundleOfCards = (props) => {
     useEffect(() => {
         setCardsData(cardsDataFromStore);
     }, [cardsDataFromStore]);
-
-    console.log(currentBundleDataFromStore);
 
     const handleOnClickNextCardButton = (event) => {
         if(activeCardIndex < cardsData.length - 1) {
@@ -178,6 +172,21 @@ const BundleOfCards = (props) => {
         return <div>No data</div>
     };
 
+    const handleAddCard = (newCardName, newCardDecoding) => {
+        const newCard = {
+            id: uuidv4(),
+            cardID: Date.now(),
+            cardName: newCardName,
+            CardDecoding: newCardDecoding,
+            bundleID: bundleID,
+            categoryID: categoryID,
+        };
+        dispatch(postNewCardThunk(cardsData, newCard));
+        dispatch(getCardsThunk());
+        setCardName('');
+        setCardDecoding('');
+    }
+
     return (
         <StyledBundleOfCards>
             <div></div>
@@ -186,7 +195,18 @@ const BundleOfCards = (props) => {
                     {getCurrentBundle()}
                     <p className={'cards-counter'}>{REVIEW_BUNDLE_OF_CARDS.NUMBER_OF_CARDS}<span className={'counter'}>{cardsData.length}</span></p>
                 </div>
-                <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.ADD_NEW_CARD_BUTTON_INNER_TEXT}/>
+                    <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.ADD_NEW_CARD_BUTTON_INNER_TEXT}
+                               onClickProps={() => {
+                                   props.updateModalContext(
+                                       <ModalWindowCreate
+                                           blockTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_TITLE}
+                                           inputNamePlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_NAME_INPUT_PLACEHOLDER}
+                                           inputDescriptionPlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_DECODING_INPUT_PLACEHOLDER}
+                                           updateModalContext={props.updateModalContext}
+                                           handleAddFunc={handleAddCard}
+                                           addButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_ADD_BUTTON}/>
+                                   )
+                               }}/>
             </div>
             <div className={'cards'}>
                 <div className={'cards__box'}>
@@ -211,4 +231,4 @@ const BundleOfCards = (props) => {
     )
 }
 
-export default BundleOfCards;
+export default withModalContext(BundleOfCards);

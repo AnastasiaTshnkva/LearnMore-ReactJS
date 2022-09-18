@@ -2,14 +2,18 @@ import {
     createNewCategoryErrorAction,
     createNewCategorySuccessfulAction
 } from '../../actions/categoriesActionCreators';
-import {fetchAddCategoryToServer, fetchUsersDate} from '../../../api/fakeServer/Api';
+import {fetchAddCategoryToServer, fetchAddNewCategoryToServer, fetchUsersDate} from '../../../api/fakeServer/Api';
 
 
-const postNewCategoryThunk = (categoriesData, newCategory, headers) => {
+const postNewCategoryThunk = (categoriesData, newCategory) => {
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+
     return dispatch => {
-        fetchAddCategoryToServer(newCategory, headers)
+        fetchAddNewCategoryToServer(newCategory, headers)
             .then(({data}) => {
-                dispatch(createNewCategorySuccessfulAction([...categoriesData, newCategory]));
+                dispatch(createNewCategorySuccessfulAction([...categoriesData, data]));
             })
             .catch(error => {
                 dispatch(createNewCategoryErrorAction(error));

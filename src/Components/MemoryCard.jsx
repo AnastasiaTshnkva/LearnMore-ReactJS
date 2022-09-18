@@ -67,15 +67,15 @@ const MemoryCard = (props) => {
         const cardBackSide = document.getElementsByName('card-back-side')[0];
         if(!cardFrontSide.classList.contains('card__front-side__turn') &&
             !cardBackSide.classList.contains('card__back-side__turn')) {
-            console.log(true);
             cardFrontSide.classList.add('card__front-side__turn');
             cardBackSide.classList.add('card__back-side__turn');
         } else {
-            console.log(false);
             cardFrontSide.classList.remove('card__front-side__turn');
             cardBackSide.classList.remove('card__back-side__turn');
         }
     }
+
+
 
     return (
         <StyledMemoryCard key={props.keyProps} onClick={handleOClickTurn}>
@@ -101,10 +101,9 @@ const MemoryCard = (props) => {
 };
 
 MemoryCard.propTypes = {
-    keyProps: PropTypes.number.isRequired,
+    keyProps: PropTypes.string.isRequired,
     activeCardName: PropTypes.string.isRequired,
     activeCardDecoding: PropTypes.string.isRequired,
-    // onClick: PropTypes.func,
 }
 
 export default MemoryCard;

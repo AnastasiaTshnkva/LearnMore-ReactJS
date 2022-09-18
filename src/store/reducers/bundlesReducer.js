@@ -2,10 +2,11 @@ import {
     SET_BUNDLES_REQUEST,
     GET_BUNDLES_SUCCESS,
     GET_BUNDLES_FAILURE,
-    CREATE_NEW_BUNDLES,
+    CREATE_NEW_BUNDLE_SUCCESS,
+    CREATE_NEW_BUNDLE_ERROR,
     DELETE_BUNDLES,
     CORRECT_BUNDLES
-} from "../actions/bunldlesActionCreators";
+} from '../actions/bunldlesActionCreators';
 
 const initState = {
     loading: false,
@@ -35,11 +36,18 @@ const bundlesReducer = (state=initState, action) => {
                 error: action.payload,
             };
 
-        case CREATE_NEW_BUNDLES:
+        case CREATE_NEW_BUNDLE_SUCCESS:
             return {
                 ...state,
                 bundlesData: action.payload,
             };
+
+        case CREATE_NEW_BUNDLE_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
+
 
         case DELETE_BUNDLES:
             return {
@@ -54,7 +62,7 @@ const bundlesReducer = (state=initState, action) => {
             }
 
         default:
-            return {...state}
+            return {...state};
     }
 }
 

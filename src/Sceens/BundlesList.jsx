@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { Link, useParams } from 'react-router-dom';
 import AddButton from 'Components/AddButton';
-import { createNewCategorySuccessfulAction } from 'store/actions/categoriesActionCreators';
 import { showBundlesFromStore } from 'store/selectors/selectors';
 import getBundlesThunk from 'store/thunk/bundles/getBundlesThunk';
 import withModalContext from 'HOC/withModalContext';
 import { REVIEW_BUNDLES_LIST } from 'constants/reviews/reviewBundlesList';
 import ModalWindowCreate from 'Components/ModalWindowCreate';
+import postNewBundleThunk from 'store/thunk/bundles/postNewBundleThunk';
 
 
 const StyledBundlesList = styled.div`
@@ -19,6 +20,7 @@ const StyledBundlesList = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 20px;
+    margin-top: 20px;
     .bundle-box {
       display: flex;
       justify-content: center;
@@ -62,15 +64,20 @@ const BundlesList = (props) => {
         setBundlesData(bundlesDataFromStore.bundlesData);
     }, [bundlesDataFromStore.bundlesData]);
 
-    const handleAddBundle = () => {
+    const handleAddBundle = (newBundleName, newBundleDescription) => {
         const newBundle = {
-            "bundleID": Date.now(),
-            "bundleName": setBundleName,
-            "bundleDescription": setBundleDescription,
+            id: uuidv4(),
+            bundleID: Date.now(),
+            bundleName: newBundleName,
+            bundleDescription: newBundleDescription,
+            categoryID: categoryID,
+            // userID: ,
         }
-        dispatch(createNewCategorySuccessfulAction([...bundlesData, newBundle]));
+        dispatch(postNewBundleThunk(bundlesData, newBundle));
+        dispatch(getBundlesThunk(categoryID));
         setBundleName('');
         setBundleDescription('');
+        props.updateModalContext(false);
     };
 
     const handleOnChangeBundleNameInput = (event) => {
@@ -94,7 +101,8 @@ const BundlesList = (props) => {
                         <div key={data.bundleID} className={'bundle-box'}>
                             <Link to={`/categoryList/${categoryID}/bundle/${data.bundleID}`}
                                   style={{ textDecoration: 'none' }}
-                                  className={'description'}>{data.bundleName}</Link>
+                                  className={'description'}>
+                                {data.bundleName}</Link>
                         </div>
                     )
                 })
@@ -109,22 +117,13 @@ const BundlesList = (props) => {
                            props.updateModalContext(
                                <ModalWindowCreate
                                    blockTitle={REVIEW_BUNDLES_LIST.MODAL_WINDOW_TITLE}
-                                   inputNamePlaceholder={REVIEW_BUNDLES_LIST.MODAL_WINDOW_INPUT_PLACEHOLDER}
-                                   addButtonTitle={REVIEW_BUNDLES_LIST.ADD_NEW_CATEGORY_BUTTON}
-                                   handleAddFunc={handleAddCategory}
+                                   inputNamePlaceholder={REVIEW_BUNDLES_LIST.MODAL_WINDOW_NAME_INPUT_PLACEHOLDER}
+                                   addButtonTitle={REVIEW_BUNDLES_LIST.MODAL_WINDOW_BUTTON_TITLE}
+                                   handleAddFunc={handleAddBundle}
                                    updateModalContext={props.updateModalContext}
-                                   handleOnChangeCategoryNameInput={handleOnChangeCategoryNameInput}
+                                   inputDescriptionPlaceholder={REVIEW_BUNDLES_LIST.MODAL_WINDOW_DESCRIPTION_INPUT_PLACEHOLDER}
                                />)
                        }}/>
-            {/*<Formik className={'add-category-block'}>*/}
-            {/*    <Form className={'add-category-block'}>*/}
-            {/*        <FormikInput type={'text'} value={bundleName} name={'addBundleNameInput'}*/}
-            {/*        onChangeProps={handleOnChangeBundleNameInput} placeholder={'input new bundle name'}/>*/}
-            {/*        <FormikInput type={'text'} value={bundleDescription} name={'addBundleDescriptionInput'}*/}
-            {/*        onChangeProps={handleOnChangeBundleDescriptionInput} placeholder={'input new bundle description'}/>*/}
-            {/*        <AddButton type={'button'} onClickProps={handleAddBundle} title={'Add new category'}/>*/}
-            {/*    </Form>*/}
-            {/*</Formik>*/}
             <div className={'bundle'}>
                 {getBundlesList()}
             </div>

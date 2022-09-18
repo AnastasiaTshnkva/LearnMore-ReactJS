@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import IcomoonReact from 'icomoon-react';
 import AddButton from 'Components/AddButton';
 import {
     showCategoriesDataIsLoading,
     showCategoriesDataError,
     showCategoriesDataFromStore,
 } from 'store/selectors/selectors'
-import { REVIEW_CATEGORY_LIST } from 'constants/reviews/reviewCategoryList';
 import getCategoriesThink from 'store/thunk/categories/getCategoriesThink';
 import postNewCategoryThunk from 'store/thunk/categories/postNewCategory';
-import ModalWindowCreate from '../Components/ModalWindowCreate';
+import ModalWindowCreate from 'Components/ModalWindowCreate';
 import withModalContext from 'HOC/withModalContext';
-import iconSet from 'assets/Icons/selection.json';
+import {REVIEW_CATEGORY_LIST} from 'constants/reviews/reviewCategoryList';
+import CategoryItem from 'Sceens/CategoryList/Components/CategoryItem'
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -75,16 +73,13 @@ const CategoryList = (props) => {
     }, [categoryDataFromStore]);
 
     const handleAddCategory = (newCategoryName) => {
-        const headers = {
-            'Content-Type': 'application/json',
-        };
         const newCategory = {
             id: uuidv4(),
             categoryID: Date.now(),
             categoryName: newCategoryName,
             // userID: '',
         };
-            dispatch(postNewCategoryThunk(categoriesData, newCategory, headers));
+            dispatch(postNewCategoryThunk(categoriesData, newCategory));
             dispatch(getCategoriesThink());
             setCategoryName('');
             props.updateModalContext(false);
@@ -104,29 +99,28 @@ const CategoryList = (props) => {
             return (
                 categoriesData.map((data) => {
                     return (
-                        <li key={data.categoryID} className={'category__list-item'}>
-                            <Link to={`${data.categoryID}`} className={'category__list-item__title'}
-                                  style={{ textDecoration: 'none' }}>{data.categoryName}</Link>
-                            <div className={'buttons-box'}>
-                                <button type={'button'} className={'category__button'}>
-                                    <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="pencil"/>
-                                </button>
-                                <button type={'button'} className={'category__button'}>
-                                    <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="close"/>
-                                </button>
-                            </div>
-                        </li>
+                        <CategoryItem
+                            key={data.categoryID}
+                            link={`${data.categoryID}`}
+                            categoryName={data.categoryName}
+                        />
+                        // <div key={data.categoryID} className={'category__list-item'}>
+                        //     <Link to={`${data.categoryID}`} className={'category__list-item__title'}
+                        //           style={{ textDecoration: 'none' }}>{data.categoryName}</Link>
+                        //     <div className={'buttons-box'}>
+                        //         <button type={'button'} className={'category__button'}>
+                        //             <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="pencil"/>
+                        //         </button>
+                        //         <button type={'button'} className={'category__button'}>
+                        //             <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="close"/>
+                        //         </button>
+                        //     </div>
+                        // </div>
                     )
                 })
             )
         }
         return <div>No categories created yet</div>
-    }
-
-    const addCategory = (newCategory) => {
-        setCategoriesData([...categoriesData, newCategory], () => {
-            props.updateModalContext(false);
-        });
     }
 
     return (
@@ -143,9 +137,9 @@ const CategoryList = (props) => {
                             handleOnChangeCategoryNameInput={handleOnChangeCategoryNameInput}
                         />)
             }}/>
-            <ul className={'category__list'}>
+            <div className={'category__list'}>
                 {getCategoriesList()}
-            </ul>
+            </div>
         </StyledCategoryList>
     )
 }

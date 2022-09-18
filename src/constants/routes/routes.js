@@ -1,9 +1,9 @@
-import React from "react";
-import StartPage from "Sceens/StartPage";
-import LoginRouter from "Routs/LoginRouter";
-import CategoryList from "Sceens/CategoryList";
-import BundlesList from "Sceens/BundlesList";
-import BundleOfCards from "Sceens/BundleOfCards";
+import React from 'react';
+import StartPage from 'Sceens/StartPage';
+import LoginRouter from 'Routs/LoginRouter';
+import CategoryList from 'Sceens/CategoryList/CategoryList';
+import BundlesList from 'Sceens/BundlesList';
+import BundleOfCards from 'Sceens/BundleOfCards';
 
 export const ROUTES_NAMES = {
     START_PAGE: '/',

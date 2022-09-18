@@ -5,7 +5,8 @@ import {
     SET_CURRENT_BUNDLE_REQUEST,
     GET_CURRENT_BUNDLE_SUCCESS,
     GET_CURRENT_BUNDLE_FAILURE,
-    CREATE_NEW_CARD,
+    CREATE_NEW_CARD_SUCCESS,
+    CREATE_NEW_CARD_ERROR,
     DELETE_CARD,
     CORRECT_CARD,
     CORRECT_BUNDLE,
@@ -63,11 +64,18 @@ const bundleOfCardsReducer = (state=initState, action) => {
                 currentBundleError: action.payload,
             };
 
-        case CREATE_NEW_CARD:
+        case CREATE_NEW_CARD_SUCCESS:
             return {
                 ...state,
                 cardsData: action.payload,
             };
+
+        case CREATE_NEW_CARD_ERROR:
+            return {
+                ...state,
+                cardsError: action.payload,
+            };
+
 
         case DELETE_CARD:
             return {

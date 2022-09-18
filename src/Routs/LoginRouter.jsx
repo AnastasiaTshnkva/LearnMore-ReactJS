@@ -1,9 +1,9 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import LoginPage from "Sceens/LoginPage";
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LoginPage from 'Sceens/LoginPage';
 import RootRouter from "./RootRouter";
-import CategoryList from "../Sceens/CategoryList";
+import CategoryList from 'Sceens/CategoryList/CategoryList';
 
 
 const LoginRouter = () => {

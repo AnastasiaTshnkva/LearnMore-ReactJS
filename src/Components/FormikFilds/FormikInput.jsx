@@ -14,7 +14,6 @@ const StyledFormikInput = styled.input`
 `
 
 const FormikInput = (props) => {
-    console.log('props', props);
     return (
         <StyledFormikInput type={props.type} name={props.name} placeholder={props.placeholder}
         value={props.value} onChange={props.onChangeProps ? props.onChangeProps : null}>

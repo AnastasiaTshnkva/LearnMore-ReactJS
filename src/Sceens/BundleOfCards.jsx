@@ -108,8 +108,6 @@ const BundleOfCards = (props) => {
     const cardsDataError = useSelector(showCardsDataError);
     const cardsDataFromStore = useSelector(showCardsDataFromStore);
 
-    console.log('props is', props);
-
     useEffect(() => {
         dispatch(getCurrentBundleThunk(bundleID));
         dispatch(getCardsThunk(bundleID));
@@ -166,7 +164,8 @@ const BundleOfCards = (props) => {
             const activeCard = cardsData[index];
             return (
                 <MemoryCard keyProps={activeCard.cardID} activeCardName={activeCard.cardName}
-                activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}/>
+                activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}
+                cardsDataUpdateFunc={getCardsThunk(bundleID)}/>
             );
         }
         return <div>No data</div>
@@ -177,14 +176,17 @@ const BundleOfCards = (props) => {
             id: uuidv4(),
             cardID: Date.now(),
             cardName: newCardName,
-            CardDecoding: newCardDecoding,
+            cardDecoding: newCardDecoding,
             bundleID: bundleID,
             categoryID: categoryID,
+            answersCounter: 0,
         };
-        dispatch(postNewCardThunk(cardsData, newCard));
-        dispatch(getCardsThunk());
+        dispatch(postNewCardThunk(cardsData, newCard, bundleID));
+        dispatch(getCardsThunk(bundleID));
         setCardName('');
         setCardDecoding('');
+        props.updateModalContext(false);
+        setActiveCardIndex(cardsData.length);
     }
 
     return (

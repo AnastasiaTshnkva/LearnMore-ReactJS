@@ -60,9 +60,8 @@
       "cardID": "1",
       "cardName": "cat",
       "cardDecoding": "кот",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -70,9 +69,8 @@
       "cardID": "2",
       "cardName": "dog",
       "cardDecoding": "собака",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -80,9 +78,8 @@
       "cardID": "3",
       "cardName": "horse",
       "cardDecoding": "лошадь",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -90,9 +87,8 @@
       "cardID": "4",
       "cardName": "rabbit",
       "cardDecoding": "кролик",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -100,9 +96,8 @@
       "cardID": "5",
       "cardName": "parrot",
       "cardDecoding": "попугай",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -110,9 +105,8 @@
       "cardID": "6",
       "cardName": "fish",
       "cardDecoding": "рыба",
-      "bundlesID": "1",
+      "bundleID": "1",
       "userID": "1",
-      "bundlesName": "Animals",
       "answersCounter": 0
     },
     {
@@ -120,9 +114,8 @@
       "cardID": "7",
       "cardName": "how old is the earth",
       "cardDecoding": "4.543 billion years",
-      "bundlesID": "3",
+      "bundleID": "3",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -130,9 +123,8 @@
       "cardID": "8",
       "cardName": "when the first man went to space",
       "cardDecoding": "1961",
-      "bundlesID": "3",
+      "bundleID": "3",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -140,9 +132,8 @@
       "cardID": "9",
       "cardName": "how many humans have been on the moon",
       "cardDecoding": "12",
-      "bundlesID": "3",
+      "bundleID": "3",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -150,9 +141,8 @@
       "cardID": "10",
       "cardName": "nouse",
       "cardDecoding": "нос",
-      "bundlesID": "2",
+      "bundleID": "2",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -160,9 +150,8 @@
       "cardID": "11",
       "cardName": "mouth",
       "cardDecoding": "рот",
-      "bundlesID": "2",
+      "bundleID": "2",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -170,9 +159,8 @@
       "cardID": "12",
       "cardName": "eye",
       "cardDecoding": "глаз",
-      "bundlesID": "2",
+      "bundleID": "2",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -180,9 +168,8 @@
       "cardID": "13",
       "cardName": "mustache",
       "cardDecoding": "усы",
-      "bundlesID": "2",
+      "bundleID": "2",
       "userID": "1",
-      "bundlesName": "Space",
       "answersCounter": 0
     },
     {
@@ -190,23 +177,56 @@
       "cardID": "14",
       "cardName": "eyelashes",
       "cardDecoding": "ресницы",
-      "bundlesID": "2",
+      "bundleID": "2",
       "userID": "1",
-      "bundlesName": "Space",
+      "answersCounter": 0
+    },
+    {
+      "id": "844c49ca-6705-4221-ba18-079fe53085d5",
+      "cardID": 1663616189102,
+      "cardName": "frog",
+      "cardDecoding": "лягушка",
+      "bundleID": "1",
+      "categoryID": "1",
+      "answersCounter": 0
+    },
+    {
+      "id": "38342d8b-10e2-426a-896f-377c0dd352cd",
+      "cardID": 1663616250382,
+      "cardName": "mouse",
+      "cardDecoding": "мышь",
+      "bundleID": "1",
+      "categoryID": "1",
+      "answersCounter": 0
+    },
+    {
+      "id": "222b5ee8-7997-43f5-981b-6703f25a3138",
+      "cardID": 1663616267736,
+      "cardName": "sxdfg",
+      "cardDecoding": "sdfg",
+      "bundleID": "1",
+      "categoryID": "1",
+      "answersCounter": 0
+    },
+    {
+      "id": "606b1ff1-fff0-4c6a-af0a-e85d63f21919",
+      "cardID": 1663616310624,
+      "cardName": "asdfghjk",
+      "cardDecoding": "zsxdfghj",
+      "bundleID": "1",
+      "categoryID": "1",
       "answersCounter": 0
     }
   ],
   "users": [
     {
       "id": "2",
-      "cardID": "2",
       "userName": "Sasha",
       "userEmail": "sasha@mail.ru",
       "userPassword": "321"
     },
     {
       "id": "1",
-      "cardID": "1",
       "userName": "Nastya",
       "userEmail": "nastya@mail.ru",
       "userPassword": "123"

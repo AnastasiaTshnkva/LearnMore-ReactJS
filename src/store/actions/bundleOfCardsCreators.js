@@ -9,7 +9,9 @@ export const GET_CURRENT_BUNDLE_FAILURE = "GET_CURRENT_BUNDLE_FAILURE";
 export const CREATE_NEW_CARD_SUCCESS = "CREATE_NEW_CARD_SUCCESS";
 export const CREATE_NEW_CARD_ERROR = "CREATE_NEW_CARD_ERROR";
 
-export const DELETE_CARD = "DELETE_CARD";
+export const DELETE_CARD_SUCCESS = "DELETE_CARD_SUCCESS";
+export const DELETE_CARD_ERROR = "DELETE_CARD_ERROR";
+
 export const CORRECT_CARD = "CORRECT_CARD";
 export const CORRECT_BUNDLE = "CORRECT_BUNDLE";
 
@@ -68,9 +70,16 @@ export const createNewCardErrorAction = (value) => {
     };
 };
 
-export const deleteCardAction = (value) => {
+export const deleteCardSuccessAction = (value) => {
     return{
-        type: DELETE_CARD,
+        type: DELETE_CARD_SUCCESS,
+        payload: value,
+    }
+};
+
+export const deleteCardErrorAction = (value) => {
+    return{
+        type: DELETE_CARD_ERROR,
         payload: value,
     }
 };

@@ -42,10 +42,12 @@ export const createNewCategoryErrorAction = (value) => {
     }
 };
 
-export const deleteCategoryAction = (value) => ({
-    type: DELETE_CATEGORY,
-    payload: value,
-})
+export const deleteCategoryAction = (value) => {
+    return {
+        type: DELETE_CATEGORY,
+        payload: value,
+    }
+};
 
 export const correctCategoryAction = (value) => ({
     type: CORRECT_CATEGORY,

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import IcomoonReact from "icomoon-react";
 import iconSet from "assets/Icons/selection.json";
 import PropTypes from "prop-types";
+import deleteCardThunk from "../store/thunk/cards/deleteCardThunk";
+import {useDispatch} from "react-redux";
 
 const StyledMemoryCard = styled.div`
     display: flex;
@@ -62,6 +64,8 @@ const StyledMemoryCard = styled.div`
 `
 
 const MemoryCard = (props) => {
+    const dispatch = useDispatch();
+
     const handleOClickTurn = () => {
         const cardFrontSide = document.getElementsByName('card-front-side')[0];
         const cardBackSide = document.getElementsByName('card-back-side')[0];
@@ -72,10 +76,12 @@ const MemoryCard = (props) => {
         } else {
             cardFrontSide.classList.remove('card__front-side__turn');
             cardBackSide.classList.remove('card__back-side__turn');
-        }
-    }
+        };
+    };
 
-
+    const handleDeleteButton = () => {
+        dispatch(deleteCardThunk(props.keyProps));
+    };
 
     return (
         <StyledMemoryCard key={props.keyProps} onClick={handleOClickTurn}>
@@ -85,7 +91,7 @@ const MemoryCard = (props) => {
                     <button type={'button'} className={'memoryCard__but'}>
                         <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
                     </button>
-                    <button type={'button'} className={'memoryCard__but'}>
+                    <button type={'button'} className={'memoryCard__but'} onClick={handleDeleteButton}>
                         <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
                     </button>
                 </div>
@@ -101,9 +107,9 @@ const MemoryCard = (props) => {
 };
 
 MemoryCard.propTypes = {
-    keyProps: PropTypes.string.isRequired,
-    activeCardName: PropTypes.string.isRequired,
-    activeCardDecoding: PropTypes.string.isRequired,
+    // keyProps: PropTypes.string,
+    activeCardName: PropTypes.string,
+    activeCardDecoding: PropTypes.string,
 }
 
 export default MemoryCard;

@@ -14,6 +14,7 @@ const StyledModalProvider = styled.div`
   background-color: rgba(0, 0, 0, 0.31);
   width: 100%;
   height: 100%;
+  z-index: 1;
   .modal-window {
     position: relative;
     min-width: 500px;

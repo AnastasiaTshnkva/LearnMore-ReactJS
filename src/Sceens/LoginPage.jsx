@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Form, Formik } from 'formik'
@@ -9,6 +10,7 @@ import { setNotValidUserAction, setValidUserAction } from 'store/actions/userAct
 import { REVIEW_LOGIN_PAGE } from 'constants/reviews/reviewLoginPage';
 import getUsersThunk from 'store/thunk/users/getUsersThunk';
 import { showUserData } from 'store/selectors/selectors';
+import postNewUserThunk from "../store/thunk/users/postNewUserThunk";
 
 const StyledLoginPage = styled.div`
   margin: 0 auto;
@@ -85,7 +87,7 @@ const StyledLoginPage = styled.div`
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [userData, setUserData] = useState();
+    const [usersData, setUsersData] = useState();
     const [validateError, setValidateError] = useState('');
     const userDataFromState = useSelector(showUserData);
     const [newUserRegistration, setNewUserRegistration] = useState(false);
@@ -95,28 +97,26 @@ const LoginPage = () => {
    },[]);
 
    useEffect(() => {
-       setUserData(userDataFromState);
+       setUsersData(userDataFromState);
    }, [userDataFromState])
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
+        const userName = document.getElementsByName('name')[0].value;
+        const userEmail = document.getElementsByName('email')[0].value;
+        const userPassword = document.getElementsByName('password')[0].value;
         if(!newUserRegistration) {
-            // const userName = document.getElementsByName('name')[0].value;
-            const userEmail = document.getElementsByName('email')[0].value;
-            const userPassword = document.getElementsByName('password')[0].value;
+
             const user = {
-                // userName,
                 userEmail,
                 userPassword,
             };
             const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
             if(currentUserData
                 && (
-                    // currentUserData.userName === user.userName &&
                     currentUserData.userPassword === user.userPassword)) {
                 dispatch(setValidUserAction(
                     {
-                        // userName: user.userName,
                         userEmail: user.userEmail,
                     }));
                 navigate('/categoryList');
@@ -126,9 +126,14 @@ const LoginPage = () => {
             }
         }
         if(newUserRegistration) {
-            const headers = {
-                'Content-Type': 'application/json',
-            };
+            const newUser = {
+                id: uuidv4(),
+                userName,
+                userEmail,
+                userPassword,
+            }
+            dispatch(postNewUserThunk(newUser, usersData));
+            dispatch(setValidUserAction(newUser));
         }
 
     };

@@ -4,7 +4,6 @@ import {setNotValidUserAction, setValidUserAction} from '../../actions/userActio
 
 const getUsersThunk = () => {
     return dispatch => {
-
         fetchUsersDate()
             .then(({data}) => {
                 dispatch(setValidUserAction(data))})

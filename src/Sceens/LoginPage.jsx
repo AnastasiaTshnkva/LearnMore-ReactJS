@@ -102,22 +102,20 @@ const LoginPage = () => {
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        const userName = document.getElementsByName('name')[0].value;
-        const userEmail = document.getElementsByName('email')[0].value;
-        const userPassword = document.getElementsByName('password')[0].value;
+        const email = document.getElementsByName('email')[0].value;
+        const password = document.getElementsByName('password')[0].value;
         if(!newUserRegistration) {
-
             const user = {
-                userEmail,
-                userPassword,
+                email,
+                password,
             };
-            const currentUserData = userData.find((element) => element.userEmail === user.userEmail);
+            const currentUserData = usersData.find((element) => element.userEmail === user.userEmail);
             if(currentUserData
                 && (
                     currentUserData.userPassword === user.userPassword)) {
                 dispatch(setValidUserAction(
                     {
-                        userEmail: user.userEmail,
+                        email: user.email,
                     }));
                 navigate('/categoryList');
             } else {
@@ -126,16 +124,20 @@ const LoginPage = () => {
             }
         }
         if(newUserRegistration) {
+            const name = document.getElementsByName('name')[0].value;
             const newUser = {
                 id: uuidv4(),
-                userName,
-                userEmail,
-                userPassword,
+                name,
+                email,
+                password,
             }
             dispatch(postNewUserThunk(newUser, usersData));
-            dispatch(setValidUserAction(newUser));
+            dispatch(setValidUserAction(
+                {
+                    email: newUser.email,
+                }));
+            navigate('/categoryList');
         }
-
     };
 
    const handleRedirectUser = () => {

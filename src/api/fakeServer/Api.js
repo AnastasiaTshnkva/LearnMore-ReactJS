@@ -25,7 +25,9 @@ export const fetchCardsData = () => fakeServerInstance.get('/cards');
 //post
 export const fetchAddNewCardToServer = (newCard, headers) => fakeServerInstance.post('/cards', newCard, headers);
 //delete
-export const fetchDeleteCardFromServer = (cardID) => fakeServerInstance.delete(`/cards/?cardID=${cardID}`);
+export const fetchDeleteCardFromServer = (cardID) => fakeServerInstance.delete(`/cards/${cardID}`);
+//patch
+export const fetchPatchCardData = (cardID, newData, headers) => fakeServerInstance.patch(`cards/${cardID}`, newData, headers);
 
 
 //users

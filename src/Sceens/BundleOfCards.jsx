@@ -17,6 +17,7 @@ import MemoryCard from 'Components/MemoryCard';
 import { ROUTES_NAMES } from 'constants/routes/routes';
 import getCurrentBundleThunk from 'store/thunk/bundles/getCurrentBundleThunk';
 import getCardsThunk from 'store/thunk/cards/getCardsThunk';
+import deleteCurrentCard from 'store/thunk/cards/deleteCardThunk';
 import ModalWindowCreate from 'Components/ModalWindowCreate';
 import withModalContext from 'HOC/withModalContext';
 import postNewCardThunk from 'store/thunk/cards/postNewCardThunk';
@@ -162,10 +163,12 @@ const BundleOfCards = (props) => {
         }
         if (!!cardsData.length){
             const activeCard = cardsData[index];
+
             return (
-                <MemoryCard keyProps={activeCard.cardID} activeCardName={activeCard.cardName}
+                <MemoryCard activeCardName={activeCard.cardName}
                 activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}
-                cardsDataUpdateFunc={getCardsThunk(bundleID)}/>
+                cardId={activeCard.id} updateCardsData={updateCardsData}
+                />
             );
         }
         return <div>No data</div>
@@ -188,6 +191,11 @@ const BundleOfCards = (props) => {
         props.updateModalContext(false);
         setActiveCardIndex(cardsData.length);
     }
+
+    const updateCardsData = () => {
+        dispatch(getCardsThunk(bundleID));
+        setActiveCardIndex(0);
+    };
 
     return (
         <StyledBundleOfCards>

@@ -5,6 +5,8 @@ import iconSet from "assets/Icons/selection.json";
 import PropTypes from "prop-types";
 import deleteCardThunk from "../store/thunk/cards/deleteCardThunk";
 import {useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
+import patchCardsThunk from "../store/thunk/cards/patchCardsThunk";
 
 const StyledMemoryCard = styled.div`
     display: flex;
@@ -64,6 +66,7 @@ const StyledMemoryCard = styled.div`
 `
 
 const MemoryCard = (props) => {
+    const { bundleID } = useParams();
     const dispatch = useDispatch();
 
     const handleOClickTurn = () => {
@@ -80,11 +83,16 @@ const MemoryCard = (props) => {
     };
 
     const handleDeleteButton = () => {
-        dispatch(deleteCardThunk(props.keyProps));
+        dispatch(deleteCardThunk(props.cardId));
+        props.updateCardsData();
     };
 
+    // const handleUpdateButton = () => {
+    //     dispatch(patchCardsThunk(props.newData, props.cardId));
+    // };
+
     return (
-        <StyledMemoryCard key={props.keyProps} onClick={handleOClickTurn}>
+        <StyledMemoryCard key={props.cardId} onClick={handleOClickTurn}>
             <div className={'card__front-side'} name={'card-front-side'}>
                 { props.buttonVisible &&
                 <div className={'buttons-box'}>

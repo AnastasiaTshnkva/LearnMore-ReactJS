@@ -1,12 +1,11 @@
-import {fetchDeleteCardFromServer} from '../../../api/fakeServer/Api';
+import {fetchCurrentCardsData, fetchCurrentUserData, fetchDeleteCardFromServer} from '../../../api/fakeServer/Api';
 import {deleteCardErrorAction, deleteCardSuccessAction} from '../../actions/bundleOfCardsCreators';
 
-const deleteCardThunk = (cardID, cardsData) => {
+const deleteCardThunk = (cardID) => {
     return dispatch => {
         fetchDeleteCardFromServer(cardID)
             .then(({data}) => {
-                console.log(data);
-                dispatch(deleteCardSuccessAction())
+                dispatch(deleteCardSuccessAction(data))
             })
             .catch(error => {
                 dispatch(deleteCardErrorAction(error));

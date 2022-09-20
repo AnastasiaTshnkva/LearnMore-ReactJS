@@ -9,8 +9,10 @@ import {
     CREATE_NEW_CARD_ERROR,
     DELETE_CARD_SUCCESS,
     DELETE_CARD_ERROR,
-    CORRECT_CARD,
-    CORRECT_BUNDLE,
+    CORRECT_CARD_SUCCESS,
+    CORRECT_CARD_ERROR,
+    CORRECT_BUNDLE_SUCCESS,
+    CORRECT_BUNDLE_ERROR,
 } from '../actions/bundleOfCardsCreators';
 
 
@@ -90,16 +92,28 @@ const bundleOfCardsReducer = (state=initState, action) => {
                 cardsError: action.payload,
             };
 
-        case CORRECT_CARD:
+        case CORRECT_CARD_SUCCESS:
             return {
                 ...state,
                 cardsData: action.payload,
             }
 
-        case CORRECT_BUNDLE:
+        case CORRECT_CARD_ERROR:
+            return {
+                ...state,
+                cardsError: action.payload,
+            }
+
+        case CORRECT_BUNDLE_SUCCESS:
             return {
                 ...state,
                 currentBundleData: action.payload,
+            }
+
+        case CORRECT_BUNDLE_ERROR:
+            return {
+                ...state,
+                currentBundleError: action.payload,
             }
 
         default:

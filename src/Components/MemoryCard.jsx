@@ -1,12 +1,15 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
-import IcomoonReact from "icomoon-react";
-import iconSet from "assets/Icons/selection.json";
-import PropTypes from "prop-types";
-import deleteCardThunk from "../store/thunk/cards/deleteCardThunk";
-import {useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
-import patchCardsThunk from "../store/thunk/cards/patchCardsThunk";
+import IcomoonReact from 'icomoon-react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import iconSet from 'assets/Icons/selection.json';
+import PropTypes from 'prop-types';
+import { REVIEW_BUNDLE_OF_CARDS } from 'constants/reviews/reviewBandleOfCards';
+import deleteCardThunk from '../store/thunk/cards/deleteCardThunk';
+import patchCardsThunk from '../store/thunk/cards/patchCardsThunk';
+import ModalWindowConfirm from 'Components/ModalWindowConfirm';
+import ModalWindowUpdate from 'Components/ModalWindowUpdate';
 
 const StyledMemoryCard = styled.div`
     display: flex;
@@ -82,24 +85,59 @@ const MemoryCard = (props) => {
         };
     };
 
-    const handleDeleteButton = () => {
+    const handleDeleteButton = (event) => {
+        // event.stopPropagation();
         dispatch(deleteCardThunk(props.cardId));
         props.updateCardsData();
+        props.updateModalContext(false);
     };
 
-    // const handleUpdateButton = () => {
-    //     dispatch(patchCardsThunk(props.newData, props.cardId));
-    // };
+    const handleCloseModalWindow = (event) => {
+        // event.stopPropagation();
+        props.updateModalContext(false);
+    }
+
+    const handleUpdateCardData = (newCardData) => {
+        dispatch(patchCardsThunk(newCardData, props.cardId));
+        props.updateCardsData();
+        props.updateModalContext(false);
+    }
 
     return (
         <StyledMemoryCard key={props.cardId} onClick={handleOClickTurn}>
             <div className={'card__front-side'} name={'card-front-side'}>
                 { props.buttonVisible &&
                 <div className={'buttons-box'}>
-                    <button type={'button'} className={'memoryCard__but'}>
+                    <button type={'button'} className={'memoryCard__but'}
+                        onClick={() => {
+                            const cardName = props.activeCardName;
+                            const cardDecoding = props.activeCardDecoding;
+                            return props.updateModalContext(
+                                <ModalWindowUpdate
+                                    blockTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_TITLE}
+                                    cardName={cardName}
+                                    inputNamePlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_NAME_INPUT}
+                                    cardDecoding={cardDecoding}
+                                    inputDescriptionPlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_DECODING_INPUT}
+                                    updateButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_BUTTON_TITLE}
+                                    handleUpdateFunc={handleUpdateCardData}
+                                />
+                            )}}>
                         <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
                     </button>
-                    <button type={'button'} className={'memoryCard__but'} onClick={handleDeleteButton}>
+                    <button type={'button'} className={'memoryCard__but'}
+                    onClick={() => {
+                         return props.updateModalContext(
+                            <ModalWindowConfirm
+                                title={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_CONFIRM_TITLE}
+                                acceptButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_CONFIRM_ACCEPT_BUTTON_TITLE}
+                                acceptFunc={handleDeleteButton}
+                                rejectButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_CONFIRM_REJECT_BUTTON_TITLE}
+                                rejectFunc={handleCloseModalWindow}
+                                />
+                        )
+                    }
+                    }>
                         <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
                     </button>
                 </div>
@@ -115,7 +153,6 @@ const MemoryCard = (props) => {
 };
 
 MemoryCard.propTypes = {
-    // keyProps: PropTypes.string,
     activeCardName: PropTypes.string,
     activeCardDecoding: PropTypes.string,
 }

@@ -13,7 +13,6 @@ export const showCategoriesDataFromStore = (state) => state.categories.categorie
 export const showBundlesDataIsLoading = (state) => state.bundles.loading;
 export const showBundlesDataError = (state) => state.bundles.error;
 export const showBundlesFromStore = (state) => state.bundles;
-
 //current bundleData
 export const showCurrentBundleDataIsLoading = (state) => state.bundleOfCards.currentBundleLoading;
 export const showCurrentBundleDataError = (state) => state.bundleOfCards.currentBundleError;
@@ -24,3 +23,7 @@ export const showCurrentBundleDataFromStore = (state) => state.bundleOfCards.cur
 export const showCardsDataIsLoading = (state) => state.bundleOfCards.cardsLoading;
 export const showCardsDataError = (state) => state.bundleOfCards.cardsError;
 export const showCardsDataFromStore = (state) => state.bundleOfCards.cardsData;
+//current card data
+export const showCurrentCardDataIsLoading = (state) => state.bundleOfCards.currentCardLoading;
+export const showCurrentCardDataError = (state) => state.bundleOfCards.currentCardError;
+export const showCurrentCardDataFromStore = (state) => state.bundleOfCards.currentCardData;

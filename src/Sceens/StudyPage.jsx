@@ -45,14 +45,14 @@ const StyledStudyPage = styled.div`
       border: 2px solid transparent;
       color: ${props => props.theme.lightTextColor};
       &:hover {
-        box-shadow: 0 0 5px ${props => props.theme.iDoNotKnowHoverButtonColor};
+        box-shadow: 0 0 5px ${props => props.theme.rejectButtonColor};
       }
     }
     .i-know {
       background-color: ${props => props.theme.buttonColor};
     }
     .i-do-not-know {
-      background-color: ${props => props.theme.iDoNotKnowButtonColor};
+      background-color: ${props => props.theme.rejectHoverButtonColor};
     }
   }
 `

@@ -17,8 +17,8 @@ export const THEME_COLORS = {
         inputBorderColor: '#ced0ca',
         partBackgroundColor: '#eef8ee',
         descriptionPartColor: '#d8e0d8',
-        iDoNotKnowButtonColor: '#757575',
-        iDoNotKnowHoverButtonColor: '#757575',
+        rejectButtonColor: '#757575',
+        rejectHoverButtonColor: '#757575',
     },
     dark: {
         mainBackgroundColor: '#596759',
@@ -38,8 +38,8 @@ export const THEME_COLORS = {
         inputBorderColor: '#d5d9d3',
         partBackgroundColor: '#465d46',
         descriptionPartColor: '#3a3d3a',
-        iDoNotKnowButtonColor: '#757575',
-        iDoNotKnowHoverButtonColor: '#757575',
+        rejectButtonColor: '#757575',
+        rejectHoverButtonColor: '#757575',
     },
 }
 

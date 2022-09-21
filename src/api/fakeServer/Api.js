@@ -20,7 +20,6 @@ export const fetchAddNewBundleToServer = (newBundle, headers) => fakeServerInsta
 //cards
 //get
 export const fetchBundleOfCardsData = (bundleID) => fakeServerInstance.get(`/cards/?bundleID=${bundleID}`);
-export const fetchCurrentCardsData = (cardID) => fakeServerInstance.get(`/cards/?cardID=${cardID}`);
 export const fetchCardsData = () => fakeServerInstance.get('/cards');
 //post
 export const fetchAddNewCardToServer = (newCard, headers) => fakeServerInstance.post('/cards', newCard, headers);

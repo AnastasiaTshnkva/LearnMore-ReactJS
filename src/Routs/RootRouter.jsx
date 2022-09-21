@@ -10,7 +10,7 @@ import CategoryList from 'Sceens/CategoryList/CategoryList';
 import ListsLayout from 'MainLayout/ListsLayout';
 import StartPage from 'Sceens/StartPage';
 import LoginPage from 'Sceens/LoginPage';
-import BundleOfCards from 'Sceens/BundleOfCards';
+import BundleOfCards from 'Sceens/BundleofCards/BundleOfCards';
 import { ROUTES_NAMES } from 'constants/routes/routes';
 import StudyPage from 'Sceens/StudyPage';
 import Try from 'Sceens/Try';

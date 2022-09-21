@@ -1,5 +1,6 @@
 export const REVIEW_BUNDLE_OF_CARDS = {
     NUMBER_OF_CARDS: 'number of cards - ',
+    CHANGE_BUNDLE_DATA_LINK: 'Change the data',
     ADD_NEW_CARD_BUTTON_INNER_TEXT: 'Add card',
     PREVIOUS_BUTTON_INNER_TEXT: 'Previous',
     NEXT_BUTTON_INNER_TEXT: 'Next',
@@ -8,4 +9,11 @@ export const REVIEW_BUNDLE_OF_CARDS = {
     MODAL_WINDOW_NAME_INPUT_PLACEHOLDER: 'input card name',
     MODAL_WINDOW_DECODING_INPUT_PLACEHOLDER: 'input card decoding',
     MODAL_WINDOW_ADD_BUTTON: 'Add card',
+    MODAL_WINDOW_CONFIRM_TITLE: 'Are you sure you want to delete the card?',
+    MODAL_WINDOW_CONFIRM_ACCEPT_BUTTON_TITLE: 'Delete',
+    MODAL_WINDOW_CONFIRM_REJECT_BUTTON_TITLE: 'Close',
+    MODAL_WINDOW_UPDATE_TITLE: 'Changing cards data',
+    MODAL_WINDOW_UPDATE_NAME_INPUT: 'input card name',
+    MODAL_WINDOW_UPDATE_DECODING_INPUT: 'input card decoding',
+    MODAL_WINDOW_UPDATE_BUTTON_TITLE: 'Save changing',
 };

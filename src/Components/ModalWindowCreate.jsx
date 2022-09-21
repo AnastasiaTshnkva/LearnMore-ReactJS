@@ -55,8 +55,8 @@ const ModalWindowCreate = (props) => {
                 <input onChange={(event) => setNewDescription(event.target.value)}
                        value={newDescription} className={'modal-input'} placeholder={props.inputDescriptionPlaceholder}/>
             }
-            <AddButton className={'button'} title={'Add new category'} type={'button'}
-                       onClickProps={() => props.handleAddFunc(newName, newDescription)}>{props.addButtonTitle}</AddButton>
+            <AddButton className={'button'} title={props.addButtonTitle} type={'button'}
+                       onClickProps={() => props.handleAddFunc(newName, newDescription)}/>
         </StyledModalWindowCreate>
     )
 };

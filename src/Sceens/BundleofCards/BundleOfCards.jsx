@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { REVIEW_BUNDLE_OF_CARDS } from 'constants/reviews/reviewBandleOfCards';
+import {REVIEW_BUNDLE_OF_CARDS} from 'constants/reviews/reviewBandleOfCards';
 import AddButton from 'Components/AddButton';
 import {
     showCurrentBundleDataIsLoading,
@@ -165,9 +165,14 @@ const BundleOfCards = (props) => {
             const activeCard = cardsData[index];
 
             return (
-                <MemoryCard activeCardName={activeCard.cardName}
-                activeCardDecoding={activeCard.cardDecoding} buttonVisible={true}
-                cardId={activeCard.id} updateCardsData={updateCardsData}
+                <MemoryCard
+                    activeCardName={activeCard.cardName}
+                    activeCardDecoding={activeCard.cardDecoding}
+                    buttonVisible={true}
+                    cardId={activeCard.id}
+                    updateCardsData={updateCardsData}
+                    updateModalContext={props.updateModalContext}
+
                 />
             );
         }
@@ -204,6 +209,7 @@ const BundleOfCards = (props) => {
                 <div className={'bundle-data'}>
                     {getCurrentBundle()}
                     <p className={'cards-counter'}>{REVIEW_BUNDLE_OF_CARDS.NUMBER_OF_CARDS}<span className={'counter'}>{cardsData.length}</span></p>
+                    <p>{REVIEW_BUNDLE_OF_CARDS.CHANGE_BUNDLE_DATA_LINK}</p>
                 </div>
                 <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.ADD_NEW_CARD_BUTTON_INNER_TEXT}
                            onClickProps={() => {
@@ -214,7 +220,8 @@ const BundleOfCards = (props) => {
                                        inputDescriptionPlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_DECODING_INPUT_PLACEHOLDER}
                                        updateModalContext={props.updateModalContext}
                                        handleAddFunc={handleAddCard}
-                                       addButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_ADD_BUTTON}/>
+                                       addButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_ADD_BUTTON}
+                                   />
                                )
                            }}/>
             </div>

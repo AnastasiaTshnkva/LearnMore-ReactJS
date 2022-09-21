@@ -1,10 +1,12 @@
-import {
-    SET_BUNDLE_OF_CARDS_REQUEST,
+import { SET_BUNDLE_OF_CARDS_REQUEST,
     GET_BUNDLE_OF_CARDS_SUCCESS,
     GET_BUNDLE_OF_CARDS_FAILURE,
     SET_CURRENT_BUNDLE_REQUEST,
     GET_CURRENT_BUNDLE_SUCCESS,
     GET_CURRENT_BUNDLE_FAILURE,
+    SET_CURRENT_CARD_REQUEST,
+    SET_CURRENT_CARD_SUCCESS,
+    SET_CURRENT_CARD_FAILURE,
     CREATE_NEW_CARD_SUCCESS,
     CREATE_NEW_CARD_ERROR,
     DELETE_CARD_SUCCESS,
@@ -23,6 +25,9 @@ const initState = {
     currentBundleLoading: false,
     currentBundleError: null,
     currentBundleData: {},
+    // currentCardLoading: false,
+    // currentCardError: null,
+    // currentCardData: {},
 }
 
 const bundleOfCardsReducer = (state=initState, action) => {
@@ -66,6 +71,26 @@ const bundleOfCardsReducer = (state=initState, action) => {
                 currentBundleLoading: false,
                 currentBundleError: action.payload,
             };
+
+        // case SET_CURRENT_CARD_REQUEST:
+        //     return {
+        //         ...state,
+        //         currentCardLoading: true,
+        //     };
+        //
+        // case SET_CURRENT_CARD_SUCCESS:
+        //     return {
+        //         ...state,
+        //         currentCardLoading: false,
+        //         currentCardData: action.payload,
+        //     };
+        //
+        // case SET_CURRENT_CARD_FAILURE:
+        //     return {
+        //         ...state,
+        //         currentCardLoading: false,
+        //         currentCardError: action.payload,
+        //     };
 
         case CREATE_NEW_CARD_SUCCESS:
             return {

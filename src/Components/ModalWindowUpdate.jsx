@@ -38,35 +38,30 @@ const StyledModalWindowUpdate = styled.div`
 `
 
 const ModalWindowUpdate = (props) => {
-    const [cardName, setCardName] = useState(props.cardName);
-    const [cardDecoding, setCardDecoding] = useState(props.cardDecoding);
-
-    const newCardData = {
-        cardName,
-        cardDecoding,
-    };
+    const [name, setName] = useState(props.name);
+    const [description, setDescription] = useState(props.description);
 
     return (
         <StyledModalWindowUpdate>
             <div className={'modal-header'}>
                 <p className={'title'}>{props.blockTitle}</p>
-                <button type={'button'} onClick={() => {props.updateModalContext(false)}} className={'close-but'}>
+                <button type={'button'} onClick={props.closeWindowFunc} className={'close-but'}>
                     <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
                 </button>
             </div>
-            <input onChange={(event) => setCardName(event.target.value)}
-                   value={cardName}
+            <input onChange={(event) => setName(event.target.value)}
+                   value={name}
                    className={'modal-input'}
                    placeholder={props.inputNamePlaceholder}/>
             {props.inputDescriptionPlaceholder &&
-                <input onChange={(event) => setCardDecoding(event.target.value)}
-                       value={cardDecoding} className={'modal-input'}
-                       placeholder={props.inputDescriptionPlaceholder}/>
+                <input onChange={(event) => setDescription(event.target.value)}
+                       value={description} className={'modal-input'}
+                       placeholder={props.inputDescriptionPlaceholder}
+                />
             }
             <AddButton className={'button'} title={props.updateButtonTitle} type={'button'}
                        onClickProps={() => {
-                           console.log('click');
-                           props.handleUpdateFunc(newCardData)
+                           props.handleUpdateFunc(name, description)
                        }}/>
         </StyledModalWindowUpdate>
     )
@@ -74,12 +69,13 @@ const ModalWindowUpdate = (props) => {
 
 ModalWindowUpdate.propTypes = {
     blockTitle: PropTypes.string,
-    cardName: PropTypes.string,
-    cardDecoding: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
     inputNamePlaceholder: PropTypes.string,
     inputDescriptionPlaceholder: PropTypes.string,
     handleUpdateFunc: PropTypes.func.isRequired,
     updateButtonTitle: PropTypes.string,
+    closeWindowFunc: PropTypes.func.isRequired,
 }
 
 ModalWindowUpdate.defaultProps = {

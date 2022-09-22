@@ -13,14 +13,14 @@ import {
     showCardsDataError,
     showCardsDataFromStore,
 } from 'store/selectors/selectors';
+import getCardsThunk from 'store/thunk/cards/getCardsThunk';
+import postNewCardThunk from 'store/thunk/cards/postNewCardThunk';
+import getCurrentBundleThunk from 'store/thunk/bundles/getCurrentBundleThunk';
+import withModalContext from 'HOC/withModalContext';
 import MemoryCard from 'Components/MemoryCard';
 import { ROUTES_NAMES } from 'constants/routes/routes';
-import getCurrentBundleThunk from 'store/thunk/bundles/getCurrentBundleThunk';
-import getCardsThunk from 'store/thunk/cards/getCardsThunk';
-import deleteCurrentCard from 'store/thunk/cards/deleteCardThunk';
 import ModalWindowCreate from 'Components/ModalWindowCreate';
-import withModalContext from 'HOC/withModalContext';
-import postNewCardThunk from 'store/thunk/cards/postNewCardThunk';
+import BundleData from 'Sceens/BundleofCards/Components/BundleData';
 
 const StyledBundleOfCards = styled.div`
   display: grid;
@@ -115,7 +115,7 @@ const BundleOfCards = (props) => {
     }, []);
 
     useEffect(() => {
-        setCurrentBundleData(currentBundleDataFromStore[0]);
+        setCurrentBundleData(currentBundleDataFromStore);
     }, [currentBundleDataFromStore]);
 
     useEffect(() => {
@@ -127,7 +127,7 @@ const BundleOfCards = (props) => {
             setActiveCardIndex(activeCardIndex + 1);
         } else {
             setActiveCardIndex(0);
-        }
+        };
     };
 
     const handleOnClickPreviousCardButton = (event) => {
@@ -135,7 +135,7 @@ const BundleOfCards = (props) => {
             setActiveCardIndex(activeCardIndex - 1);
         } else {
             setActiveCardIndex(cardsData.length - 1);
-        }
+        };
     };
 
     const getCurrentBundle = () => {
@@ -144,12 +144,18 @@ const BundleOfCards = (props) => {
             console.error(currentBundleDataError);
             return <div>Ops! Something went wrong</div>
         }
-        if (currentBundleData) {
+        if (!!currentBundleData.length) {
             return (
-                <div className={'bundle-data'}>
-                    <p className={'bundle__title'}>{currentBundleData.bundleName}</p>
-                    <p className={'bundle__description'}>{currentBundleData.bundleDescription}</p>
-                </div>
+                <BundleData
+                    bundleID={currentBundleData[0].id}
+                    bundleName={currentBundleData[0].bundleName}
+                    bundleDescription={currentBundleData[0].bundleDescription}
+                    counter={cardsData.length}
+                    counterTitle={REVIEW_BUNDLE_OF_CARDS.NUMBER_OF_CARDS}
+                    updateLink={REVIEW_BUNDLE_OF_CARDS.CHANGE_BUNDLE_DATA_LINK}
+                    updateBundleData={updateBundleData}
+                    updateModalContext={props.updateModalContext}
+                />
             );
         }
         return <div>No data</div>
@@ -172,7 +178,6 @@ const BundleOfCards = (props) => {
                     cardId={activeCard.id}
                     updateCardsData={updateCardsData}
                     updateModalContext={props.updateModalContext}
-
                 />
             );
         }
@@ -202,14 +207,16 @@ const BundleOfCards = (props) => {
         setActiveCardIndex(0);
     };
 
+    const updateBundleData = () => {
+        dispatch(getCurrentBundleThunk(bundleID));
+    };
+
     return (
         <StyledBundleOfCards>
             <div></div>
             <div className={'bundle-part'}>
                 <div className={'bundle-data'}>
                     {getCurrentBundle()}
-                    <p className={'cards-counter'}>{REVIEW_BUNDLE_OF_CARDS.NUMBER_OF_CARDS}<span className={'counter'}>{cardsData.length}</span></p>
-                    <p>{REVIEW_BUNDLE_OF_CARDS.CHANGE_BUNDLE_DATA_LINK}</p>
                 </div>
                 <AddButton type={'button'} title={REVIEW_BUNDLE_OF_CARDS.ADD_NEW_CARD_BUTTON_INNER_TEXT}
                            onClickProps={() => {

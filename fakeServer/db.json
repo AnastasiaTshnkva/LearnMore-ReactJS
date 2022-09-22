@@ -62,7 +62,9 @@
       "cardDecoding": "кот",
       "bundleID": "1",
       "userID": "1",
-      "answersCounter": 0
+      "answersCounter": 0,
+      "name": "catt",
+      "decoding": "кот"
     },
     {
       "id": "2",

@@ -4,8 +4,8 @@ import {
     GET_BUNDLES_FAILURE,
     CREATE_NEW_BUNDLE_SUCCESS,
     CREATE_NEW_BUNDLE_ERROR,
-    DELETE_BUNDLES,
-    CORRECT_BUNDLES
+    DELETE_BUNDLE_SUCCESS,
+    DELETE_BUNDLE_ERROR
 } from '../actions/bunldlesActionCreators';
 
 const initState = {
@@ -49,17 +49,17 @@ const bundlesReducer = (state=initState, action) => {
             };
 
 
-        case DELETE_BUNDLES:
+        case DELETE_BUNDLE_SUCCESS:
             return {
                 ...state,
                 bundlesData: action.payload,
             };
 
-        case CORRECT_BUNDLES:
+        case DELETE_BUNDLE_ERROR:
             return {
                 ...state,
-                bundlesData: action.payload,
-            }
+                error: action.payload,
+            };
 
         default:
             return {...state};

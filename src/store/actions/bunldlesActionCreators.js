@@ -5,8 +5,8 @@ export const GET_BUNDLES_FAILURE = 'GET_BUNDLES_FAILURE';
 export const CREATE_NEW_BUNDLE_SUCCESS = 'CREATE_NEW_BUNDLE_SUCCESS';
 export const CREATE_NEW_BUNDLE_ERROR = 'CREATE_NEW_BUNDLE_ERROR';
 
-export const DELETE_BUNDLES = 'DELETE_BUNDLES';
-export const CORRECT_BUNDLES = 'CORRECT_BUNDLES';
+export const DELETE_BUNDLE_SUCCESS = 'DELETE_BUNDLE_SUCCESS';
+export const DELETE_BUNDLE_ERROR = 'DELETE_BUNDLE_ERROR';
 
 export const setBundlesRequestAction = () => {
     return {
@@ -42,12 +42,16 @@ export const createNewBundleErrorAction = (value) => {
     };
 };
 
-export const deleteBundleAction = (value) => ({
-    type: DELETE_BUNDLES,
-    payload: value,
-})
+export const deleteBundleSuccessAction = (value) => {
+    return {
+        type: DELETE_BUNDLE_SUCCESS,
+        payload: value,
+    };
+};
 
-export const correctBundleAction = (value) => ({
-    type: CORRECT_BUNDLES,
-    payload: value,
-})
+export const deleteBundleErrorAction = (value) => {
+    return {
+        type: DELETE_BUNDLE_ERROR,
+        payload: value,
+    };
+};

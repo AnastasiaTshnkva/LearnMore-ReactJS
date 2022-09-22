@@ -1,4 +1,5 @@
 import fakeServerInstance from '../instance';
+import bundleData from "../../Sceens/BundleofCards/Components/BundleData";
 
 
 //categories
@@ -15,6 +16,10 @@ export const fetchCurrentBundleData = (bundleID) => fakeServerInstance.get(`/bun
 export const fetchBundleData = () => fakeServerInstance.get('/bundles');
 //post
 export const fetchAddNewBundleToServer = (newBundle, headers) => fakeServerInstance.post('/bundles', newBundle, headers);
+//patch
+export const fetchPatchBundleData = (bundleID, newData, headers) => fakeServerInstance.patch(`/bundles/${bundleID}`, newData, headers);
+//delete
+export const fetchDeleteBundleFromServer = (bundleID) => fakeServerInstance.delete(`/bundles/${bundleID}`);
 
 
 //cards
@@ -23,10 +28,10 @@ export const fetchBundleOfCardsData = (bundleID) => fakeServerInstance.get(`/car
 export const fetchCardsData = () => fakeServerInstance.get('/cards');
 //post
 export const fetchAddNewCardToServer = (newCard, headers) => fakeServerInstance.post('/cards', newCard, headers);
-//delete
-export const fetchDeleteCardFromServer = (cardID) => fakeServerInstance.delete(`/cards/${cardID}`);
 //patch
 export const fetchPatchCardData = (cardID, newData, headers) => fakeServerInstance.patch(`cards/${cardID}`, newData, headers);
+//delete
+export const fetchDeleteCardFromServer = (cardID) => fakeServerInstance.delete(`/cards/${cardID}`);
 
 
 //users

@@ -10,6 +10,7 @@ import withModalContext from 'HOC/withModalContext';
 import { REVIEW_BUNDLES_LIST } from 'constants/reviews/reviewBundlesList';
 import ModalWindowCreate from 'Components/ModalWindowCreate';
 import postNewBundleThunk from 'store/thunk/bundles/postNewBundleThunk';
+import Bundle from "./Components/Bundle";
 
 
 const StyledBundlesList = styled.div`
@@ -56,8 +57,6 @@ const BundlesList = (props) => {
     const [bundleDescription, setBundleDescription] = useState();
     const bundlesDataFromStore = useSelector(showBundlesFromStore);
 
-    console.log(props)
-
     useEffect(() => {
         dispatch(getBundlesThunk(categoryID));
     }, []);
@@ -90,6 +89,10 @@ const BundlesList = (props) => {
         return setBundleDescription(event.target.value);
     };
 
+    const handleBundlesDataUpdate = () => {
+        dispatch(getBundlesThunk(categoryID));
+    };
+
     const getBundlesList = () => {
         if(bundlesDataFromStore.loading) {return <div>Bundles list loading...</div>}
         if(bundlesDataFromStore.error)  {
@@ -100,12 +103,12 @@ const BundlesList = (props) => {
             return(
                 bundlesData.map((data) => {
                     return(
-                        <div key={data.bundleID} className={'bundle-box'}>
-                            <Link to={`/categoryList/${categoryID}/bundle/${data.bundleID}`}
-                                  style={{ textDecoration: 'none' }}
-                                  className={'description'}>
-                                {data.bundleName}</Link>
-                        </div>
+                        <Bundle key={data.id}
+                            updateModalContext={props.updateModalContext}
+                            bundleID={data.id}
+                            bundleName={data.bundleName}
+                            updateBundlesData={handleBundlesDataUpdate}
+                        />
                     )
                 })
             )

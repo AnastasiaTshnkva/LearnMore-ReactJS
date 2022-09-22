@@ -97,7 +97,11 @@ const MemoryCard = (props) => {
         props.updateModalContext(false);
     }
 
-    const handleUpdateCardData = (newCardData) => {
+    const handleUpdateCardData = (name, description) => {
+        const newCardData = {
+            cardName: name,
+            cardDecoding: description,
+        }
         dispatch(patchCardsThunk(newCardData, props.cardId));
         props.updateCardsData();
         props.updateModalContext(false);
@@ -114,13 +118,14 @@ const MemoryCard = (props) => {
                             const cardDecoding = props.activeCardDecoding;
                             return props.updateModalContext(
                                 <ModalWindowUpdate
-                                    blockTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_TITLE}
-                                    cardName={cardName}
-                                    inputNamePlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_NAME_INPUT}
-                                    cardDecoding={cardDecoding}
-                                    inputDescriptionPlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_DECODING_INPUT}
-                                    updateButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_BUTTON_TITLE}
+                                    blockTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_CARD_TITLE}
+                                    name={cardName}
+                                    inputNamePlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_CARD_NAME_INPUT}
+                                    description={cardDecoding}
+                                    inputDescriptionPlaceholder={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_CARD_DECODING_INPUT}
+                                    updateButtonTitle={REVIEW_BUNDLE_OF_CARDS.MODAL_WINDOW_UPDATE_CARD_BUTTON_TITLE}
                                     handleUpdateFunc={handleUpdateCardData}
+                                    closeWindowFunc={handleCloseModalWindow}
                                 />
                             )}}>
                         <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>

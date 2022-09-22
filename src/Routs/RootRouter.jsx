@@ -5,7 +5,7 @@ import {
     Navigate,
 } from 'react-router-dom';
 import MainLayout from 'MainLayout/MainLayout';
-import BundlesList from 'Sceens/BundlesList';
+import BundlesList from 'Sceens/BundlesList/BundlesList';
 import CategoryList from 'Sceens/CategoryList/CategoryList';
 import ListsLayout from 'MainLayout/ListsLayout';
 import StartPage from 'Sceens/StartPage';

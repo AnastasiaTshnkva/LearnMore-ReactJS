@@ -4,9 +4,11 @@ import {
     GET_CATEGORIES_FAILURE,
     CREATE_NEW_CATEGORY_SUCCESSFUL,
     CREATE_NEW_CATEGORY_ERROR,
-    DELETE_CATEGORY,
-    CORRECT_CATEGORY,
-} from "../actions/categoriesActionCreators";
+    DELETE_CATEGORY_SUCCESS,
+    DELETE_CATEGORY_ERROR,
+    CORRECT_CATEGORY_SUCCESS,
+    CORRECT_CATEGORY_ERROR,
+} from '../actions/categoriesActionCreators';
 
 const initState = {
     loading: false,
@@ -48,17 +50,29 @@ const categoriesReducer = (state = initState, action) => {
                 error: action.payload,
             };
 
-        case DELETE_CATEGORY:
+        case DELETE_CATEGORY_SUCCESS:
             return {
                 ...state,
                 categoriesData: action.payload,
             };
 
-        case CORRECT_CATEGORY:
+        case DELETE_CATEGORY_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
+
+        case CORRECT_CATEGORY_SUCCESS:
             return {
                 ...state,
                 categoriesData: action.payload,
-            }
+            };
+
+        case CORRECT_CATEGORY_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
 
         default:
             return {...state}

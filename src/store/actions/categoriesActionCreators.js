@@ -5,8 +5,11 @@ export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
 export const CREATE_NEW_CATEGORY_SUCCESSFUL = 'CREATE_NEW_CATEGORY_SUCCESSFUL';
 export const CREATE_NEW_CATEGORY_ERROR = 'CREATE_NEW_CATEGORY_ERROR';
 
-export const DELETE_CATEGORY = 'DELETE_CATEGORY';
-export const CORRECT_CATEGORY = 'CORRECT_CATEGORY';
+export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
+export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
+
+export const CORRECT_CATEGORY_SUCCESS = 'CORRECT_CATEGORY_SUCCESS';
+export const CORRECT_CATEGORY_ERROR = 'CORRECT_CATEGORY_ERROR';
 
 export const setCategoriesRequestAction = () => {
     return {
@@ -42,14 +45,31 @@ export const createNewCategoryErrorAction = (value) => {
     }
 };
 
-export const deleteCategoryAction = (value) => {
+export const deleteCategorySuccessAction = (value) => {
     return {
-        type: DELETE_CATEGORY,
+        type: DELETE_CATEGORY_SUCCESS,
         payload: value,
-    }
+    };
 };
 
-export const correctCategoryAction = (value) => ({
-    type: CORRECT_CATEGORY,
-    payload: value,
-})
+export const deleteCategoryErrorsAction = (value) => {
+    return {
+        type: DELETE_CATEGORY_ERROR,
+        payload: value,
+    };
+};
+
+
+export const correctCategorySuccessAction = (value) => {
+    return {
+        type: CORRECT_CATEGORY_SUCCESS,
+        payload: value,
+    };
+};
+
+export const correctCategoryErrorAction = (value) => {
+    return {
+        type: CORRECT_CATEGORY_ERROR,
+        payload: value,
+    };
+};

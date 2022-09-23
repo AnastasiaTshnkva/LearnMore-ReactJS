@@ -16,8 +16,8 @@ export const REVIEW_BUNDLE_OF_CARDS = {
     MODAL_WINDOW_UPDATE_BUNDLE_NAME_INPUT: 'input bundle name',
     MODAL_WINDOW_UPDATE_BUNDLE_DECODING_INPUT: 'input bundle description',
     MODAL_WINDOW_UPDATE_BUNDLE_BUTTON_TITLE: 'Save changing',
-    MODAL_WINDOW_UPDATE_CARD_TITLE: 'Changing cards data',
+    MODAL_WINDOW_UPDATE_CARD_TITLE: 'Changing card data',
     MODAL_WINDOW_UPDATE_CARD_NAME_INPUT: 'input card name',
     MODAL_WINDOW_UPDATE_CARD_DECODING_INPUT: 'input card decoding',
-    MODAL_WINDOW_UPDATE_CARD_BUTTON_TITLE: 'Save changing',
+    MODAL_WINDOW_UPDATE_CARD_BUTTON_TITLE: 'Save changes',
 };

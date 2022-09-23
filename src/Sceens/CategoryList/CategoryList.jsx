@@ -64,8 +64,6 @@ const CategoryList = (props) => {
     const categoriesDataError = useSelector(showCategoriesDataError);
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
 
-    console.log('props is', props);
-
     useEffect(() => {
         dispatch(getCategoriesThink());
     }, []);
@@ -91,6 +89,10 @@ const CategoryList = (props) => {
         setCategoryName(event.target.value);
     };
 
+    const updateCategoriesData = () => {
+        dispatch(getCategoriesThink());
+    };
+
     const getCategoriesList = () => {
         if (categoriesDataIsLoading) {return <div>Categories list loading...</div>}
         if (categoriesDataError) {
@@ -102,22 +104,14 @@ const CategoryList = (props) => {
                 categoriesData.map((data) => {
                     return (
                         <CategoryItem
-                            key={data.categoryID}
+                            key={data.id}
                             link={`${data.categoryID}`}
                             categoryName={data.categoryName}
+                            categoryID={data.id}
+                            updateModalContext={props.updateModalContext}
+                            updateCategoriesData={updateCategoriesData}
                         />
-                        // <div key={data.categoryID} className={'category__list-item'}>
-                        //     <Link to={`${data.categoryID}`} className={'category__list-item__title'}
-                        //           style={{ textDecoration: 'none' }}>{data.categoryName}</Link>
-                        //     <div className={'buttons-box'}>
-                        //         <button type={'button'} className={'category__button'}>
-                        //             <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="pencil"/>
-                        //         </button>
-                        //         <button type={'button'} className={'category__button'}>
-                        //             <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="close"/>
-                        //         </button>
-                        //     </div>
-                        // </div>
+
                     )
                 })
             )

@@ -80,7 +80,6 @@ const Bundle = (props) => {
                       style={{ textDecoration: 'none' }}
                       className={'description'}>
                     {props.bundleName}</Link>
-            {/*</div>*/}
         </StyledBundle>
     )
 };

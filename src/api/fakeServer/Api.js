@@ -1,5 +1,4 @@
 import fakeServerInstance from '../instance';
-import bundleData from "../../Sceens/BundleofCards/Components/BundleData";
 
 
 //categories
@@ -7,6 +6,10 @@ import bundleData from "../../Sceens/BundleofCards/Components/BundleData";
 export const fetchCategoryData = () => fakeServerInstance.get('/categories');
 //post
 export const fetchAddNewCategoryToServer = (newCategory, headers) => fakeServerInstance.post('/categories', newCategory, headers);
+//patch
+export const fetchPatchCategoryData = (categoryID, newData, headers) => fakeServerInstance.patch(`/categories/${categoryID}`, newData, headers);
+//delete
+export const fetchDeleteCategoryFromServer = (categoryID) => fakeServerInstance.delete(`/categories/${categoryID}`);
 
 
 //bundles

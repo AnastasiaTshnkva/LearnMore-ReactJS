@@ -12,7 +12,7 @@ const StyledAddButton = styled.button`
   border-radius: 3px;
   margin-top: 20px;
   &:hover {
-    box-shadow: 0 0 5px ${props => props.theme.buttonHoverShadow};
+    box-shadow: 0 0 10px ${props => props.theme.buttonHoverShadow};
   }
   &:active {
     background-color: ${props => props.theme.buttonColor};

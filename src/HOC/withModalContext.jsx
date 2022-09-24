@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { MyContext } from 'HOC/GlobalModalProvider';
+import { MyModalContext } from 'HOC/GlobalModalProvider';
 
 const withModalContext = (Component, props) => {
     return () => {
             return (
-                <MyContext.Consumer>
+                <MyModalContext.Consumer>
                     {updateModalContext => (
                         <Component {...props} updateModalContext={updateModalContext}/>
                     )}
-                </MyContext.Consumer>
+                </MyModalContext.Consumer>
             )
         }
 }

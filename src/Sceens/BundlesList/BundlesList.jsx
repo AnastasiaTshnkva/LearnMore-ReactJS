@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { Link, useParams } from 'react-router-dom';
 import AddButton from 'Components/AddButton';
-import { showBundlesFromStore } from 'store/selectors/selectors';
+import {showBundlesDataError, showBundlesDataIsLoading, showBundlesFromStore} from 'store/selectors/selectors';
 import getBundlesThunk from 'store/thunk/bundles/getBundlesThunk';
 import withModalContext from 'HOC/withModalContext';
 import { REVIEW_BUNDLES_LIST } from 'constants/reviews/reviewBundlesList';
@@ -51,19 +51,22 @@ const StyledBundlesList = styled.div`
 
 const BundlesList = (props) => {
     const dispatch = useDispatch();
+    const { userID } = useParams();
     const { categoryID } = useParams();
     const [bundlesData, setBundlesData] = useState([]);
     const [bundleName, setBundleName] = useState();
     const [bundleDescription, setBundleDescription] = useState();
-    const bundlesDataFromStore = useSelector(showBundlesFromStore);
+    const bundlesDataLoading = useSelector(showBundlesDataIsLoading);
+    const bundlesDataError = useSelector(showBundlesDataError);
+    const bundlesFromStore = useSelector(showBundlesFromStore);
 
     useEffect(() => {
         dispatch(getBundlesThunk(categoryID));
     }, []);
 
     useEffect(() => {
-        setBundlesData(bundlesDataFromStore.bundlesData);
-    }, [bundlesDataFromStore.bundlesData]);
+        setBundlesData(bundlesFromStore);
+    }, [bundlesFromStore]);
 
     const handleAddBundle = (newBundleName, newBundleDescription) => {
         const newBundle = {
@@ -94,12 +97,12 @@ const BundlesList = (props) => {
     };
 
     const getBundlesList = () => {
-        if(bundlesDataFromStore.loading) {return <div>Bundles list loading...</div>}
-        if(bundlesDataFromStore.error)  {
+        if(bundlesDataLoading) {return <div>Bundles list loading...</div>}
+        if(bundlesDataError)  {
             console.log('error', error);
             return <div>No bundles created yet</div>
         }
-        if(bundlesDataFromStore.bundlesData) {
+        if(!!bundlesData.length) {
             return(
                 bundlesData.map((data) => {
                     return(
@@ -113,6 +116,7 @@ const BundlesList = (props) => {
                 })
             )
         }
+        return <div>No data yet</div>
     }
 
     return (

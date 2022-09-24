@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { REVIEW_START_PAGE } from 'constants/reviews/reviewStartPage';
-import {ROUTES_NAMES} from 'constants/routes/routes';
+import { ROUTES_NAMES } from 'constants/routes/routes';
 
 const StyledStartPage = styled.div`
   display: flex;
@@ -48,7 +48,6 @@ const StyledStartPage = styled.div`
   .buttons-box {
     display: flex;
     justify-content: space-around;
-    width: 100vw;
     margin-top: 15px;
     margin-bottom: 30px;
     .button {
@@ -86,12 +85,11 @@ const StartPage = () => {
                 </div>
                 <div className={'advantage__item'}>
                     <p className={'advantage__title'}>{REVIEW_START_PAGE.ADVANTAGES_DESCRIPTION_ABOUT_CARDS}</p>
-                    <img src={'assets/images/superior-7100.jpg'} className={'advantage__img'}/>
+                    <img src={'https://fotosale.by/wp-content/uploads/2020/07/superior-7100.jpg'} className={'advantage__img'}/>
                 </div>
             </div>
             <div className={'buttons-box'}>
                 <Link to={ROUTES_NAMES.LOGIN}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.LOGIN_BUTTON_INNER_TEXT}</button></Link>
-                <Link to={ROUTES_NAMES.LOGIN}><button type={'button'} className={'button'}>{REVIEW_START_PAGE.JOIN_BUTTON_INNER_TEXT}</button></Link>
             </div>
         </StyledStartPage>
     )

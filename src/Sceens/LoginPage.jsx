@@ -9,7 +9,7 @@ import FormikInput from 'Components/FormikFilds/FormikInput';
 import { setNotValidUserAction, setValidUserAction } from 'store/actions/userActionCreators';
 import { REVIEW_LOGIN_PAGE } from 'constants/reviews/reviewLoginPage';
 import getUsersThunk from 'store/thunk/users/getUsersThunk';
-import { showUserData } from 'store/selectors/selectors';
+import {showUserData, showUserDataFromStore} from 'store/selectors/selectors';
 import postNewUserThunk from "../store/thunk/users/postNewUserThunk";
 
 const StyledLoginPage = styled.div`
@@ -89,7 +89,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const [usersData, setUsersData] = useState();
     const [validateError, setValidateError] = useState('');
-    const userDataFromState = useSelector(showUserData);
+    const userDataFromState = useSelector(showUserDataFromStore);
     const [newUserRegistration, setNewUserRegistration] = useState(false);
 
    useEffect(() => {
@@ -109,15 +109,15 @@ const LoginPage = () => {
                 email,
                 password,
             };
-            const currentUserData = usersData.find((element) => element.userEmail === user.userEmail);
+            const currentUserData = usersData.find((element) => element.email === user.email);
             if(currentUserData
                 && (
-                    currentUserData.userPassword === user.userPassword)) {
+                    currentUserData.password === user.password)) {
                 dispatch(setValidUserAction(
                     {
                         email: user.email,
                     }));
-                navigate('/categoryList');
+                navigate(`/${currentUserData.id}/categoryList`);
             } else {
                 dispatch(setNotValidUserAction());
                 setValidateError(REVIEW_LOGIN_PAGE.INVALID_VALUES_ERROR_MASSAGE);
@@ -126,17 +126,17 @@ const LoginPage = () => {
         if(newUserRegistration) {
             const name = document.getElementsByName('name')[0].value;
             const newUser = {
-                id: uuidv4(),
+                id: Date.now(),
                 name,
                 email,
                 password,
-            }
+            };
             dispatch(postNewUserThunk(newUser, usersData));
             dispatch(setValidUserAction(
                 {
                     email: newUser.email,
                 }));
-            navigate('/categoryList');
+            navigate(`/${newUser.id}/categoryList`);
         }
     };
 

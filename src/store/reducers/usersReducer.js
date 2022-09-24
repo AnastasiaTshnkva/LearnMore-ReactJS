@@ -1,4 +1,7 @@
 import {
+    SET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_ERROR,
     SET_VALID_USER,
     SET_NOT_VALID_USER,
     CREATE_NEW_USER_SUCCESS,
@@ -6,12 +9,34 @@ import {
 } from 'store/actions/userActionCreators'
 
 const initState = {
+    loading: false,
     currentUserData: {},
     isLoggedIn: false,
     error: null,
 }
 const usersReducer = (state = initState, action) => {
     switch (action.type) {
+
+        case SET_USER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case GET_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                currentUserData: action.payload,
+            };
+
+        case GET_USER_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+
         case SET_VALID_USER:
             return {
                 ...state,
@@ -24,6 +49,7 @@ const usersReducer = (state = initState, action) => {
                 ...state,
                 error: action.payload,
             };
+
 
         case CREATE_NEW_USER_SUCCESS:
             return {

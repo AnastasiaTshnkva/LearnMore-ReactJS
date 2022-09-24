@@ -26,7 +26,7 @@ const ListsLayout = (props) => {
             <StyledListsLayout>
                 <Header/>
                 <main className={'main'}>
-                    <SearchInput className={'search'}/>
+                    {/*<SearchInput className={'search'}/>*/}
                     <Outlet/>
                     {/*{props.children}*/}
                 </main>

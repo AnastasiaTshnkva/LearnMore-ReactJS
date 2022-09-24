@@ -13,7 +13,6 @@ import LoginPage from 'Sceens/LoginPage';
 import BundleOfCards from 'Sceens/BundleofCards/BundleOfCards';
 import { ROUTES_NAMES } from 'constants/routes/routes';
 import StudyPage from 'Sceens/StudyPage';
-import Try from 'Sceens/Try';
 
 const RootRouter = () => {
     return (
@@ -22,14 +21,13 @@ const RootRouter = () => {
 
             <Route path={ROUTES_NAMES.LOGIN} element={<LoginPage/>}/>
 
-            <Route path={ROUTES_NAMES.CATEGORIES} element={<ListsLayout/>}>
+            <Route path={'/:userID/categoryList'} element={<ListsLayout/>}>
                 <Route index element={<CategoryList/>}/>
                 <Route path={':categoryID'} element={<BundlesList/>}/>
-                <Route path={'try'} element={<Try/>}></Route>
             </Route>
-            <Route path={`${ROUTES_NAMES.CATEGORIES}/:categoryID/bundle/:bundleID`}
+            <Route path={'/:userID/categoryList/:categoryID/bundle/:bundleID'}
                    element={<MainLayout><BundleOfCards/></MainLayout>}/>
-            <Route path={`${ROUTES_NAMES.CATEGORIES}/:categoryID/bundle/:bundleID/studying`}
+            <Route path={'/:userID/categoryList/:categoryID/bundle/:bundleID/studying'}
                    element={<MainLayout><StudyPage/></MainLayout>}/>
 
 

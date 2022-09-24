@@ -213,34 +213,18 @@
   ],
   "users": [
     {
-      "id": "2",
-      "userName": "Sasha",
-      "userEmail": "sasha@mail.ru",
-      "userPassword": "321"
-    },
-    {
       "id": "1",
-      "userName": "Nastya",
-      "userEmail": "nastya@mail.ru",
-      "userPassword": "123"
+      "name": "Nastya",
+      "email": "nastya@mail.ru",
+      "password": "123",
+      "avatar": "AVATAR1"
     },
     {
-      "email": "andrey@mail.ru",
-      "password": "$2a$10$rgvdj4hNSuS9uHzzU3KcZ.Ac1jM6aNll0PCdgHLqgax0FCkW3Y6CK",
-      "id": "3",
-      "userName": "Andrey"
-    },
-    {
-      "email": "nikita@mail.ru",
-      "password": "$2a$10$snv9U9YlKQ3u7wiewp6tW.N7XBaXyaYg98YL3u0aOhHxUEbNP.YtK",
-      "id": "8ac82595-8f0d-42e9-9ec2-8d8730b285bf",
-      "name": "Nikita"
-    },
-    {
-      "email": "nataly@mail.ru",
-      "password": "$2a$10$D1l2ju/OUS5/8ws7gMIsgOo7DUPRcY1gmVYrBmNHQcdZw8w2jDBE2",
-      "id": "547d256f-0f6b-4362-99c0-fe750a21ea6e",
-      "name": "Nataly"
+      "id": "2",
+      "name": "Sasha",
+      "email": "sasha@mail.ru",
+      "password": "321",
+      "avatar": "AVATAR2"
     }
   ]
 }

@@ -12,14 +12,16 @@ import ModalWindowConfirm from 'Components/ModalWindowConfirm';
 import ModalWindowUpdate from 'Components/ModalWindowUpdate';
 
 const StyledMemoryCard = styled.div`
-    display: flex;
-    position: relative;
-    min-height: 150px;
-    min-width: 250px;
-    aspect-ratio: 3/2;
-    font-size: 22px;
-    line-height: 24px;
-    perspective: 1000px;
+  display: flex;
+  position: relative;
+  min-height: 150px;
+  min-width: 250px;
+  aspect-ratio: 3/2;
+  font-size: 22px;
+  line-height: 24px;
+  perspective: 1000px;
+  width: 300px;
+  color: ${props => props.theme.cardTextColor};
   .card__front-side, .card__back-side {
     display: flex;
     flex-direction: column;
@@ -29,10 +31,11 @@ const StyledMemoryCard = styled.div`
     border: 2px solid ${props => props.theme.cardBorderColor};
     border-radius: 10px;
     background-color: ${props => {return props.theme.cardColor}};
-    padding-top: 5px;
+    padding: 5px;
     position: absolute;
     transition: 0.7s;
     backface-visibility: hidden;
+    text-align: center;
   }
   .card__front-side{
     position: relative;
@@ -41,7 +44,7 @@ const StyledMemoryCard = styled.div`
       position: absolute;
       justify-self: center;
       justify-content: space-between;
-      width: 100%;
+      width: 96%;
       .memoryCard__but {
         background-color: transparent;
         border: none;
@@ -71,6 +74,7 @@ const StyledMemoryCard = styled.div`
 const MemoryCard = (props) => {
     const { bundleID } = useParams();
     const dispatch = useDispatch();
+    const theme = localStorage.getItem('theme');
 
     const handleOClickTurn = () => {
         const cardFrontSide = document.getElementsByName('card-front-side')[0];
@@ -128,7 +132,7 @@ const MemoryCard = (props) => {
                                     closeWindowFunc={handleCloseModalWindow}
                                 />
                             )}}>
-                        <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="pencil"/>
+                        <IcomoonReact iconSet={iconSet} color={'#2d2b2b'} size={25} icon="pencil"/>
                     </button>
                     <button type={'button'} className={'memoryCard__but'}
                     onClick={() => {
@@ -143,7 +147,7 @@ const MemoryCard = (props) => {
                         )
                     }
                     }>
-                        <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+                        <IcomoonReact iconSet={iconSet} color={'#2d2b2b'} size={25} icon="close"/>
                     </button>
                 </div>
                 }

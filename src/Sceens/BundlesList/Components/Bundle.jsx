@@ -41,12 +41,13 @@ const StyledBundle = styled.div`
       font-size: 22px;
       line-height: 26px;
       height: 100%;
-      color: ${props => props.theme.textColor};
+      color: ${props => props.theme.cardTextColor};
     }
 `
 
 const Bundle = (props) => {
     const { categoryID } = useParams();
+    const { userID } = useParams();
     const dispatch = useDispatch();
 
     const handleCloseModalWindow = () => {
@@ -74,9 +75,9 @@ const Bundle = (props) => {
                             )
                         }
                         }>
-                    <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+                    <IcomoonReact iconSet={iconSet} color={'#505250'} size={25} icon="close"/>
                 </button>
-                <Link to={`/categoryList/${categoryID}/bundle/${props.bundleID}`}
+                <Link to={`/${userID}/categoryList/${categoryID}/bundle/${props.bundleID}`}
                       style={{ textDecoration: 'none' }}
                       className={'description'}>
                     {props.bundleName}</Link>

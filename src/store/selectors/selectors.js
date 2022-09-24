@@ -1,6 +1,7 @@
 // user selectors
-export const showUserData = (state) => state.users.currentUserData;
-export const showIsUserLoggedIn = (state) => state.users.isLoggedIn;
+export const showUserDataLoading = (state) => state.users.loading;
+export const showUserDataError = (state) => state.users.loading;
+export const showUserDataFromStore = (state) => state.users.currentUserData;
 
 
 //categories selectors
@@ -12,7 +13,7 @@ export const showCategoriesDataFromStore = (state) => state.categories.categorie
 //bundles data
 export const showBundlesDataIsLoading = (state) => state.bundles.loading;
 export const showBundlesDataError = (state) => state.bundles.error;
-export const showBundlesFromStore = (state) => state.bundles;
+export const showBundlesFromStore = (state) => state.bundles.bundlesData;
 //current bundleData
 export const showCurrentBundleDataIsLoading = (state) => state.bundleOfCards.currentBundleLoading;
 export const showCurrentBundleDataError = (state) => state.bundleOfCards.currentBundleError;

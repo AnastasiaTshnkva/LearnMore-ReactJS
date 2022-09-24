@@ -5,11 +5,11 @@ import {
 } from '../../actions/categoriesActionCreators';
 import {fetchCategoryData} from '../../../api/fakeServer/Api';
 
-const getCategoriesThink = () => {
+const getCategoriesThink = (userID) => {
     return dispatch => {
         dispatch(setCategoriesRequestAction());
 
-        fetchCategoryData()
+        fetchCategoryData(userID)
             .then(({data}) => {
                 dispatch(getCategoriesSuccessAction(data));
             }).catch((error) => {

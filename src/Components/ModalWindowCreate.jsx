@@ -29,8 +29,13 @@ const StyledModalWindowCreate = styled.div`
     margin-top: 25px;
     width: 100%;
     border: 1px solid ${props => props.theme.inputBorderColor};
+    background-color: ${props => props.theme.mainBackgroundColor};
+    color: ${props => props.theme.inputTextColor};
     padding: 7px;
     border-radius: 3px;
+    &::placeholder {
+      color: ${props => props.theme.inputTextColor};
+    }
     &:focus {
       outline: none;
     }
@@ -46,7 +51,7 @@ const ModalWindowCreate = (props) => {
             <div className={'modal-header'}>
                 <p className={'title'}>{props.blockTitle}</p>
                 <button type={'button'} onClick={() => {props.updateModalContext(false)}} className={'close-but'}>
-                    <IcomoonReact iconSet={iconSet} color={'grey'} size={25} icon="close"/>
+                    <IcomoonReact iconSet={iconSet} color={'#2d2b2b'} size={25} icon="close"/>
                 </button>
             </div>
             <input onChange={(event) => setNewName(event.target.value)}

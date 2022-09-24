@@ -14,6 +14,7 @@ import ModalWindowCreate from 'Components/ModalWindowCreate';
 import withModalContext from 'HOC/withModalContext';
 import {REVIEW_CATEGORY_LIST} from 'constants/reviews/reviewCategoryList';
 import CategoryItem from 'Sceens/CategoryList/Components/CategoryItem'
+import {useParams} from "react-router-dom";
 
 const StyledCategoryList = styled.div`
   display: flex;
@@ -23,41 +24,12 @@ const StyledCategoryList = styled.div`
   .category__list {
     align-self: start;
     min-height: 50vh;
-    .category__list-item {
-      display: flex;
-      margin-top: 20px;
-      border-bottom: 1px ${props => props.theme.cardBorderColor} solid;
-      &:hover {
-        border-bottom: 1px ${props => props.theme.accentTextColor} solid;
-        .category__list-item__title {
-          color: ${props => props.theme.accentTextColor};
-        }
-      }
-      .category__list-item__title{
-        display: block;
-        min-width: 70px;
-        margin-right: 20px;
-        color: ${props => props.theme.textColor};
-        cursor: pointer;
-        &:hover {
-          color: ${props => props.theme.accentTextColor};
-        }
-      }
-      &:last-child {
-        margin-bottom: 15px;
-      }
-      .buttons-box {
-        .category__button {
-          background-color: transparent;
-          border: none;
-        }
-      }
     }
- }
 `
 
 const CategoryList = (props) => {
     const dispatch = useDispatch();
+    const { userID } = useParams();
     const [categoriesData, setCategoriesData] = useState([]);
     const [categoryName, setCategoryName] = useState('');
     const categoryDataFromStore = useSelector(showCategoriesDataFromStore);
@@ -65,7 +37,7 @@ const CategoryList = (props) => {
     const categoriesDataIsLoading = useSelector(showCategoriesDataIsLoading);
 
     useEffect(() => {
-        dispatch(getCategoriesThink());
+        dispatch(getCategoriesThink(userID));
     }, []);
 
     useEffect(() => {
@@ -80,7 +52,7 @@ const CategoryList = (props) => {
             // userID: '',
         };
             dispatch(postNewCategoryThunk(categoriesData, newCategory));
-            dispatch(getCategoriesThink());
+            dispatch(getCategoriesThink(userID));
             setCategoryName('');
             props.updateModalContext(false);
     };
@@ -90,7 +62,7 @@ const CategoryList = (props) => {
     };
 
     const updateCategoriesData = () => {
-        dispatch(getCategoriesThink());
+        dispatch(getCategoriesThink(userID));
     };
 
     const getCategoriesList = () => {

@@ -24,7 +24,7 @@ import BundleData from 'Sceens/BundleofCards/Components/BundleData';
 
 const StyledBundleOfCards = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 3fr 0.3fr;
+  grid-template-columns: 0.5fr 1fr 3fr 0.3fr;
   width: 100vw;
   min-height: calc(100vh - 80px - 50px);
   .bundle-part {

@@ -1,24 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import IcomoonReact from 'icomoon-react';
 import iconSet from 'assets/Icons/selection.json';
-import ModalWindowUpdate from "../../../Components/ModalWindowUpdate";
-import patchCategoryDataThunk from "../../../store/thunk/categories/patchCategoryDataThunk";
-import {REVIEW_BUNDLES_LIST} from "../../../constants/reviews/reviewBundlesList";
-import {REVIEW_CATEGORY_LIST} from "../../../constants/reviews/reviewCategoryList";
-import deleteCategoryThunk from "../../../store/thunk/categories/deleteCategoryThunk";
-import ModalWindowConfirm from "../../../Components/ModalWindowConfirm";
-
+import patchCategoryDataThunk from 'store/thunk/categories/patchCategoryDataThunk';
+import deleteCategoryThunk from 'store/thunk/categories/deleteCategoryThunk';
+import { REVIEW_CATEGORY_LIST } from 'constants/reviews/reviewCategoryList';
+import ModalWindowConfirm from 'Components/ModalWindowConfirm';
+import ModalWindowUpdate from 'Components/ModalWindowUpdate';
 
 const StyledCategoryItem = styled.div `
-    
+    .category__list-item {
+      display: flex;
+      margin-top: 20px;
+      border-bottom: 2px ${props => props.theme.cardBorderColor} solid;
+      &:hover {
+        border-bottom: 2px ${props => props.theme.accentTextColor} solid;
+        .category__list-item__title {
+          color: ${props => props.theme.accentTextColor};
+        }
+      }
+      .category__list-item__title{
+        display: block;
+        min-width: 70px;
+        margin-right: 20px;
+        color: ${props => props.theme.textColor};
+        cursor: pointer;
+        &:hover {
+          color: ${props => props.theme.accentTextColor};
+        }
+      }
+      &:last-child {
+        margin-bottom: 15px;
+      }
+      .buttons-box {
+        .category__button {
+          background-color: transparent;
+          border: none;
+        }
+      }
+    }
 `
 
 const CategoryItem = (props) => {
     const dispatch = useDispatch();
+    const { userID } = useParams();
 
     const handleCloseWindowModal = () => {
         props.updateModalContext(false);
@@ -43,7 +71,7 @@ const CategoryItem = (props) => {
     return (
         <StyledCategoryItem>
             <div  className={'category__list-item'}>
-                <Link to={props.link} className={'category__list-item__title'}
+                <Link to={`/${userID}/categoryList/${props.link}`} className={'category__list-item__title'}
                       style={{ textDecoration: 'none' }}>{props.categoryName}</Link>
                 <div className={'buttons-box'}>
                     <button type={'button'} className={'category__button'}
@@ -60,7 +88,7 @@ const CategoryItem = (props) => {
                                 )
                             }}
                     >
-                        <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="pencil"/>
+                        <IcomoonReact iconSet={iconSet} color={'#2d2b2b'} size={15} icon="pencil"/>
                     </button>
                     <button type={'button'} className={'category__button'}
                             onClick={() => {
@@ -75,7 +103,7 @@ const CategoryItem = (props) => {
                                 )
                             }}
                     >
-                        <IcomoonReact iconSet={iconSet} color={'grey'} size={15} icon="close"/>
+                        <IcomoonReact iconSet={iconSet} color={'#2d2b2b'} size={15} icon="close"/>
                     </button>
                 </div>
             </div>

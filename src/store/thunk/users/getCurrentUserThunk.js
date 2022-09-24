@@ -1,14 +1,20 @@
-import {fetchCurrentUserData} from "../../../api/fakeServer/Api";
-import {setNotValidUserAction, setValidUserAction} from "../../actions/userActionCreators";
+import { fetchCurrentUserData } from '../../../api/fakeServer/Api';
+import {
+    setUserRequestAction,
+    getUserErrorAction,
+    getUserSuccessAction,
+} from '../../actions/userActionCreators';
 
 const getCurrentUserThunk = (userID) => {
     return dispatch => {
+        dispatch(setUserRequestAction());
+
         fetchCurrentUserData(userID)
             .then(({data}) => {
-                dispatch(setValidUserAction(data));
+                dispatch(getUserSuccessAction(data));
             })
             .catch(error => {
-                dispatch(setNotValidUserAction(error));
+                dispatch(getUserErrorAction(error));
             })
     };
 };

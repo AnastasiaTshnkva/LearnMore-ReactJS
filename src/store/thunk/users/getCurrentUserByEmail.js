@@ -1,22 +1,22 @@
-import {fetchUsersDate} from '../../../api/fakeServer/Api';
 import {
     getUserErrorAction,
     getUserSuccessAction,
-    setUserRequestAction,
+    setUserRequestAction
 } from '../../actions/userActionCreators';
+import {fetchGetCurrentUserByEmail} from '../../../api/fakeServer/Api';
 
-
-const getUsersThunk = () => {
+const getCurrentUserByEmail = (userEmail) => {
     return dispatch => {
         dispatch(setUserRequestAction());
 
-        fetchUsersDate()
+        fetchGetCurrentUserByEmail(userEmail)
             .then(({data}) => {
-                dispatch(getUserSuccessAction(data))})
+                dispatch(getUserSuccessAction(data))
+            })
             .catch(error => {
                 dispatch(getUserErrorAction(error))
             });
     };
 };
 
-export default getUsersThunk;
+export default getCurrentUserByEmail;

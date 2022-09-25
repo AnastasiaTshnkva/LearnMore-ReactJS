@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import styled, { ThemeConsumer } from 'styled-components';
 import IcomoonReact from 'icomoon-react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import iconSet from 'assets/Icons/selection.json';
+import dinoAvatar from 'assets/images/dinoAvatar.png';
 import {
     showUserDataError,
     showUserDataFromStore,
     showUserDataLoading,
 } from 'store/selectors/selectors';
 import getCurrentUserThunk from 'store/thunk/users/getCurrentUserThunk';
+import {setUserLogOutAction} from 'store/actions/userActionCreators';
 import withSwitchThemeContext from 'HOC/withSwitchThemeContext';
 
 const StyledHeader = styled.header`
@@ -33,17 +35,30 @@ const StyledHeader = styled.header`
   .theme-button{
     background-color: transparent;
     border: none;
+    padding: 10px 20px;
   }
-  .header__user {
+  
+  .header__data {
     display: flex;
-    margin-right: 10px;
-    .header__user-avatar, .header__user-name{
-      padding: 0 10px;
-    }
     .header__user-avatar {
-      height: 50px;
+      max-height: 60px;
       background-color: white;
       border-radius: 50%;
+      margin-right: 15px;
+    }
+    .user-data {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .header__log-out {
+        margin-top: 10px;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          color: ${props => props.theme.accentTextColor};
+        }
+      }
     }
   }
 `
@@ -51,6 +66,7 @@ const StyledHeader = styled.header`
 const Header = (props) => {
     const dispatch = useDispatch();
     const { userID } = useParams();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({});
     const userDataLoading = useSelector(showUserDataLoading);
     const userDataError = useSelector(showUserDataError);
@@ -71,8 +87,16 @@ const Header = (props) => {
         if (userData) {
             return (
                 <React.Fragment>
-                    <p className={'header__user-name'}>Hi, {userData.name}!</p>
+                    <img src={dinoAvatar} alt={'avatar'} className={'header__user-avatar'}/>
+                    <div className={'user-data'}>
+                        <p className={'header__user-name'}>Hi, {userData.name}!</p>
+                        <p className={'header__log-out'} onClick={() => {
+                            dispatch(setUserLogOutAction());
+                            navigate('/login');
+                        }}>Log Out</p>
+                    </div>
                 </React.Fragment>
+
 
             )
         }
@@ -96,7 +120,7 @@ const Header = (props) => {
         <StyledHeader>
             <ul className={'header__list'}>
                 <li className={'header__logo'}>LearnMore</li>
-                <li className={'header__user'}>
+                <li className={'header__data'}>
                     <button className={'theme-button'} type={'button'} onClick={() => {
                         props.themeSwitch();
                         changeTheme();

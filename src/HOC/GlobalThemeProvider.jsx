@@ -16,6 +16,8 @@ const GlobalThemeProvider = (props) => {
         mainBackgroundColor: theme === 'dark' ? THEME_COLORS.dark.mainBackgroundColor : THEME_COLORS.light.mainBackgroundColor,
         loginBackgroundColorRight: theme === 'dark' ? THEME_COLORS.dark.loginBackgroundColorRight : THEME_COLORS.light.loginBackgroundColorRight,
         loginBackgroundColorLeft: theme === 'dark' ? THEME_COLORS.dark.loginBackgroundColorLeft : THEME_COLORS.light.loginBackgroundColorLeft,
+        loginWindowBackground: theme === 'dark' ? THEME_COLORS.dark.loginWindowBackground : THEME_COLORS.light.loginWindowBackground,
+        loginWindowTextColor: theme === 'dark' ? THEME_COLORS.dark.loginWindowTextColor : THEME_COLORS.light.loginWindowTextColor,
         loginWindowBorder: theme === 'dark' ? THEME_COLORS.dark.loginWindowBorder : THEME_COLORS.light.loginWindowBorder,
         buttonHoverShadow: theme === 'dark' ? THEME_COLORS.dark.buttonHoverShadow : THEME_COLORS.light.buttonHoverShadow,
         textColor: theme === 'dark' ? THEME_COLORS.dark.textColor : THEME_COLORS.light.textColor,

@@ -4,6 +4,7 @@ import {
     GET_USER_ERROR,
     SET_VALID_USER,
     SET_NOT_VALID_USER,
+    SET_USER_LOG_OUT,
     CREATE_NEW_USER_SUCCESS,
     CREATE_NEW_USER_ERROR,
 } from 'store/actions/userActionCreators'
@@ -49,6 +50,13 @@ const usersReducer = (state = initState, action) => {
                 ...state,
                 error: action.payload,
             };
+
+        case SET_USER_LOG_OUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+            };
+
 
 
         case CREATE_NEW_USER_SUCCESS:

@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledFormikInput = styled.input`
-    margin-top: 25px;
-    width: 100%;
-    border: 1px solid ${props => props.theme.inputBorderColor};
-    padding: 7px;
-    border-radius: 3px;
-    &:focus {
-      outline: none;
-    }
+  margin-top: 25px;
+  width: 100%;
+  border: 1px solid ${props => props.theme.inputBorderColor};
+  padding: 7px;
+  border-radius: 3px;
+  color: ${props => props.theme.loginWindowTextColor};
+  background-color: ${props => props.theme.loginWindowBackground};
+  &::placeholder {
+    color: ${props => props.theme.loginWindowTextColor};
+  }
+  &:focus {
+    outline: none;
+  }
 `
 
 const FormikInput = (props) => {

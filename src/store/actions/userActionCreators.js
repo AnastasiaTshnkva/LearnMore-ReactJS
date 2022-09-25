@@ -5,6 +5,8 @@ export const GET_USER_ERROR = 'GET_USER_ERROR';
 export const SET_VALID_USER = 'SET_VALID_USER';
 export const SET_NOT_VALID_USER = 'SET_NOT_VALID_USER';
 
+export const SET_USER_LOG_OUT = 'SET_USER_LOG_OUT';
+
 export const CREATE_NEW_USER_SUCCESS = 'CREATE_NEW_USER_SUCCESS';
 export const CREATE_NEW_USER_ERROR = 'CREATE_NEW_USER_ERROR';
 
@@ -39,6 +41,13 @@ export const setValidUserAction = (value) => {
 export const setNotValidUserAction = (value) => {
     return {
         type: SET_NOT_VALID_USER,
+        payload: value,
+    };
+};
+
+export const setUserLogOutAction = (value) => {
+    return {
+        type: SET_USER_LOG_OUT,
         payload: value,
     };
 };

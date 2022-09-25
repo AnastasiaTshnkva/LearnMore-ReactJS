@@ -15,7 +15,7 @@ import postNewUserThunk from "../store/thunk/users/postNewUserThunk";
 const StyledLoginPage = styled.div`
   margin: 0 auto;
   min-height: 100vh;
-  color: ${props => {return props.theme.textColor}};
+  color: ${props => {return props.theme.loginWindowTextColor}};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -28,7 +28,7 @@ const StyledLoginPage = styled.div`
   min-height: 50vh;
   border: solid 3px ${props => props.theme.loginWindowBorder};
   border-radius: 3px;
-  background-color: ${props => props.theme.mainBackgroundColor};
+  background-color: ${props => props.theme.loginWindowBackground};
     .form {
       width: 100%;
       padding: 10px;
@@ -42,7 +42,7 @@ const StyledLoginPage = styled.div`
       .button {
         padding: 10px;
         margin-top: 20px;
-        border: 2px solid ${props => props.theme.mainBackgroundColor};
+        border: 2px solid ${props => props.theme.cardColor};
         border-radius: 3px;
         width: 100%;
         color: ${props => props.theme.lightTextColor};
